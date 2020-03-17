@@ -54,8 +54,8 @@ end
 
 Z_params = zeros(2*numLines,2*numLines,freqpts);    % impedance matrix
 TA = zeros(numLines,numLines,freqpts);              % the A term of transmission(ABCD) matrix:[A B;C D]
-% The B, C, and D terms are not actually used.
 TB = TA;
+% The C and D terms are not actually used.
 TC = TA;
 TD = TA;
 I = eye(2*numLines,2*numLines);                     % 2Nx2N identity matrix
@@ -64,9 +64,9 @@ for idx=1:freqpts
     Z_params(:,:,idx) = z0*(I+s_params(:,:,idx)) / (I-s_params(:,:,idx));
     TA(:,:,idx) =   Z_params(1:numLines,1:numLines,idx) /               ...
                     Z_params(numLines+1:end,1:numLines,idx);
-    % The B, C, and D terms are not actually used.
     TB(:,:,idx) =   TA * Z_params(numLines+1:end,numLines+1:end) -      ...
                     Z_params(1:numLines,numLines+1:end,idx);
+    % The C and D terms are not actually used.
     TC(:,:,idx) =   I / (I-s_params(:,:,idx));
     TD(:,:,idx) =   TC(:,:,idx) * Z_params(numLines+1:end,numLines+1:end);
 end
@@ -84,13 +84,72 @@ for idx = 1:freqpts
     [eigVec(:,:,idx),eigVal(:,idx)] = eig(TA(:,:,idx),'vector');
 end
 
-% Adjust the order of eigenvalues and eigenvectors [Braunisch1998, Chu2015]
+% Adjust the order of Eigenvalues and Eigenvectors [Braunisch1998, Chu2015]
 prodTable = nan(numLines,numLines,freqpts);     % Hermitian Inner Product recoder.
 newIndex  = nan(numLines,freqpts);              % Correct order of eigVal and corresponding eigVec
 for freqidx = 2:freqpts                         % Index of frequency point
+    % For each Eigenvector at the current frequency, calculate the 
+    % Hermitian inner product of each Eigenvector at the previous 
+    % frequency. Since the Eigenvector have been normalized in advance,
+    % there should be only one of these inner products closest to 1,
+    % which indicates that the two Eigenvectors involved correspond to
+    % the Eigenvalue of the same position.[Braunisch1998]
     prodTable(:,:,freqidx) =  ctranspose(eigVec(:,:,freqidx)) * eigVec(:,:,freqidx-1);
-    % ²¹³ä×¢ÊÍ! --grwei, 20200316
+    
+    % Determine the correct position by Hermitian Inner Product.
+    % WARNNING! Duplicate serial numbers may be generated in extreme
+    % cases.
     newIndex(:,freqidx) = max(prodTable(:,:,freqidx),[],2);
+    eigVec(:,:,freqidx) = eigVec(:,newIndex(:,freqidx),freqidx);
+    eigVal(:,freqidx) = eigVal(newIndex(:,freqidx),freqidx);
+end
+
+%% Extract Attenuation Constants and Unwrapped Phase Constants
+
+gammaLenEigWrap = acosh(eigVal);  % Principle Value of gammaEig*linelength: 
+                                  % Real part is non-negative, imag part in [-pi,pi] 
+betaLenEigWrapDiff(:,2:freqpts) = diff(imag(gammaLenEigWrap),1,2);
+discontCount(:,2:freqpts) = cumsum(betaLenEigWrapDiff > pi,2);
+betaLenEigUnwrap = imag(gammaLenEigWrap) + 2*pi*discontCount;
+gammaEigUnwrap = complex(real(gammaLenEigWrap),betaLenEigUnwrap) / linelength;
+
+gamma = nan(numLines,numLines,freqpts);
+for idx = 1:freqpts
+    gamma(:,:,idx) = eigVec(:,:,idx)        *                           ...
+                diag(gammaEigUnwrap(:,idx)) /                           ...
+                eigVec(:,:,idx);
+end
+
+alpha = real(gamma);
+beta  = imag(gamma);
+
+%% Extract Characteristic Impedance Matrix
+
+Zc = zeros(numLines,numLines,freqpts);  % Characteristic impedance
+% The phase contant need not be unwrapped to compute Zc[]
+for idx = 1:freqpts
+   Zc(:,:,idx) = eigVec(:,:,idx)                *                       ...
+                diag(1./gammaLenEigWrap(:,idx)) /                       ...
+                eigVec(:,:,idx)                 *                       ...
+                TB(:,:,idx);
+end
+
+%% Extract RLGC
+
+R = zeros(numLines,numLines,freqpts);       % Resistance matrix
+L = R;                                      % Inductance matrix
+C = R;                                      % Capacitance matrix
+G = R;                                      % Conductance matrix
+Z_pul = R;                                  % p.u.l impedance matrix
+Y_pul = R;                                  % p.u.l admittance matrix
+
+for idx = 1:freqidx
+   Z_pul(:,:,idx) =  gamma(:,:,idx) * Zc(:,:,idx);
+   Y_pul(:,:,udx) =  Zc(:,:,idx) \ gamma(:,:,idx);
+   R(:,:,idx) = real(Z_pul(:,:,idx));
+   L(:,:,idx) = imag(Z_pul(:,:,idx)) / (2*pi*freq(idx));
+   G(:,:,idx) = real(Y_pul(:,:,idx));
+   C(:,:,idx) = imag(Y_pul(:,:,idx)) / (2*pi*freq(idx));
 end
 
 %% 
