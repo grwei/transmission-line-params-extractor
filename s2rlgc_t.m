@@ -61,9 +61,9 @@ TD = TA;
 I = eye(2*numLines,2*numLines);                     % 2Nx2N identity matrix
 
 for idx=1:freqpts
-    Z_params(:,:,idx) = z0*(I+s_params(:,:,idx))        /               ...
+    Z_params(:,:,idx) = z0*(I+s_params(:,:,idx))                /       ...
                         (I-s_params(:,:,idx));
-    TA(:,:,idx) =   Z_params(1:numLines,1:numLines,idx) /               ...
+    TA(:,:,idx) =   Z_params(1:numLines,1:numLines,idx)         /       ...
                     Z_params(numLines+1:end,1:numLines,idx);
     TB(:,:,idx) =   TA(:,:,idx)                                 *       ...
                     Z_params(numLines+1:end,numLines+1:end,idx) -       ...
@@ -98,14 +98,15 @@ for freqidx = 2:freqpts                         % Index of frequency point
     % there should be only one of these inner products closest to 1,
     % which indicates that the two Eigenvectors involved correspond to
     % the Eigenvalue of the same position.[Braunisch1998]
-    prodTable(:,:,freqidx) =  ctranspose(eigVec(:,:,freqidx)) * eigVec(:,:,freqidx-1);
+    prodTable(:,:,freqidx) =  ctranspose(eigVec(:,:,freqidx)) *     ...
+                                eigVec(:,:,freqidx-1);
     
     % Determine the correct position by Hermitian Inner Product.
     % WARNNING! Duplicate serial numbers may be generated in extreme
     % cases.
     [~,newIndex(:,freqidx)] = max(abs(prodTable(:,:,freqidx)),[],2);
-    eigVec(:,:,freqidx) = eigVec(:,newIndex(:,freqidx),freqidx);
-    eigVal(:,freqidx) = eigVal(newIndex(:,freqidx),freqidx);
+    eigVec(:,:,freqidx)     = eigVec(:,newIndex(:,freqidx),freqidx);
+    eigVal(:,freqidx)       = eigVal(newIndex(:,freqidx),freqidx);
 end
 
 %% Extract Attenuation Constants and Unwrapped Phase Constants
