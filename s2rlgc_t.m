@@ -1,6 +1,6 @@
 function output = s2rlgc_t(s_params,linelength,freq,z0,port_reorder)
 %S2RLGC Converts S-parameters of a transmission line to RLGC-parameters
-%   OUTPUT = S2RLGC(S_PARAMS, LINELENGTH, FREQ, Z0, PORT_REORDER) converts
+%   OUTPUT = S2RLGC_t(S_PARAMS, LINELENGTH, FREQ, Z0, PORT_REORDER) converts
 %   the scattering parameters S_PARAMS of a transmission line into
 %   RLGC-matrices. 
 %
@@ -61,14 +61,18 @@ TD = TA;
 I = eye(2*numLines,2*numLines);                     % 2Nx2N identity matrix
 
 for idx=1:freqpts
-    Z_params(:,:,idx) = z0*(I+s_params(:,:,idx)) / (I-s_params(:,:,idx));
+    Z_params(:,:,idx) = z0*(I+s_params(:,:,idx))        /               ...
+                        (I-s_params(:,:,idx));
     TA(:,:,idx) =   Z_params(1:numLines,1:numLines,idx) /               ...
                     Z_params(numLines+1:end,1:numLines,idx);
-    TB(:,:,idx) =   TA * Z_params(numLines+1:end,numLines+1:end) -      ...
+    TB(:,:,idx) =   TA(:,:,idx)                                 *       ...
+                    Z_params(numLines+1:end,numLines+1:end,idx) -       ...
                     Z_params(1:numLines,numLines+1:end,idx);
     % The C and D terms are not actually used.
-    TC(:,:,idx) =   I / (I-s_params(:,:,idx));
-    TD(:,:,idx) =   TC(:,:,idx) * Z_params(numLines+1:end,numLines+1:end);
+    TC(:,:,idx) =   eye(numLines,numLines)                      /       ...
+                    Z_params(numLines+1:end,1:numLines,idx);
+    TD(:,:,idx) =   TC(:,:,idx)                                 *       ...
+                    Z_params(numLines+1:end,numLines+1:end,idx);
 end
 
 %% Extract Complex Propagation Constants while preserving relative Eigenvalue position
@@ -99,7 +103,7 @@ for freqidx = 2:freqpts                         % Index of frequency point
     % Determine the correct position by Hermitian Inner Product.
     % WARNNING! Duplicate serial numbers may be generated in extreme
     % cases.
-    newIndex(:,freqidx) = max(prodTable(:,:,freqidx),[],2);
+    [~,newIndex(:,freqidx)] = max(abs(prodTable(:,:,freqidx)),[],2);
     eigVec(:,:,freqidx) = eigVec(:,newIndex(:,freqidx),freqidx);
     eigVal(:,freqidx) = eigVal(newIndex(:,freqidx),freqidx);
 end
@@ -109,7 +113,7 @@ end
 gammaLenEigWrap = acosh(eigVal);  % Principle Value of gammaEig*linelength: 
                                   % Real part is non-negative, imag part in [-pi,pi] 
 betaLenEigWrapDiff(:,2:freqpts) = diff(imag(gammaLenEigWrap),1,2);
-discontCount(:,2:freqpts) = cumsum(betaLenEigWrapDiff > pi,2);
+discontCount = cumsum(abs(betaLenEigWrapDiff) > pi,2);
 betaLenEigUnwrap = imag(gammaLenEigWrap) + 2*pi*discontCount;
 gammaEigUnwrap = complex(real(gammaLenEigWrap),betaLenEigUnwrap) / linelength;
 
@@ -129,7 +133,7 @@ Zc = zeros(numLines,numLines,freqpts);  % Characteristic impedance
 % The phase contant need not be unwrapped to compute Zc[]
 for idx = 1:freqpts
    Zc(:,:,idx) = eigVec(:,:,idx)                *                       ...
-                diag(1./gammaLenEigWrap(:,idx)) /                       ...
+                diag(1./sinh(gammaLenEigWrap(:,idx))) /                       ...
                 eigVec(:,:,idx)                 *                       ...
                 TB(:,:,idx);
 end
@@ -145,7 +149,7 @@ Y_pul = R;                                  % p.u.l admittance matrix
 
 for idx = 1:freqidx
    Z_pul(:,:,idx) =  gamma(:,:,idx) * Zc(:,:,idx);
-   Y_pul(:,:,udx) =  Zc(:,:,idx) \ gamma(:,:,idx);
+   Y_pul(:,:,idx) =  Zc(:,:,idx) \ gamma(:,:,idx);
    R(:,:,idx) = real(Z_pul(:,:,idx));
    L(:,:,idx) = imag(Z_pul(:,:,idx)) / (2*pi*freq(idx));
    G(:,:,idx) = real(Y_pul(:,:,idx));
