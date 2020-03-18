@@ -26,3 +26,7 @@
 *.jpg -crlf -diff -merge
 *.png -crlf -diff -merge
 
+*.csv -crlf -diff -merge
+*.s8p -crlf -diff -merge
+*.s4p -crlf -diff -merge
+*.Si9 -crlf -diff -merge

@@ -1,6 +1,6 @@
 function output = s2rlgc_t(s_params,linelength,freq,z0,port_reorder)
 %S2RLGC Converts S-parameters of a transmission line to RLGC-parameters
-%   OUTPUT = S2RLGC_t(S_PARAMS, LINELENGTH, FREQ, Z0, PORT_REORDER) converts
+%   OUTPUT = S2RLGC_T(S_PARAMS, LINELENGTH, FREQ, Z0, PORT_REORDER) converts
 %   the scattering parameters S_PARAMS of a transmission line into
 %   RLGC-matrices. 
 %
@@ -115,6 +115,11 @@ gammaLenEigWrap = acosh(eigVal);  % Principle Value of gammaEig*linelength:
                                   % Real part is non-negative, imag part in [-pi,pi] 
 betaLenEigWrapDiff(:,2:freqpts) = diff(imag(gammaLenEigWrap),1,2);
 discontCount = cumsum(abs(betaLenEigWrapDiff) > pi,2);
+
+%% !!!Phase-Unwrapp method invalid near singular frequency! --grwei,20200318 
+% discontCount(:,491:end) = 1;
+
+%%
 betaLenEigUnwrap = imag(gammaLenEigWrap) + 2*pi*discontCount;
 gammaEigUnwrap = complex(real(gammaLenEigWrap),betaLenEigUnwrap) / linelength;
 
