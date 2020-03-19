@@ -30,3 +30,6 @@
 *.s8p -crlf -diff -merge
 *.s4p -crlf -diff -merge
 *.Si9 -crlf -diff -merge
+
+#website
+*.mhtml -crlf -diff -merge
