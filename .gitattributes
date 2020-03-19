@@ -31,5 +31,8 @@
 *.s4p -crlf -diff -merge
 *.Si9 -crlf -diff -merge
 
-#website
+# website
 *.mhtml -crlf -diff -merge
+
+# data
+/data -crlf -diff -merge

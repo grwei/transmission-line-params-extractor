@@ -26,12 +26,12 @@ numOfLines = size(SingleEnded4PortData.S_Parameters,1)/2;
 filename_PowerSI = 'data/CPL_1in_20200202_PowerSI.csv';
 opts = detectImportOptions(filename_PowerSI);
 rlgc_PowerSI_mat = readtable(filename_PowerSI);
-% allocate memory
-rlgc_PowerSI.R = zeros(numOfLines,numOfLines);
+% Allocate memory
+rlgc_PowerSI.R = zeros(numOfLines,numOfLines,freqPts);
 rlgc_PowerSI.L = rlgc_PowerSI.R;
 rlgc_PowerSI.C = rlgc_PowerSI.R;
 rlgc_PowerSI.G = rlgc_PowerSI.R;
-% load data
+% Load data
 for freqIdx = 1:freqPts
     rlgc_PowerSI.R(1,1,freqIdx) = rlgc_PowerSI_mat{4*freqIdx-3,3}/lineLength;
     rlgc_PowerSI.R(1,2,freqIdx) = rlgc_PowerSI_mat{4*freqIdx-3,4}/lineLength;
@@ -55,11 +55,11 @@ end
 
 rlgc_t = s2rlgc_t(SingleEnded4PortData.S_Parameters,lineLength,freq,z0);
 
-%% Extracted RLGC compared with Cadence PowerSI
+%% Extracted RLGC compared with Cadence Sigrity PowerSI
 
 % R, L
 figure('Name','R, L matrix')
-sgtitle({'Comparison Between Proposed Algorithm and';' Cadence Sigrity PowerSI: R, L Matrix'})
+sgtitle({'Comparison Between Proposed Algorithm and';'Cadence Sigrity PowerSI: R, L Matrix'})
 subplot(221)
 plot(freq/1e9,squeeze(rlgc_t.R(1,1,:)),'k-')
 hold on

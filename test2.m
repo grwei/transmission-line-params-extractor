@@ -11,7 +11,7 @@ clc; clear; close all;
 
 % Import simulated data
 lineLength = 0.02; % Line Length(meters)
-filename_4line = 'data/4line_4linetoRLCG_10201603.s8p';
+filename_4line = 'data/Four-line_20mm_20191020.s8p';
 SingleEnded8PortData = read(rfdata.data,filename_4line);
 freq = SingleEnded8PortData.Freq;
 freqPts = length(freq);
@@ -21,13 +21,13 @@ SingleEnded8PortData.S_Parameters = snp2smp(SingleEnded8PortData.S_Parameters,..
 numOfLines = size(SingleEnded8PortData.S_Parameters,1)/2;
 
 % Import Cadence-PowerSI-extracted params
-% allocate memory
-rlgc_PowerSI.R = zeros(numOfLines,numOfLines);
+% Allocate memory
+rlgc_PowerSI.R = zeros(numOfLines,numOfLines,freqPts);
 rlgc_PowerSI.L = rlgc_PowerSI.R;
 rlgc_PowerSI.C = rlgc_PowerSI.R;
 rlgc_PowerSI.G = rlgc_PowerSI.R;
-% load data
-filename_PowerSI = 'data/4line_4linetoRLCG_10201603.csv';
+% Load data
+filename_PowerSI = 'data/Four-line_20mm_20191020_PowerSI.csv';
 opts = detectImportOptions(filename_PowerSI);
 rlgc_PowerSI_mat = readtable(filename_PowerSI);
 for freqIdx = 1:freqPts
