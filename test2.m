@@ -105,8 +105,8 @@ end
 rlgc_t = s2rlgc_t(SingleEnded8PortData.S_Parameters,lineLength,freq,z0);
 
 %% 3. Extract RLGC params using proposed method
-figure('Name','Extracted RLGC using proposed method')
-sgtitle('Extracted RLGC using proposed algorithm')
+figure('Name','Extracted RLGC using proposed method(before 1st resonance frequency)')
+sgtitle({'Extracted RLGC using proposed algorithm','(before 1st resonance frequency)'})
 subplot(2,2,1)
 plot(freq,squeeze(rlgc_t.R(1,1,:)))
 grid on

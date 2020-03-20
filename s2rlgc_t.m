@@ -2,17 +2,17 @@ function output = s2rlgc_t(s_params,linelength,freq,z0,port_reorder)
 %S2RLGC Converts S-parameters of a transmission line to RLGC-parameters
 %   OUTPUT = S2RLGC_T(S_PARAMS, LINELENGTH, FREQ, Z0, PORT_REORDER) converts
 %   the scattering parameters S_PARAMS of a transmission line into
-%   RLGC-matrices. 
+%   RLGC-matrices.
 %
 %   S_PARAMS is a complex 2N-by-2N-by-M array, where M is the number of
 %   frequency points at which the S-parameters are specified and N is
 %   the number of transmission lines.
-%   LINELENGTH is the length of the transmission line 
+%   LINELENGTH is the length of the transmission line
 %   FREQ is a real Mx1 frequency vector
 %   Z0 is the reference impedance, the default is 50 ohms.
 %   PORT_REORDER is a 2Nx1 vector indicating the input and output ports
-%   [IP... OP ...]. Ports on one side of the lines are numbered first 
-%   followed by the ports on the other side; thus, if i refers to a port 
+%   [IP... OP ...]. Ports on one side of the lines are numbered first
+%   followed by the ports on the other side; thus, if i refers to a port
 %   of a line at z=0, then the port on the other side is numbered  N+i.
 %
 %   The outputs are per unit length transmission line parameters
@@ -23,6 +23,10 @@ function output = s2rlgc_t(s_params,linelength,freq,z0,port_reorder)
 %   OUTPUT.Zc is a complex N-by-N-by-M Characteristic line impedance(ohm)
 %   OUTPUT.alpha is a real N-by-N-by-M attenuation constant (Nepers/m)
 %   OUTPUT.beta is a real N-by-N-by-M phase constant (radians/m)
+
+%% Debug flag
+
+debugFlag = true;
 
 %% Input validity check and initialization
 
@@ -62,17 +66,17 @@ I = eye(2*numLines,2*numLines);                     % 2Nx2N identity matrix
 
 for idx=1:freqpts
     Z_params(:,:,idx) = z0*(I+s_params(:,:,idx))                /       ...
-                        (I-s_params(:,:,idx));
+        (I-s_params(:,:,idx));
     TA(:,:,idx) =   Z_params(1:numLines,1:numLines,idx)         /       ...
-                    Z_params(numLines+1:end,1:numLines,idx);
+        Z_params(numLines+1:end,1:numLines,idx);
     TB(:,:,idx) =   TA(:,:,idx)                                 *       ...
-                    Z_params(numLines+1:end,numLines+1:end,idx) -       ...
-                    Z_params(1:numLines,numLines+1:end,idx);
+        Z_params(numLines+1:end,numLines+1:end,idx)             -       ...
+        Z_params(1:numLines,numLines+1:end,idx);
     % The C and D terms are not actually used.
     TC(:,:,idx) =   eye(numLines,numLines)                      /       ...
-                    Z_params(numLines+1:end,1:numLines,idx);
+        Z_params(numLines+1:end,1:numLines,idx);
     TD(:,:,idx) =   TC(:,:,idx)                                 *       ...
-                    Z_params(numLines+1:end,numLines+1:end,idx);
+        Z_params(numLines+1:end,numLines+1:end,idx);
 end
 
 %% Extract Complex Propagation Constants while preserving relative Eigenvalue position
@@ -81,9 +85,9 @@ end
 eigVal = zeros(numLines,freqpts);           % Eigenvalues of TA
 eigVec = zeros(numLines,numLines,freqpts);  % Columns are the corresponding Right Eigenvectors of TA
 for idx = 1:freqpts
-    % [V,D] = eig(TA,'vector') --> TA*diag(V) = diag(V)*D 
-    % Note: The eigenvectors should be normalized[Braunisch1998] 
-    % so that the 2-norm of each is 1, which is done by default 
+    % [V,D] = eig(TA,'vector') --> TA*diag(V) = diag(V)*D
+    % Note: The eigenvectors should be normalized[Braunisch1998]
+    % so that the 2-norm of each is 1, which is done by default
     % by the MATLAB function eig().
     [eigVec(:,:,idx),eigVal(:,idx)] = eig(TA(:,:,idx),'vector');
 end
@@ -92,14 +96,14 @@ end
 prodTable = nan(numLines,numLines,freqpts);     % Hermitian Inner Product recoder.
 newIndex  = nan(numLines,freqpts);              % Correct order of eigVal and corresponding eigVec
 for freqidx = 2:freqpts                         % Index of frequency point
-    % For each Eigenvector at the current frequency, calculate the 
-    % Hermitian inner product of each Eigenvector at the previous 
+    % For each Eigenvector at the current frequency, calculate the
+    % Hermitian inner product of each Eigenvector at the previous
     % frequency. Since the Eigenvector have been normalized in advance,
     % there should be only one of these inner products closest to 1,
     % which indicates that the two Eigenvectors involved correspond to
     % the Eigenvalue of the same position.[Braunisch1998]
     prodTable(:,:,freqidx) =  ctranspose(eigVec(:,:,freqidx)) *     ...
-                                eigVec(:,:,freqidx-1);
+        eigVec(:,:,freqidx-1);
     
     % Determine the correct position by Hermitian Inner Product.
     % WARNNING! Duplicate serial numbers may be generated in extreme
@@ -111,12 +115,12 @@ end
 
 %% Extract Attenuation Constants and Unwrapped Phase Constants
 
-gammaLenEigWrap = acosh(eigVal);  % Principle Value of gammaEig*linelength: 
-                                  % Real part is non-negative, imag part in [-pi,pi] 
+gammaLenEigWrap = acosh(eigVal);  % Principle Value of gammaEig*linelength:
+% Real part is non-negative, imag part in [-pi,pi]
 betaLenEigWrapDiff(:,2:freqpts) = diff(imag(gammaLenEigWrap),1,2);
 discontCount = cumsum(abs(betaLenEigWrapDiff) > pi,2);
 
-%% !!!Phase-Unwrapp method invalid near singular frequency! --grwei,20200318 
+%% !!!Phase-unwrapping algorithm is unreliable near singular frequency! --grwei,20200318
 % discontCount(:,491:end) = 1;
 
 %%
@@ -126,8 +130,8 @@ gammaEigUnwrap = complex(real(gammaLenEigWrap),betaLenEigUnwrap) / linelength;
 gamma = nan(numLines,numLines,freqpts);
 for idx = 1:freqpts
     gamma(:,:,idx) = eigVec(:,:,idx)        *                           ...
-                diag(gammaEigUnwrap(:,idx)) /                           ...
-                eigVec(:,:,idx);
+        diag(gammaEigUnwrap(:,idx))         /                           ...
+        eigVec(:,:,idx);
 end
 
 alpha = real(gamma);
@@ -138,10 +142,10 @@ beta  = imag(gamma);
 Zc = zeros(numLines,numLines,freqpts);  % Characteristic impedance
 % The phase contant need not be unwrapped to compute Zc[]
 for idx = 1:freqpts
-                Zc(:,:,idx) = eigVec(:,:,idx)           *               ...
-                diag(1./sinh(gammaLenEigWrap(:,idx)))   /               ...
-                eigVec(:,:,idx)                         *               ...
-                TB(:,:,idx);
+    Zc(:,:,idx) = eigVec(:,:,idx)               *               ...
+        diag(1./sinh(gammaLenEigWrap(:,idx)))   /               ...
+        eigVec(:,:,idx)                         *               ...
+        TB(:,:,idx);
 end
 
 %% Extract RLGC
@@ -154,17 +158,177 @@ Z_pul = R;                                  % p.u.l impedance matrix
 Y_pul = R;                                  % p.u.l admittance matrix
 
 for idx = 1:freqidx
-   Z_pul(:,:,idx) =  gamma(:,:,idx) * Zc(:,:,idx);
-   Y_pul(:,:,idx) =  Zc(:,:,idx) \ gamma(:,:,idx);
-   R(:,:,idx) = real(Z_pul(:,:,idx));
-   L(:,:,idx) = imag(Z_pul(:,:,idx)) / (2*pi*freq(idx));
-   G(:,:,idx) = real(Y_pul(:,:,idx));
-   C(:,:,idx) = imag(Y_pul(:,:,idx)) / (2*pi*freq(idx));
+    Z_pul(:,:,idx) =  gamma(:,:,idx) * Zc(:,:,idx);
+    Y_pul(:,:,idx) =  Zc(:,:,idx) \ gamma(:,:,idx);
+    R(:,:,idx) = real(Z_pul(:,:,idx));
+    L(:,:,idx) = imag(Z_pul(:,:,idx)) / (2*pi*freq(idx));
+    G(:,:,idx) = real(Y_pul(:,:,idx));
+    C(:,:,idx) = imag(Y_pul(:,:,idx)) / (2*pi*freq(idx));
 end
 
-%% 
+%%
 
 output = struct('R',R,'L',L,'G',G,'C',C,'alpha',alpha,'beta',beta,'Zc',Zc);
 
+% end 
+
+%%
+%The following code snippets are for debugging purposes only.
+
+if debugFlag == false
+    return
+end
+%%
+
+figure('Name','prodTable')
+sgtitle('Hermitian Inner Product')
+for idx_cur = 1:numLines
+    subplot(2,ceil(numLines/2),idx_cur)
+    plot(freq,abs(squeeze(prodTable(idx_cur,1,:))));
+    hold on
+    for idx_pre = 2:numLines
+        plot(freq,abs(squeeze(prodTable(idx_cur,idx_pre,:))));
+    end
+    hold off
+    txt = cell(1,numLines);
+    for idx = 1:numLines
+        txt{1,idx} = ['prePos-',sprintf('%u',idx)];
+    end
+    legend(txt,'Location','best')
+    legend('boxoff')
+    title(['curPos-',sprintf('%u',idx_cur)])
+    xlabel('Frequency(Hz)')
+    ylabel('Hermitian Inner Product(Magnitude)')
+    ylim([0 1.1])
 end
 
+%%
+
+figure('Name','gammaLenEigWrap')
+sgtitle('gamma(wrap) of each eigen modes')
+subplot(121)
+plot(freq,real(gammaLenEigWrap(1,:))/linelength)
+hold on
+for idx = 2:numLines
+    plot(freq,real(gammaLenEigWrap(idx,:))/linelength)
+end
+hold off
+grid on
+xlim([4.5e9 5.5e9])
+xlabel('Frequency(Hz)')
+ylabel('\alpha(Np/m)')
+txt = cell(1,numLines);
+for idx = 1:numLines
+    txt{1,idx} = ['\alpha_',sprintf('%u',idx)];
+end
+legend(txt,'Location','best','NumColumns',2)
+legend('boxoff')
+title('\alpha')
+
+subplot(122)
+plot(freq,imag(gammaLenEigWrap(1,:)))
+hold on
+for idx = 2:numLines
+    plot(freq,imag(gammaLenEigWrap(idx,:)))
+end
+hold off
+grid on
+xlim([4.5e9 5.5e9])
+xlabel('Frequency(Hz)')
+ylabel('\betaL(rad)')
+txt = cell(1,numLines);
+for idx = 1:numLines
+    txt{1,idx} = ['\beta_',sprintf('%u',idx)];
+end
+legend(txt,'Location','best','NumColumns',2)
+legend('boxoff')
+title('\betaL')
+
+%%
+
+figure('Name','Zc(Real part)')
+sgtitle('Charateristic Impedance Matrix(Real part)')
+for idx_row = 1:numLines
+    subplot(2,ceil(numLines/2),idx_row)
+    plot(freq,real(squeeze(Zc(idx_row,1,:))))
+    hold on
+    for idx_col = 2:numLines
+       plot(freq,real(squeeze(Zc(idx_row,idx_col,:))))
+    end
+    hold off
+    txt = cell(1,numLines);
+    for idx_col = 1:numLines
+       txt{1,idx_col} = ['Zc_{',sprintf('%u',idx_row),sprintf('%u',idx_col),'}']; 
+    end
+    legend(txt,'Location','best','NumColumns',2)
+    legend('boxoff')
+    xlabel('Frequency(Hz)')
+    ylabel('Real-part(Ohms)')
+    title(['Zc_{',sprintf('%u',idx_row),'X}'])
+end
+
+% 
+figure('Name','Zc(Imag part)')
+sgtitle('Charateristic Impedance Matrix(Imag part)')
+for idx_row = 1:numLines
+    subplot(2,ceil(numLines/2),idx_row)
+    plot(freq,imag(squeeze(Zc(idx_row,1,:))))
+    hold on
+    for idx_col = 2:numLines
+       plot(freq,imag(squeeze(Zc(idx_row,idx_col,:))))
+    end
+    hold off
+    txt = cell(1,numLines);
+    for idx_col = 1:numLines
+       txt{1,idx_col} = ['Zc_{',sprintf('%u',idx_row),sprintf('%u',idx_col),'}']; 
+    end
+    legend(txt,'Location','best','NumColumns',2)
+    legend('boxoff')
+    xlabel('Frequency(Hz)')
+    ylabel('Imag-part(Ohms)')
+    title(['Zc_{',sprintf('%u',idx_row),'X}'])
+end
+
+%%
+
+figure('Name','gammaEigUnwrap')
+sgtitle('gamma(unwrap) of each eigen modes')
+subplot(121)
+plot(freq,real(gammaEigUnwrap(1,:)))
+hold on
+for idx = 2:numLines
+    plot(freq,real(gammaEigUnwrap(idx,:)))
+end
+hold off
+grid on
+xlim([4.5e9 5.5e9])
+xlabel('Frequency(Hz)')
+ylabel('\alpha(Np/m)')
+txt = cell(1,numLines);
+for idx = 1:numLines
+    txt{1,idx} = ['\alpha_',sprintf('%u',idx)];
+end
+legend(txt,'Location','best','NumColumns',2)
+legend('boxoff')
+title('\alpha')
+
+subplot(122)
+plot(freq,imag(gammaEigUnwrap(1,:)))
+hold on
+for idx = 2:numLines
+    plot(freq,imag(gammaEigUnwrap(idx,:)))
+end
+hold off
+grid on
+xlim([4.5e9 5.5e9])
+xlabel('Frequency(Hz)')
+ylabel('\betaL(rad)')
+txt = cell(1,numLines);
+for idx = 1:numLines
+    txt{1,idx} = ['\beta_',sprintf('%u',idx)];
+end
+legend(txt,'Location','best','NumColumns',2)
+legend('boxoff')
+title('\beta')
+
+end % end for function
