@@ -117,9 +117,9 @@ hold on
 plot(freq/1e9,squeeze(rlgc_PowerSI.C(1,1,:)),'k--')
 hold off
 grid on
-ave_y = mean(squeeze(rlgc_t.C(1,1,:)));
-del_r = 4e-5;
-ylim([ave_y*(1-del_r), ave_y*(1+del_r)])
+% ave_y = mean(squeeze(rlgc_t.C(1,1,:)));
+% del_r = 4e-5;
+% ylim([ave_y*(1-del_r), ave_y*(1+del_r)])
 xlabel('Freq(GHz)');
 ylabel('C11(F/m)');
 title('C11 Comparison');
@@ -132,9 +132,9 @@ hold on
 plot(freq/1e9,squeeze(rlgc_PowerSI.C(1,2,:)),'k--')
 hold off
 grid on
-ave_y = mean(squeeze(rlgc_t.C(1,2,:)));
-del_r = 5e-4;
-ylim([ave_y*(1+del_r), ave_y*(1-del_r)])
+% ave_y = mean(squeeze(rlgc_t.C(1,2,:)));
+% del_r = 5e-4;
+% ylim([ave_y*(1+del_r), ave_y*(1-del_r)])
 xlabel('Freq(GHz)');
 ylabel('C12(F/m)');
 title('C12 Comparison');
