@@ -104,7 +104,7 @@ end
 
 rlgc_t = s2rlgc_t(SingleEnded8PortData.S_Parameters,lineLength,freq,z0);
 
-%% 
+%% Extracted RLGC using proposed method(before 1st resonance frequency)
 
 figure('Name','Extracted RLGC using proposed method(before 1st resonance frequency)')
 sgtitle({'Extracted RLGC using proposed algorithm','(before 1st resonance frequency)'})
@@ -176,9 +176,10 @@ legend({'G11','G21','G22','G31','G32','G41'},'Location','best','NumColumns',2)
 legend('boxoff')
 title('G matrix')
 
-%% Candence Sigrity PowerSI extracted RLGC
-figure('Name','Candence Sigrity PowerSI extracted RLGC')
-sgtitle('Candence Sigrity PowerSI extracted RLGC')
+%% Candence Sigrity PowerSI extracted RLGC(before 1st resonance frequency)
+
+figure('Name','Candence Sigrity PowerSI extracted RLGC(before 1st resonance frequency)')
+sgtitle({'Candence Sigrity PowerSI extracted RLGC','(before 1st resonance frequency)'})
 subplot(2,2,1)
 plot(freq,squeeze(rlgc_PowerSI.R(1,1,:)))
 grid on
