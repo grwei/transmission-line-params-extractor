@@ -24,9 +24,10 @@ function output = s2rlgc_t(s_params,linelength,freq,z0,port_reorder)
 %   OUTPUT.alpha is a real N-by-N-by-M attenuation constant (Nepers/m)
 %   OUTPUT.beta is a real N-by-N-by-M phase constant (radians/m)
 
-%% Debug flag
+%% Configuration
 
-debugFlag = true;
+debugFlag = true;       % Debug mode
+EigSortMethod = 0;      % 0(default)- abs(real(...))  1- abs(...)
 
 %% Input validity check and initialization
 
@@ -93,8 +94,9 @@ for idx = 1:freqpts
 end
 
 % Adjust the order of Eigenvalues and Eigenvectors [Braunisch1998, Chu2015]
-prodTable = nan(numLines,numLines,freqpts);     % Hermitian Inner Product recoder.
-newIndex  = nan(numLines,freqpts);              % Correct order of eigVal and corresponding eigVec
+prodTable   = nan(numLines,numLines,freqpts);   % Hermitian Inner Product recoder.
+CorrectPos  = nan(numLines,freqpts);            % Correct position of eigVal and corresponding eigVec
+newIndex    = nan(numLines,freqpts);            % New index of eigVal and corresponding eigVec
 for freqidx = 2:freqpts                         % Index of frequency point
     % For each Eigenvector at the current frequency, calculate the
     % Hermitian inner product of each Eigenvector at the previous
@@ -108,7 +110,15 @@ for freqidx = 2:freqpts                         % Index of frequency point
     % Determine the correct position by Hermitian Inner Product.
     % WARNNING! Duplicate serial numbers may be generated in extreme
     % cases.
-    [~,newIndex(:,freqidx)] = max(abs(prodTable(:,:,freqidx)),[],2);
+    
+    % !!!Two choices: 0. max(abs(real(...)))   1. max(abs(...))
+    switch(EigSortMethod)
+        case 0
+            [~,CorrectPos(:,freqidx)] = max(abs(real(prodTable(:,:,freqidx))),[],2);
+        case 1
+            [~,CorrectPos(:,freqidx)] = max(abs(prodTable(:,:,freqidx)),[],2);
+    end
+    [~,newIndex(:,freqidx)] = sort(CorrectPos(:,freqidx));
     eigVec(:,:,freqidx)     = eigVec(:,newIndex(:,freqidx),freqidx);
     eigVal(:,freqidx)       = eigVal(newIndex(:,freqidx),freqidx);
 end
@@ -121,7 +131,8 @@ betaLenEigWrapDiff(:,2:freqpts) = diff(imag(gammaLenEigWrap),1,2);
 discontCount = cumsum(abs(betaLenEigWrapDiff) > pi,2);
 
 %% !!!Phase-unwrapping algorithm is unreliable near singular frequency! --grwei,20200318
-% discontCount(:,491:end) = 1;
+%%Maybe position-tracking algorithm instead???
+% discontCount(:,491:end) = 1; 
 
 %%
 betaLenEigUnwrap = imag(gammaLenEigWrap) + 2*pi*discontCount;
@@ -172,7 +183,7 @@ output = struct('R',R,'L',L,'G',G,'C',C,'alpha',alpha,'beta',beta,'Zc',Zc);
 
 % end 
 
-%%
+%% 
 %The following code snippets are for debugging purposes only.
 
 if debugFlag == false
@@ -180,14 +191,15 @@ if debugFlag == false
 end
 %%
 
-figure('Name','prodTable')
-sgtitle('Hermitian Inner Product')
+figure('Name','prodTable(Real-part)')
+sgtitle('Hermitian Inner Product(Real-part)')
+sz = 10;
 for idx_cur = 1:numLines
     subplot(2,ceil(numLines/2),idx_cur)
-    plot(freq,abs(squeeze(prodTable(idx_cur,1,:))));
+    scatter(freq,abs(real(squeeze(prodTable(idx_cur,1,:)))),sz,'o');
     hold on
     for idx_pre = 2:numLines
-        plot(freq,abs(squeeze(prodTable(idx_cur,idx_pre,:))));
+        scatter(freq,abs(real(squeeze(prodTable(idx_cur,idx_pre,:)))),sz,'o');
     end
     hold off
     txt = cell(1,numLines);
@@ -198,14 +210,41 @@ for idx_cur = 1:numLines
     legend('boxoff')
     title(['curPos-',sprintf('%u',idx_cur)])
     xlabel('Frequency(Hz)')
-    ylabel('Hermitian Inner Product(Magnitude)')
-    ylim([0 1.1])
+    ylabel('Abs(Real-part)')
+%     ylim([0 1.1])
 end
 
 %%
 
+
+figure('Name','prodTable(Magnitude)')
+sgtitle('Hermitian Inner Product(Magnitude)')
+sz = 10;
+for idx_cur = 1:numLines
+    subplot(2,ceil(numLines/2),idx_cur)
+    scatter(freq,abs(squeeze(prodTable(idx_cur,1,:))),sz,'o');
+    hold on
+    for idx_pre = 2:numLines
+        scatter(freq,abs(squeeze(prodTable(idx_cur,idx_pre,:))),sz,'o');
+    end
+    hold off
+    txt = cell(1,numLines);
+    for idx = 1:numLines
+        txt{1,idx} = ['prePos-',sprintf('%u',idx)];
+    end
+    legend(txt,'Location','best')
+    legend('boxoff')
+    title(['curPos-',sprintf('%u',idx_cur)])
+    xlabel('Frequency(Hz)')
+    ylabel('Value(Magnitude)')
+%     ylim([0 1.1])
+end
+
+
+%%
+
 figure('Name','gammaLenEigWrap')
-sgtitle('gamma(wrap) of each eigen modes')
+sgtitle('Gamma(wrap) of each eigen mode')
 subplot(121)
 plot(freq,real(gammaLenEigWrap(1,:))/linelength)
 hold on
@@ -248,51 +287,51 @@ title('\betaL')
 
 figure('Name','Zc(Real part)')
 sgtitle('Charateristic Impedance Matrix(Real part)')
-for idx_row = 1:numLines
-    subplot(2,ceil(numLines/2),idx_row)
-    plot(freq,real(squeeze(Zc(idx_row,1,:))))
+for idx = 1:numLines
+    subplot(2,ceil(numLines/2),idx)
+    plot(freq,real(squeeze(Zc(idx,1,:))))
     hold on
     for idx_col = 2:numLines
-       plot(freq,real(squeeze(Zc(idx_row,idx_col,:))))
+       plot(freq,real(squeeze(Zc(idx,idx_col,:))))
     end
     hold off
     txt = cell(1,numLines);
     for idx_col = 1:numLines
-       txt{1,idx_col} = ['Zc_{',sprintf('%u',idx_row),sprintf('%u',idx_col),'}']; 
+       txt{1,idx_col} = ['Zc_{',sprintf('%u',idx),sprintf('%u',idx_col),'}']; 
     end
     legend(txt,'Location','best','NumColumns',2)
     legend('boxoff')
     xlabel('Frequency(Hz)')
     ylabel('Real-part(Ohms)')
-    title(['Zc_{',sprintf('%u',idx_row),'X}'])
+    title(['Zc_{',sprintf('%u',idx),'X}'])
 end
 
 % 
 figure('Name','Zc(Imag part)')
 sgtitle('Charateristic Impedance Matrix(Imag part)')
-for idx_row = 1:numLines
-    subplot(2,ceil(numLines/2),idx_row)
-    plot(freq,imag(squeeze(Zc(idx_row,1,:))))
+for idx = 1:numLines
+    subplot(2,ceil(numLines/2),idx)
+    plot(freq,imag(squeeze(Zc(idx,1,:))))
     hold on
     for idx_col = 2:numLines
-       plot(freq,imag(squeeze(Zc(idx_row,idx_col,:))))
+       plot(freq,imag(squeeze(Zc(idx,idx_col,:))))
     end
     hold off
     txt = cell(1,numLines);
     for idx_col = 1:numLines
-       txt{1,idx_col} = ['Zc_{',sprintf('%u',idx_row),sprintf('%u',idx_col),'}']; 
+       txt{1,idx_col} = ['Zc_{',sprintf('%u',idx),sprintf('%u',idx_col),'}']; 
     end
     legend(txt,'Location','best','NumColumns',2)
     legend('boxoff')
     xlabel('Frequency(Hz)')
     ylabel('Imag-part(Ohms)')
-    title(['Zc_{',sprintf('%u',idx_row),'X}'])
+    title(['Zc_{',sprintf('%u',idx),'X}'])
 end
 
 %%
 
 figure('Name','gammaEigUnwrap')
-sgtitle('gamma(unwrap) of each eigen modes')
+sgtitle('Gamma(unwrap) of each eigen mode')
 subplot(121)
 plot(freq,real(gammaEigUnwrap(1,:)))
 hold on
@@ -330,5 +369,82 @@ end
 legend(txt,'Location','best','NumColumns',2)
 legend('boxoff')
 title('\beta')
+
+%% 
+
+figure('Name','RLGC matrix')
+sgtitle({'Extracted RLGC matrix'})
+% R
+subplot(221)
+plot(freq,squeeze(R(1,1,:)))
+hold on
+for idx = 2:numLines
+    plot(freq,squeeze(R(1,idx,:)))
+end
+hold off
+grid on
+xlabel('Frequency(Hz)')
+ylabel('Value(Ohms/m)')
+txt = cell(1,numLines);
+for idx = 1:numLines
+    txt{1,idx} = [sprintf('R1%u',idx)];
+end
+legend(txt,'Location','best','NumColumns',2)
+legend('boxoff')
+title('R matrix')
+% L
+subplot(222)
+plot(freq,squeeze(L(1,1,:)))
+hold on
+for idx = 2:numLines
+    plot(freq,squeeze(L(1,idx,:)))
+end
+hold off
+grid on
+xlabel('Frequency(Hz)')
+ylabel('Value(H/m)')
+txt = cell(1,numLines);
+for idx = 1:numLines
+    txt{1,idx} = [sprintf('L1%u',idx)];
+end
+legend(txt,'Location','best','NumColumns',2)
+legend('boxoff')
+title('L matrix')
+% G
+subplot(223)
+plot(freq,squeeze(G(1,1,:)))
+hold on
+for idx = 2:numLines
+    plot(freq,squeeze(G(1,idx,:)))
+end
+hold off
+grid on
+xlabel('Frequency(Hz)')
+ylabel('Value(S/m)')
+txt = cell(1,numLines);
+for idx = 1:numLines
+    txt{1,idx} = [sprintf('G1%u',idx)];
+end
+legend(txt,'Location','best','NumColumns',2)
+legend('boxoff')
+title('G matrix')
+% C
+subplot(224)
+plot(freq,squeeze(C(1,1,:)))
+hold on
+for idx = 2:numLines
+    plot(freq,squeeze(C(1,idx,:)))
+end
+hold off
+grid on
+xlabel('Frequency(Hz)')
+ylabel('Value(F/m)')
+txt = cell(1,numLines);
+for idx = 1:numLines
+    txt{1,idx} = [sprintf('C1%u',idx)];
+end
+legend(txt,'Location','best','NumColumns',2)
+legend('boxoff')
+title('C matrix')
 
 end % end for function
