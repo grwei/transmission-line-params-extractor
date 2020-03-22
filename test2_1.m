@@ -126,8 +126,8 @@ for idx = 1:numOfLines
     hold off
     grid on
     xlabel('Freq(GHz)');
-    ylabel([sprintf('R1%u(Ohms/m)',idx)]);
-    title([sprintf('R1%u',idx)]);
+    ylabel(sprintf('R1%u(Ohms/m)',idx));
+    title(sprintf('R1%u',idx));
     legend({'Proposed Algorithm','Cadence Sigrity PowerSI','Boundary points'},'Location','best','NumColumns',1)
     legend('boxoff')
 end
@@ -145,8 +145,8 @@ for idx = 1:numOfLines
     hold off
     grid on
     xlabel('Freq(GHz)');
-    ylabel([sprintf('L1%u(H/m)',idx)]);
-    title([sprintf('L1%u',idx)]);
+    ylabel(sprintf('L1%u(H/m)',idx));
+    title(sprintf('L1%u',idx));
     legend({'Proposed Algorithm','Cadence Sigrity PowerSI','Boundary points'},'Location','best','NumColumns',1)
     legend('boxoff')
 end
@@ -164,8 +164,8 @@ for idx = 1:numOfLines
     hold off
     grid on
     xlabel('Freq(GHz)');
-    ylabel([sprintf('G1%u(S/m)',idx)]);
-    title([sprintf('G1%u',idx)]);
+    ylabel(sprintf('G1%u(S/m)',idx));
+    title(sprintf('G1%u',idx));
     legend({'Proposed Algorithm','Cadence Sigrity PowerSI','Boundary points'},'Location','best','NumColumns',1)
     legend('boxoff')
 end
@@ -183,8 +183,8 @@ for idx = 1:numOfLines
     hold off
     grid on
     xlabel('Freq(GHz)');
-    ylabel([sprintf('C1%u(F/m)',idx)]);
-    title([sprintf('C1%u',idx)]);
+    ylabel(sprintf('C1%u(F/m)',idx));
+    title(sprintf('C1%u',idx));
     legend({'Proposed Algorithm','Cadence Sigrity PowerSI','Boundary points'},'Location','best','NumColumns',1)
     legend('boxoff')
 end

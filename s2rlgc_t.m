@@ -132,7 +132,7 @@ discontCount = cumsum(abs(betaLenEigWrapDiff) > pi,2);
 
 %% !!!Phase-unwrapping algorithm is unreliable near singular frequency! --grwei,20200318
 %%Maybe position-tracking algorithm instead???
-% discontCount(:,491:end) = 1; 
+% discontCount(:,491:end) = 1;
 
 %%
 betaLenEigUnwrap = imag(gammaLenEigWrap) + 2*pi*discontCount;
@@ -181,9 +181,9 @@ end
 
 output = struct('R',R,'L',L,'G',G,'C',C,'alpha',alpha,'beta',beta,'Zc',Zc);
 
-% end 
+% end
 
-%% 
+%%
 %The following code snippets are for debugging purposes only.
 
 if debugFlag == false
@@ -211,7 +211,7 @@ for idx_cur = 1:numLines
     title(['curPos-',sprintf('%u',idx_cur)])
     xlabel('Frequency(Hz)')
     ylabel('Abs(Real-part)')
-%     ylim([0 1.1])
+    %     ylim([0 1.1])
 end
 
 %%
@@ -237,7 +237,7 @@ for idx_cur = 1:numLines
     title(['curPos-',sprintf('%u',idx_cur)])
     xlabel('Frequency(Hz)')
     ylabel('Value(Magnitude)')
-%     ylim([0 1.1])
+    %     ylim([0 1.1])
 end
 
 
@@ -292,12 +292,12 @@ for idx = 1:numLines
     plot(freq,real(squeeze(Zc(idx,1,:))))
     hold on
     for idx_col = 2:numLines
-       plot(freq,real(squeeze(Zc(idx,idx_col,:))))
+        plot(freq,real(squeeze(Zc(idx,idx_col,:))))
     end
     hold off
     txt = cell(1,numLines);
     for idx_col = 1:numLines
-       txt{1,idx_col} = ['Zc_{',sprintf('%u',idx),sprintf('%u',idx_col),'}']; 
+        txt{1,idx_col} = ['Zc_{',sprintf('%u',idx),sprintf('%u',idx_col),'}'];
     end
     legend(txt,'Location','best','NumColumns',2)
     legend('boxoff')
@@ -306,7 +306,7 @@ for idx = 1:numLines
     title(['Zc_{',sprintf('%u',idx),'X}'])
 end
 
-% 
+%
 figure('Name','Zc(Imag part)')
 sgtitle('Charateristic Impedance Matrix(Imag part)')
 for idx = 1:numLines
@@ -314,12 +314,12 @@ for idx = 1:numLines
     plot(freq,imag(squeeze(Zc(idx,1,:))))
     hold on
     for idx_col = 2:numLines
-       plot(freq,imag(squeeze(Zc(idx,idx_col,:))))
+        plot(freq,imag(squeeze(Zc(idx,idx_col,:))))
     end
     hold off
     txt = cell(1,numLines);
     for idx_col = 1:numLines
-       txt{1,idx_col} = ['Zc_{',sprintf('%u',idx),sprintf('%u',idx_col),'}']; 
+        txt{1,idx_col} = ['Zc_{',sprintf('%u',idx),sprintf('%u',idx_col),'}'];
     end
     legend(txt,'Location','best','NumColumns',2)
     legend('boxoff')
@@ -370,7 +370,7 @@ legend(txt,'Location','best','NumColumns',2)
 legend('boxoff')
 title('\beta')
 
-%% 
+%%
 
 figure('Name','RLGC matrix')
 sgtitle({'Extracted RLGC matrix'})
@@ -387,7 +387,7 @@ xlabel('Frequency(Hz)')
 ylabel('Value(Ohms/m)')
 txt = cell(1,numLines);
 for idx = 1:numLines
-    txt{1,idx} = [sprintf('R1%u',idx)];
+    txt{1,idx} = sprintf('R1%u',idx);
 end
 legend(txt,'Location','best','NumColumns',2)
 legend('boxoff')
@@ -405,7 +405,7 @@ xlabel('Frequency(Hz)')
 ylabel('Value(H/m)')
 txt = cell(1,numLines);
 for idx = 1:numLines
-    txt{1,idx} = [sprintf('L1%u',idx)];
+    txt{1,idx} = sprintf('L1%u',idx);
 end
 legend(txt,'Location','best','NumColumns',2)
 legend('boxoff')
@@ -423,7 +423,7 @@ xlabel('Frequency(Hz)')
 ylabel('Value(S/m)')
 txt = cell(1,numLines);
 for idx = 1:numLines
-    txt{1,idx} = [sprintf('G1%u',idx)];
+    txt{1,idx} = sprintf('G1%u',idx);
 end
 legend(txt,'Location','best','NumColumns',2)
 legend('boxoff')
@@ -441,7 +441,7 @@ xlabel('Frequency(Hz)')
 ylabel('Value(F/m)')
 txt = cell(1,numLines);
 for idx = 1:numLines
-    txt{1,idx} = [sprintf('C1%u',idx)];
+    txt{1,idx} = sprintf('C1%u',idx);
 end
 legend(txt,'Location','best','NumColumns',2)
 legend('boxoff')
