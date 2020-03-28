@@ -13,6 +13,7 @@ Matlab implementation of patent [Transmission-line simulators and methods](https
 1. `test0.m`: Single-line Transmission Line
 1. `test1.m`: Coupled Transmission Line
 1. `test2.m`: Four-line Transmission Line
+1. `test2_1.m`: Four-line TL, removing singular frequencies
 
 ## Contact us
 
