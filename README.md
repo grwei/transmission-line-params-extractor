@@ -15,6 +15,15 @@ Matlab implementation of patent [Transmission-line simulators and methods](https
 1. `test2.m`: Four-line Transmission Line
 1. `test2_1.m`: Four-line TL, removing singular frequencies
 
+## In progress
+
+> Need to add:
+> 
+> * [ ]  Resonance treatment
+> * [ ]  Low-frequency conversion
+> * [ ]  Passivity check
+> * [ ]  Causality enforcement
+
 ## Contact us
 
 E-mail: 313017602@qq.com
