@@ -1,5 +1,5 @@
 %% Basic Information
-% Overview
+%%% Overview
 % Transmission-line parameters extractor
 % MATLAB implementation of Patent US8892414B1
 % Author Name: Guorui Wei
@@ -110,6 +110,7 @@ idx_3 = find(freq == 7.5e9);
 idx_sel = [1:idx_1,idx_2:idx_3]';
 freq_sel = freq(idx_sel);
 rlgc_t = s2rlgc_t(SingleEnded8PortData.S_Parameters(:,:,idx_sel),lineLength,freq_sel,z0);
+% [s_params_rebuilt, rlgc_rebuilt] = rlgc2s_t(rlgc_t.R,rlgc_t.L,rlgc_t.G,rlgc_t.C,lineLength,freq_sel,z0);
 
 %% Extracted RLGC compared with Cadence PowerSI
 

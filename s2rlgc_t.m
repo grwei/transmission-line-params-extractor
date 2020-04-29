@@ -23,6 +23,8 @@ function output = s2rlgc_t(s_params,linelength,freq,z0,port_reorder)
 %   OUTPUT.Zc is a complex N-by-N-by-M Characteristic line impedance(ohm)
 %   OUTPUT.alpha is a real N-by-N-by-M attenuation constant (Nepers/m)
 %   OUTPUT.beta is a real N-by-N-by-M phase constant (radians/m)
+%
+%   See also S2RLGC, ABCD2S, S2Y, S2Z, S2H, Y2ABCD, Z2ABCD, H2ABCD, RLGC2S
 
 %% Configuration
 
@@ -82,19 +84,19 @@ end
 
 %% Extract Complex Propagation Constants while preserving relative Eigenvalue position
 
-% Eigenvalue decomposition(similarity transformation) of TA
+%%% Eigenvalue decomposition(similarity transformation) of TA
 eigVal = zeros(numLines,freqpts);           % Eigenvalues of TA
 eigVec = zeros(numLines,numLines,freqpts);  % Columns are the corresponding Right Eigenvectors of TA
 for idx = 1:freqpts
-    % [V,D] = eig(TA,'vector') --> TA*diag(V) = diag(V)*D
+    % [V,D] = eig(TA,'vector') --> TA*V = V*diag(D)
     % Note: The eigenvectors should be normalized[Braunisch1998]
     % so that the 2-norm of each is 1, which is done by default
     % by the MATLAB function eig().
     [eigVec(:,:,idx),eigVal(:,idx)] = eig(TA(:,:,idx),'vector');
 end
 
-% Adjust the order of Eigenvalues and Eigenvectors [Braunisch1998, Chu2015]
-prodTable   = nan(numLines,numLines,freqpts);   % Hermitian Inner Product recoder.
+%%% Adjust the order of Eigenvalues and Eigenvectors [Braunisch1998, Chu2015]
+prodTable   = nan(numLines,numLines,freqpts);   % Hermitian Inner Product recorder.
 CorrectPos  = nan(numLines,freqpts);            % Correct position of eigVal and corresponding eigVec
 newIndex    = nan(numLines,freqpts);            % New index of eigVal and corresponding eigVec
 for freqidx = 2:freqpts                         % Index of frequency point
@@ -107,17 +109,20 @@ for freqidx = 2:freqpts                         % Index of frequency point
     prodTable(:,:,freqidx) =  ctranspose(eigVec(:,:,freqidx)) *     ...
         eigVec(:,:,freqidx-1);
     
-    % Determine the correct position by Hermitian Inner Product.
-    % WARNNING! Duplicate serial numbers may be generated in extreme
-    % cases.
+    %%% Determine the correct position by Hermitian Inner Product.
+    % WARNNING! In extreme cases, duplicate serial numbers may appear, 
+    % which can lead to fatal errors.
     
-    % !!!Two choices: 0. max(abs(real(...)))   1. max(abs(...))
+    % !!!Two choices: 
+    % 0. using the absolute value of the real part, i.e. max(abs(real(...)));   
+    % 1. using the modulus of complex number, i.e. max(abs(...))
     switch(EigSortMethod)
         case 0
             [~,CorrectPos(:,freqidx)] = max(abs(real(prodTable(:,:,freqidx))),[],2);
         case 1
             [~,CorrectPos(:,freqidx)] = max(abs(prodTable(:,:,freqidx)),[],2);
     end
+    %%% Reorder the Eigenvectors and the corresponding Eigenvalues
     [~,newIndex(:,freqidx)] = sort(CorrectPos(:,freqidx));
     eigVec(:,:,freqidx)     = eigVec(:,newIndex(:,freqidx),freqidx);
     eigVal(:,freqidx)       = eigVal(newIndex(:,freqidx),freqidx);
@@ -126,15 +131,15 @@ end
 %% Extract Attenuation Constants and Unwrapped Phase Constants
 
 gammaLenEigWrap = acosh(eigVal);  % Principle Value of gammaEig*linelength:
-% Real part is non-negative, imag part in [-pi,pi]
+% Real part should be non-negative, imag part in [-pi,pi]
 betaLenEigWrapDiff(:,2:freqpts) = diff(imag(gammaLenEigWrap),1,2);
 discontCount = cumsum(abs(betaLenEigWrapDiff) > pi,2);
 
-%% !!!Phase-unwrapping algorithm is unreliable near singular frequency! --grwei,20200318
-%%Maybe position-tracking algorithm instead???
+%%% !!!Phase-unwrapping algorithm is unreliable near singular frequency! --grwei,20200318
+% Maybe position-tracking algorithm instead???
 % discontCount(:,491:end) = 1;
 
-%%
+%%% discontinuity-detection-based phase unwrapping
 betaLenEigUnwrap = imag(gammaLenEigWrap) + 2*pi*discontCount;
 gammaEigUnwrap = complex(real(gammaLenEigWrap),betaLenEigUnwrap) / linelength;
 
@@ -183,13 +188,16 @@ output = struct('R',R,'L',L,'G',G,'C',C,'alpha',alpha,'beta',beta,'Zc',Zc);
 
 % end
 
-%%
+%% debug
 %The following code snippets are for debugging purposes only.
 
 if debugFlag == false
     return
 end
-%%
+
+%% Hermitian inner product table
+% the basis of Eigenvalues(and their corresponding Eigenvectors)
+% reordering, and discontinuity-detection-based phase-unwrapping algorithm
 
 figure('Name','prodTable(Real-part)')
 sgtitle('Hermitian Inner Product(Real-part)')
@@ -214,8 +222,9 @@ for idx_cur = 1:numLines
     %     ylim([0 1.1])
 end
 
-%%
-
+%% Hermitian inner product table
+% the basis of Eigenvalues(and their corresponding Eigenvectors)
+% reordering, and discontinuity-detection-based phase-unwrapping algorithm
 
 figure('Name','prodTable(Magnitude)')
 sgtitle('Hermitian Inner Product(Magnitude)')
@@ -241,9 +250,9 @@ for idx_cur = 1:numLines
 end
 
 
-%%
+%% Propagation constant(before unwrapping) of each eigen-mode
 
-figure('Name','gammaLenEigWrap')
+figure('Name','Propagation constant(before unwrapping) of each eigen-mode')
 sgtitle('Gamma(wrap) of each eigen mode')
 subplot(121)
 plot(freq,real(gammaLenEigWrap(1,:))/linelength)
@@ -283,7 +292,7 @@ legend(txt,'Location','best','NumColumns',2)
 legend('boxoff')
 title('\betaL')
 
-%%
+%% Extracted characteristic impedance matrix
 
 figure('Name','Zc(Real part)')
 sgtitle('Charateristic Impedance Matrix(Real part)')
@@ -328,7 +337,7 @@ for idx = 1:numLines
     title(['Zc_{',sprintf('%u',idx),'X}'])
 end
 
-%%
+%% Propagation constant of each eigen-mode
 
 figure('Name','gammaEigUnwrap')
 sgtitle('Gamma(unwrap) of each eigen mode')
@@ -370,7 +379,7 @@ legend(txt,'Location','best','NumColumns',2)
 legend('boxoff')
 title('\beta')
 
-%%
+%% Extracted RLGC
 
 figure('Name','RLGC matrix')
 sgtitle({'Extracted RLGC matrix'})
@@ -446,5 +455,86 @@ end
 legend(txt,'Location','best','NumColumns',2)
 legend('boxoff')
 title('C matrix')
+
+%% Rebuilt S-parameters using extracted RLGC
+% Expected to be consistent with the original S-parameters
+% 
+% <<doc\pic\port-ordering.png>>
+% 
+
+% Rebuild S-parameters using extracted RLGC
+[s_params_rebuilt,~] = rlgc2s_t(R,L,G,C,linelength,freq,z0);
+
+% external<-external
+figure('Name','Rebuilt S-parameters: See') 
+sgtitle({'Comparison Between Rebuilt S-parameters and';'Original S-parameters: See'})
+num_of_columes = ceil(numLines/2);
+for idx = 1:numLines
+    subplot(2,num_of_columes,idx)
+    plot(freq/1e9,db(squeeze(s_params_rebuilt(1,idx,:)),'voltage'),'k-')
+    hold on
+    plot(freq/1e9,db(squeeze(s_params(1,idx,:)),'voltage'),'g--')
+    hold off
+    grid on
+    xlabel('Freq(GHz)');
+    ylabel(sprintf('S1%u(Ohms/m)',idx));
+    title(sprintf('S1%u',idx));
+    legend({'Rebuilt S-parameters','Original S-parameters'},'Location','best','NumColumns',1)
+    legend('boxoff')
+end
+
+% external<-internal
+figure('Name','Rebuilt S-parameters: Sei')
+sgtitle({'Comparison Between Rebuilt S-parameters and';'Original S-parameters: Sei'})
+num_of_columes = ceil(numLines/2);
+for idx = 1:numLines
+    subplot(2,num_of_columes,idx)
+    plot(freq/1e9,db(squeeze(s_params_rebuilt(1,idx+numLines,:)),'voltage'),'k-')
+    hold on
+    plot(freq/1e9,db(squeeze(s_params(1,idx+numLines,:)), 'voltage'),'g--')
+    hold off
+    grid on
+    xlabel('Freq(GHz)');
+    ylabel(sprintf('S1%u(dB)',idx+numLines));
+    title(sprintf('S1%u',idx+numLines));
+    legend({'Rebuilt S-parameters','Original S-parameters'},'Location','best','NumColumns',1)
+    legend('boxoff')
+end
+
+% internal<-external
+figure('Name','Rebuilt S-parameters: Sie') 
+sgtitle({'Comparison Between Rebuilt S-parameters and';'Original S-parameters: Sie'})
+num_of_columes = ceil(numLines/2);
+for idx = 1:numLines
+    subplot(2,num_of_columes,idx)
+    plot(freq/1e9,db(squeeze(s_params_rebuilt(numLines+1,idx,:)),'voltage'),'k-')
+    hold on
+    plot(freq/1e9,db(squeeze(s_params(numLines+1,idx,:)),'voltage'),'g--')
+    hold off
+    grid on
+    xlabel('Freq(GHz)');
+    ylabel(sprintf('S%u%u(Ohms/m)',numLines+1,idx));
+    title(sprintf('S%u%u',numLines+1,idx));
+    legend({'Rebuilt S-parameters','Original S-parameters'},'Location','best','NumColumns',1)
+    legend('boxoff')
+end
+
+% internal<-internal
+figure('Name','Rebuilt S-parameters: Sii') 
+sgtitle({'Comparison Between Rebuilt S-parameters and';'Original S-parameters: Sii'})
+num_of_columes = ceil(numLines/2);
+for idx = 1:numLines
+    subplot(2,num_of_columes,idx)
+    plot(freq/1e9,db(squeeze(s_params_rebuilt(numLines+1,numLines+idx,:)),'voltage'),'k-')
+    hold on
+    plot(freq/1e9,db(squeeze(s_params(numLines+1,numLines+idx,:)),'voltage'),'g--')
+    hold off
+    grid on
+    xlabel('Freq(GHz)');
+    ylabel(sprintf('S%u%u(Ohms/m)',numLines+1,numLines+idx));
+    title(sprintf('S%u%u',numLines+1,numLines+idx));
+    legend({'Rebuilt S-parameters','Original S-parameters'},'Location','best','NumColumns',1)
+    legend('boxoff')
+end
 
 end % end for function
