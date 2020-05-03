@@ -1,4 +1,4 @@
-function output = s2rlgc_t(s_params,linelength,freq,z0,port_reorder)
+function output = s2rlgc_t(s_params,linelength,freq,z0,port_reorder,debug_mode)
 %S2RLGC Converts S-parameters of a transmission line to RLGC-parameters
 %   OUTPUT = S2RLGC_T(S_PARAMS, LINELENGTH, FREQ, Z0, PORT_REORDER) converts
 %   the scattering parameters S_PARAMS of a transmission line into
@@ -26,14 +26,9 @@ function output = s2rlgc_t(s_params,linelength,freq,z0,port_reorder)
 %
 %   See also S2RLGC, ABCD2S, S2Y, S2Z, S2H, Y2ABCD, Z2ABCD, H2ABCD, RLGC2S
 
-%% Configuration
-
-debugFlag = true;       % Debug mode
-EigSortMethod = 0;      % 0(default)- abs(real(...))  1- abs(...)
-
 %% Input validity check and initialization
 
-narginchk(3,5)
+narginchk(3,6)
 
 % freq should be a column vector
 if isvector(freq) && isrow(freq)
@@ -57,29 +52,43 @@ if ~isempty(port_reorder)
     s_params = snp2smp(s_params,z0,port_reorder);
 end
 
-%% Convert S-parameters to ABCD-Parameters[Sampath2008]
+%% Configuration
 
-Z_params = zeros(2*numLines,2*numLines,freqpts);    % impedance matrix
-TA = zeros(numLines,numLines,freqpts);              % the A term of transmission(ABCD) matrix:[A B;C D]
-TB = TA;
+debugFlag = true;      % Debug flag: 0-released; 1-debug
+if nargin > 5 && debug_mode == false
+    debugFlag = false;
+end
+EigSortMethod = 0;      % 0(default)- abs(real(...))  1- abs(...)
+
+%% Convert S-parameters to ABCD-Parameters [Sampath2008]
+
+Z_params    = zeros(2*numLines,2*numLines,freqpts); % impedance matrix
+TA          = zeros(numLines,numLines,freqpts);     % the A term of transmission(ABCD) matrix:[A B;C D]
+TB          = TA;
 % The C and D terms are not actually used.
-TC = TA;
-TD = TA;
-I = eye(2*numLines,2*numLines);                     % 2Nx2N identity matrix
+TC          = TA;
+TD          = TA;
+I           = eye(2*numLines,2*numLines);           % 2Nx2N identity matrix
+z0_matrix   = z0 * I;                               % reference characteristic impedance matrix
 
 for idx=1:freqpts
-    Z_params(:,:,idx) = z0*(I+s_params(:,:,idx))                /       ...
-        (I-s_params(:,:,idx));
+    Z_params(:,:,idx) = z0_matrix*(I+s_params(:,:,idx))         /       ...
+                        (I-s_params(:,:,idx));
+    %%% test [Reveyrand2018]: S->Z
+    % It seems that both formula works well.
+    % should be removed when released
+%     Z_params(:,:,idx) =    (I-s_params(:,:,idx))                \       ...
+%                            (I+s_params(:,:,idx))*z0_matrix;
     TA(:,:,idx) =   Z_params(1:numLines,1:numLines,idx)         /       ...
-        Z_params(numLines+1:end,1:numLines,idx);
+                    Z_params(numLines+1:end,1:numLines,idx);
     TB(:,:,idx) =   TA(:,:,idx)                                 *       ...
-        Z_params(numLines+1:end,numLines+1:end,idx)             -       ...
-        Z_params(1:numLines,numLines+1:end,idx);
+                    Z_params(numLines+1:end,numLines+1:end,idx) -       ...
+                    Z_params(1:numLines,numLines+1:end,idx);
     % The C and D terms are not actually used.
     TC(:,:,idx) =   eye(numLines,numLines)                      /       ...
-        Z_params(numLines+1:end,1:numLines,idx);
+                    Z_params(numLines+1:end,1:numLines,idx);
     TD(:,:,idx) =   TC(:,:,idx)                                 *       ...
-        Z_params(numLines+1:end,numLines+1:end,idx);
+                    Z_params(numLines+1:end,numLines+1:end,idx);
 end
 
 %% Extract Complex Propagation Constants while preserving relative Eigenvalue position
@@ -124,6 +133,10 @@ for freqidx = 2:freqpts                         % Index of frequency point
     end
     %%% Reorder the Eigenvectors and the corresponding Eigenvalues
     [~,newIndex(:,freqidx)] = sort(CorrectPos(:,freqidx));
+    %%% test: 不排序
+    % 结论：不影响S重建，但会导致RLGC非物理
+%     newIndex(:,freqidx) = 1:numLines;
+    
     eigVec(:,:,freqidx)     = eigVec(:,newIndex(:,freqidx),freqidx);
     eigVal(:,freqidx)       = eigVal(newIndex(:,freqidx),freqidx);
 end
@@ -131,6 +144,15 @@ end
 %% Extract Attenuation Constants and Unwrapped Phase Constants
 
 gammaLenEigWrap = acosh(eigVal);  % Principle Value of gammaEig*linelength:
+%%% test: arccosh(z) = log(z +/- sqrt(z^2 - 1));
+% Very bad
+% gammaLenEigWrap_1 = log(eigVal + sqrt(eigVal.^2 - 1));
+% gammaLenEigWrap_2 = log(eigVal - sqrt(eigVal.^2 - 1));
+% alphaLenEigWrap = abs(real(gammaLenEigWrap_1 - gammaLenEigWrap_2))/2;
+% betaLenEigWrap = abs(imag(gammaLenEigWrap_1 - gammaLenEigWrap_2))/2;
+% betaLenEigWrap = cumsum([betaLenEigWrap(:,1),abs(diff(betaLenEigWrap,1,2))],2); % continious phase[0,+inf)
+% gammaLenEigWrap = complex(alphaLenEigWrap,betaLenEigWrap);
+
 % Real part should be non-negative, imag part in [-pi,pi]
 betaLenEigWrapDiff(:,2:freqpts) = diff(imag(gammaLenEigWrap),1,2);
 discontCount = cumsum(abs(betaLenEigWrapDiff) > pi,2);
@@ -140,6 +162,11 @@ discontCount = cumsum(abs(betaLenEigWrapDiff) > pi,2);
 % discontCount(:,491:end) = 1;
 
 %%% discontinuity-detection-based phase unwrapping
+
+%%% Test: 不作解折叠
+% 结论：求出的RLGC非物理，但不影响重建S参数
+% discontCount(:) = 0;
+
 betaLenEigUnwrap = imag(gammaLenEigWrap) + 2*pi*discontCount;
 gammaEigUnwrap = complex(real(gammaLenEigWrap),betaLenEigUnwrap) / linelength;
 
@@ -165,6 +192,16 @@ for idx = 1:freqpts
 end
 
 %% Extract RLGC
+
+%%% Test: RLGC -> ABCD,S不是单射！
+% 结论：gammaEig的j2pi周期会导致提取的RLGC非物理，但不影响S重建
+% for idx = 1:freqpts
+%     gammaEigUnwrap(1:2,idx)  =  gammaEigUnwrap(1:2,idx) + 200*pi*1i/linelength;
+%     gammaEigUnwrap(3:4,idx)  =  gammaEigUnwrap(3:4,idx) + 100*pi*1i/linelength;
+%     gamma(:,:,idx) = eigVec(:,:,idx)        *                           ...
+%         diag(gammaEigUnwrap(:,idx))         /                           ...
+%         eigVec(:,:,idx);
+% end
 
 R = zeros(numLines,numLines,freqpts);       % Resistance matrix
 L = R;                                      % Inductance matrix
@@ -248,7 +285,6 @@ for idx_cur = 1:numLines
     ylabel('Value(Magnitude)')
     %     ylim([0 1.1])
 end
-
 
 %% Propagation constant(before unwrapping) of each eigen-mode
 
@@ -379,10 +415,10 @@ legend(txt,'Location','best','NumColumns',2)
 legend('boxoff')
 title('\beta')
 
-%% Extracted RLGC
+%% Extracted RLGC (Overview)
 
-figure('Name','RLGC matrix')
-sgtitle({'Extracted RLGC matrix'})
+figure('Name','RLGC matrix (Overview)')
+sgtitle({'Extracted RLGC matrix (Overview)'})
 % R
 subplot(221)
 plot(freq,squeeze(R(1,1,:)))
@@ -466,7 +502,7 @@ title('C matrix')
 [s_params_rebuilt,~] = rlgc2s_t(R,L,G,C,linelength,freq,z0);
 
 % external<-external
-figure('Name','Rebuilt S-parameters: See') 
+figure('Name','Rebuilt S (Extracted-RLGC): See') 
 sgtitle({'Comparison Between Rebuilt S-parameters and';'Original S-parameters: See'})
 num_of_columes = ceil(numLines/2);
 for idx = 1:numLines
@@ -479,12 +515,12 @@ for idx = 1:numLines
     xlabel('Freq(GHz)');
     ylabel(sprintf('S1%u(Ohms/m)',idx));
     title(sprintf('S1%u',idx));
-    legend({'Rebuilt S-parameters','Original S-parameters'},'Location','best','NumColumns',1)
+    legend({'Extracted-RLGC','Original S-parameters'},'Location','best','NumColumns',1)
     legend('boxoff')
 end
 
 % external<-internal
-figure('Name','Rebuilt S-parameters: Sei')
+figure('Name','Rebuilt S (Extracted-RLGC): Sei')
 sgtitle({'Comparison Between Rebuilt S-parameters and';'Original S-parameters: Sei'})
 num_of_columes = ceil(numLines/2);
 for idx = 1:numLines
@@ -497,12 +533,12 @@ for idx = 1:numLines
     xlabel('Freq(GHz)');
     ylabel(sprintf('S1%u(dB)',idx+numLines));
     title(sprintf('S1%u',idx+numLines));
-    legend({'Rebuilt S-parameters','Original S-parameters'},'Location','best','NumColumns',1)
+    legend({'Extracted-RLGC','Original S-parameters'},'Location','best','NumColumns',1)
     legend('boxoff')
 end
 
 % internal<-external
-figure('Name','Rebuilt S-parameters: Sie') 
+figure('Name','Rebuilt S (Extracted-RLGC): Sie') 
 sgtitle({'Comparison Between Rebuilt S-parameters and';'Original S-parameters: Sie'})
 num_of_columes = ceil(numLines/2);
 for idx = 1:numLines
@@ -515,12 +551,12 @@ for idx = 1:numLines
     xlabel('Freq(GHz)');
     ylabel(sprintf('S%u%u(Ohms/m)',numLines+1,idx));
     title(sprintf('S%u%u',numLines+1,idx));
-    legend({'Rebuilt S-parameters','Original S-parameters'},'Location','best','NumColumns',1)
+    legend({'Extracted-RLGC','Original S-parameters'},'Location','best','NumColumns',1)
     legend('boxoff')
 end
 
 % internal<-internal
-figure('Name','Rebuilt S-parameters: Sii') 
+figure('Name','Rebuilt S (Extracted-RLGC): Sii') 
 sgtitle({'Comparison Between Rebuilt S-parameters and';'Original S-parameters: Sii'})
 num_of_columes = ceil(numLines/2);
 for idx = 1:numLines
@@ -533,7 +569,7 @@ for idx = 1:numLines
     xlabel('Freq(GHz)');
     ylabel(sprintf('S%u%u(Ohms/m)',numLines+1,numLines+idx));
     title(sprintf('S%u%u',numLines+1,numLines+idx));
-    legend({'Rebuilt S-parameters','Original S-parameters'},'Location','best','NumColumns',1)
+    legend({'Extracted-RLGC','Original S-parameters'},'Location','best','NumColumns',1)
     legend('boxoff')
 end
 

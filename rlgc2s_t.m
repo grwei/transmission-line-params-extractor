@@ -46,10 +46,10 @@ end
 freqpts  = size(freq(:),1);         % Number of frequency points
 num_lines = size(resistance,1);     % Number of transmission lines
 % Allocate memory
-s_params            = zeros(2*num_lines, 2*num_lines, freqpts);
-z0_matrix           = z0 * eye(2*num_lines, 2*num_lines);
-transform_matrix    = zeros(num_lines, num_lines, freqpts);
-square_of_gammaEig  = zeros(num_lines, freqpts);
+s_params            = zeros(2*num_lines, 2*num_lines, freqpts); % 
+z0_matrix           = z0 * eye(2*num_lines, 2*num_lines);       % reference characteristic impedance matrix
+transform_matrix    = zeros(num_lines, num_lines, freqpts);     % 
+square_of_gammaEig  = zeros(num_lines, freqpts);                % 
 gammaEig            = square_of_gammaEig; % eigen-mode propagation constant
 gamma               = transform_matrix;   % complex propagation constant matrix
 Zc                  = transform_matrix;   % characteristic impedance matrix
@@ -69,7 +69,7 @@ for freqidx=1:freqpts
     Z = complex(resistance(:,:,freqidx), 2*pi*freq(freqidx).*inductance(:,:,freqidx));   % p.u.l. impedance
     Y = complex(conductance(:,:,freqidx), 2*pi*freq(freqidx).*capacitance(:,:,freqidx)); % p.u.l. admittance
 
-    % 1. Calculate Complex Propagation Constants
+    %%% 1. Calculate Complex Propagation Constants
     % [V,D] = eig(A,'vector') returns colume vector D of eigenvalues 
     % and matrix V whose columns are the corresponding right eigenvectors,
     % so that A*V = V*diag(D).
@@ -83,9 +83,9 @@ for freqidx=1:freqpts
     gamma(:,:,freqidx) = transform_matrix(:,:,freqidx)              *   ...
                          diag(gammaEig(:,freqidx))                  /   ...
                          transform_matrix(:,:,freqidx);
-    % 2. Calculate Characteristic Impedance matrix
+    %%% 2. Calculate Characteristic Impedance matrix
     Zc(:,:,freqidx) = gamma(:,:,freqidx) \ Z;
-    % 3. Calculate the ABCD matices [Paul2007]
+    %%% 3. Calculate the ABCD matices [Paul2007]
     cosh_gamma_length(:,:,freqidx)                                  =   ... 
                       transform_matrix(:,:,freqidx)                 *   ...
                       diag(cosh(gammaEig(:,freqidx) * linelength))  /   ...
@@ -100,16 +100,30 @@ for freqidx=1:freqpts
     D(:,:,freqidx) = Zc(:,:,freqidx)                                \   ...
                      cosh_gamma_length(:,:,freqidx)                 *   ...
                      Zc(:,:,freqidx);
-    % 4. Convert ABCD matrix to Z-parameter(impedance) matrix[Reveyrand2018]
+    %%% test [Sampath2008] ABCD<-RLGC
+    % It seems that this formula is bad.
+    % should be removed when released
+%     D(:,:,freqidx) = cosh_gamma_length(:,:,freqidx);
+%     B(:,:,freqidx) = Zc(:,:,freqidx) * sinh_gamma_length(:,:,freqidx);
+%     C(:,:,freqidx) = sinh_gamma_length(:,:,freqidx) / Zc(:,:,freqidx);
+%     A(:,:,freqidx) = Zc(:,:,freqidx)                                *   ...
+%                      cosh_gamma_length(:,:,freqidx)                 /   ...
+%                      Zc(:,:,freqidx);
+    %%% 4. Convert ABCD matrix to Z-parameter(impedance) matrix[Reveyrand2018]
     Z11(:,:,freqidx) = A(:,:,freqidx) / C(:,:,freqidx);
     Z12(:,:,freqidx) = Z11(:,:,freqidx) * D(:,:,freqidx) - B(:,:,freqidx);
     Z21(:,:,freqidx) = eye(num_lines,num_lines) / C(:,:,freqidx);
     Z22(:,:,freqidx) = Z21(:,:,freqidx) * D(:,:,freqidx);
     Z_params(:,:,freqidx) = [Z11(:,:,freqidx),Z12(:,:,freqidx);         ...
                              Z21(:,:,freqidx),Z22(:,:,freqidx)];
-    % 5. Convert Z-parameter(impedance) matrix to S matrix [Reveyrand2018]
-    s_params(:,:,freqidx) = (Z_params(:,:,freqidx) + z0_matrix)       \ ...
-                            (Z_params(:,:,freqidx) - z0_matrix);
+    %%% 5. Convert Z-parameter(impedance) matrix to S matrix [Reveyrand2018]
+%     s_params(:,:,freqidx) = (Z_params(:,:,freqidx) + z0_matrix)       \ ...
+%                             (Z_params(:,:,freqidx) - z0_matrix);
+    %%% test [Reveyrand2018]: S->Z
+    % It seems that both formula works well.
+    % should be removed when released
+    s_params(:,:,freqidx) = (Z_params(:,:,freqidx) - z0_matrix)       / ...
+                            (Z_params(:,:,freqidx) + z0_matrix);
 end
 
 % The following output struct can be removed when released.

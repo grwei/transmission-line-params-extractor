@@ -8,7 +8,6 @@
 clc; clear; close all;
 
 %% Import data
-
 lineLength = 0.0254; % Line Length(meters)
 
 % Import simulated data
