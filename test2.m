@@ -102,7 +102,7 @@ end
 
 %% Extract RLGC params using proposed method
 
-rlgc_t = s2rlgc_t(SingleEnded8PortData.S_Parameters,lineLength,freq,z0,[],false);
+rlgc_t = s2rlgc_t(SingleEnded8PortData.S_Parameters,lineLength,freq,z0,[],true);
 check_consistence(rlgc_t.R, rlgc_t.L, rlgc_t.G, rlgc_t.C, lineLength, freq, z0);
 %%% Test: rational fit
 % 结论：无区别？

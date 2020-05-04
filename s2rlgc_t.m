@@ -135,7 +135,7 @@ for freqidx = 2:freqpts                         % Index of frequency point
     [~,newIndex(:,freqidx)] = sort(CorrectPos(:,freqidx));
     %%% test: 不排序
     % 结论：不影响S重建，但会导致RLGC非物理
-%     newIndex(:,freqidx) = 1:numLines;
+    newIndex(:,freqidx) = 1:numLines;
     
     eigVec(:,:,freqidx)     = eigVec(:,newIndex(:,freqidx),freqidx);
     eigVal(:,freqidx)       = eigVal(newIndex(:,freqidx),freqidx);
@@ -153,7 +153,7 @@ gammaLenEigWrap = acosh(eigVal);  % Principle Value of gammaEig*linelength:
 % betaLenEigWrap = cumsum([betaLenEigWrap(:,1),abs(diff(betaLenEigWrap,1,2))],2); % continious phase[0,+inf)
 % gammaLenEigWrap = complex(alphaLenEigWrap,betaLenEigWrap);
 
-% Real part should be non-negative, imag part in [-pi,pi]
+% Real part should be non-negative, imag part in (-pi,pi]
 betaLenEigWrapDiff(:,2:freqpts) = diff(imag(gammaLenEigWrap),1,2);
 discontCount = cumsum(abs(betaLenEigWrapDiff) > pi,2);
 
@@ -236,9 +236,9 @@ end
 % the basis of Eigenvalues(and their corresponding Eigenvectors)
 % reordering, and discontinuity-detection-based phase-unwrapping algorithm
 
-figure('Name','prodTable(Real-part)')
-sgtitle('Hermitian Inner Product(Real-part)')
-sz = 10;
+figure('Name','prodTable (Real-part)')
+sgtitle('Hermitian Inner Product (Real-part)')
+sz = 10; % Marker area
 for idx_cur = 1:numLines
     subplot(2,ceil(numLines/2),idx_cur)
     scatter(freq,abs(real(squeeze(prodTable(idx_cur,1,:)))),sz,'o');
@@ -255,7 +255,7 @@ for idx_cur = 1:numLines
     legend('boxoff')
     title(['curPos-',sprintf('%u',idx_cur)])
     xlabel('Frequency(Hz)')
-    ylabel('Abs(Real-part)')
+    ylabel('Abs (Real-part)')
     %     ylim([0 1.1])
 end
 
@@ -263,9 +263,9 @@ end
 % the basis of Eigenvalues(and their corresponding Eigenvectors)
 % reordering, and discontinuity-detection-based phase-unwrapping algorithm
 
-figure('Name','prodTable(Magnitude)')
-sgtitle('Hermitian Inner Product(Magnitude)')
-sz = 10;
+figure('Name','prodTable (Magnitude)')
+sgtitle('Hermitian Inner Product (Magnitude)')
+sz = 10; % Marker area
 for idx_cur = 1:numLines
     subplot(2,ceil(numLines/2),idx_cur)
     scatter(freq,abs(squeeze(prodTable(idx_cur,1,:))),sz,'o');
@@ -288,13 +288,16 @@ end
 
 %% Propagation constant(before unwrapping) of each eigen-mode
 
-figure('Name','Propagation constant(before unwrapping) of each eigen-mode')
-sgtitle('Gamma(wrap) of each eigen mode')
+figure('Name','Propagation constant (before unwrapping) of each eigen-mode')
+sgtitle('Gamma (wrap) of each eigen mode')
+sz = 10; % Marker area
 subplot(121)
-plot(freq,real(gammaLenEigWrap(1,:))/linelength)
+% plot(freq,real(gammaLenEigWrap(1,:))/linelength)
+scatter(freq,real(gammaLenEigWrap(1,:))/linelength,sz,'o')
 hold on
 for idx = 2:numLines
-    plot(freq,real(gammaLenEigWrap(idx,:))/linelength)
+%     plot(freq,real(gammaLenEigWrap(idx,:))/linelength)
+    scatter(freq,real(gammaLenEigWrap(idx,:))/linelength,sz,'o');
 end
 hold off
 grid on
@@ -310,10 +313,12 @@ legend('boxoff')
 title('\alpha')
 
 subplot(122)
-plot(freq,imag(gammaLenEigWrap(1,:)))
+% plot(freq,imag(gammaLenEigWrap(1,:)))
+scatter(freq,imag(gammaLenEigWrap(1,:)),sz,'o')
 hold on
 for idx = 2:numLines
-    plot(freq,imag(gammaLenEigWrap(idx,:)))
+%     plot(freq,imag(gammaLenEigWrap(idx,:)))
+    scatter(freq,imag(gammaLenEigWrap(idx,:)),sz,'o')
 end
 hold off
 grid on
@@ -330,8 +335,8 @@ title('\betaL')
 
 %% Extracted characteristic impedance matrix
 
-figure('Name','Zc(Real part)')
-sgtitle('Charateristic Impedance Matrix(Real part)')
+figure('Name','Zc (Real part)')
+sgtitle('Charateristic Impedance Matrix (Real part)')
 for idx = 1:numLines
     subplot(2,ceil(numLines/2),idx)
     plot(freq,real(squeeze(Zc(idx,1,:))))
@@ -346,14 +351,14 @@ for idx = 1:numLines
     end
     legend(txt,'Location','best','NumColumns',2)
     legend('boxoff')
-    xlabel('Frequency(Hz)')
-    ylabel('Real-part(Ohms)')
+    xlabel('Frequency (Hz)')
+    ylabel('Real-part (Ohms)')
     title(['Zc_{',sprintf('%u',idx),'X}'])
 end
 
 %
-figure('Name','Zc(Imag part)')
-sgtitle('Charateristic Impedance Matrix(Imag part)')
+figure('Name','Zc (Imag part)')
+sgtitle('Charateristic Impedance Matrix (Imag part)')
 for idx = 1:numLines
     subplot(2,ceil(numLines/2),idx)
     plot(freq,imag(squeeze(Zc(idx,1,:))))
@@ -376,12 +381,14 @@ end
 %% Propagation constant of each eigen-mode
 
 figure('Name','gammaEigUnwrap')
-sgtitle('Gamma(unwrap) of each eigen mode')
+sgtitle('Gamma (unwrap) of each eigen mode')
 subplot(121)
-plot(freq,real(gammaEigUnwrap(1,:)))
+% plot(freq,real(gammaEigUnwrap(1,:)))
+scatter(freq,real(gammaEigUnwrap(1,:)),sz,'o')
 hold on
 for idx = 2:numLines
-    plot(freq,real(gammaEigUnwrap(idx,:)))
+%     plot(freq,real(gammaEigUnwrap(idx,:)))
+    scatter(freq,real(gammaEigUnwrap(idx,:)),sz,'o')
 end
 hold off
 grid on
@@ -397,16 +404,18 @@ legend('boxoff')
 title('\alpha')
 
 subplot(122)
-plot(freq,imag(gammaEigUnwrap(1,:)))
+% plot(freq,imag(gammaEigUnwrap(1,:)))
+scatter(freq,imag(gammaEigUnwrap(1,:)),sz,'o')
 hold on
 for idx = 2:numLines
-    plot(freq,imag(gammaEigUnwrap(idx,:)))
+%     plot(freq,imag(gammaEigUnwrap(idx,:)))
+    scatter(freq,imag(gammaEigUnwrap(idx,:)),sz,'o')
 end
 hold off
 grid on
 xlim([4.5e9 5.5e9])
 xlabel('Frequency(Hz)')
-ylabel('\betaL(rad)')
+ylabel('\beta(rad/m)')
 txt = cell(1,numLines);
 for idx = 1:numLines
     txt{1,idx} = ['\beta_',sprintf('%u',idx)];

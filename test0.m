@@ -41,7 +41,7 @@ end
 %% Extract RLGC params using proposed method
 
 rlgc_t = s2rlgc_t(SingleEnded2PortData.S_Parameters,lineLength,freq,z0);
-% [s_params_rebuilt, rlgc_rebuilt] = rlgc2s_t(rlgc_t.R,rlgc_t.L,rlgc_t.G,rlgc_t.C,lineLength,freq,z0);
+check_consistence(rlgc_t.R, rlgc_t.L, rlgc_t.G, rlgc_t.C, lineLength, freq, z0);
 
 %% Extracted RLGC compared with Cadence Sigrity PowerSI
 
