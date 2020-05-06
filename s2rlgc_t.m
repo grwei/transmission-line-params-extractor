@@ -135,7 +135,7 @@ for freqidx = 2:freqpts                         % Index of frequency point
     [~,newIndex(:,freqidx)] = sort(CorrectPos(:,freqidx));
     %%% test: 不排序
     % 结论：不影响S重建，但会导致RLGC非物理
-    newIndex(:,freqidx) = 1:numLines;
+%     newIndex(:,freqidx) = 1:numLines;
     
     eigVec(:,:,freqidx)     = eigVec(:,newIndex(:,freqidx),freqidx);
     eigVal(:,freqidx)       = eigVal(newIndex(:,freqidx),freqidx);

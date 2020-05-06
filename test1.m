@@ -4,6 +4,7 @@
 % MATLAB implementation of Patent US8892414B1
 % Author Name: Guorui Wei
 % Created in: 2020-03-15 12:45
+% Example: Edge-Coupled Surface Microstrip 
 
 clc; clear; close all;
 
