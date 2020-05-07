@@ -392,7 +392,7 @@ for idx = 2:numLines
 end
 hold off
 grid on
-xlim([4.5e9 5.5e9])
+% xlim([4.5e9 5.5e9])
 xlabel('Frequency(Hz)')
 ylabel('\alpha(Np/m)')
 txt = cell(1,numLines);
@@ -413,7 +413,7 @@ for idx = 2:numLines
 end
 hold off
 grid on
-xlim([4.5e9 5.5e9])
+% xlim([4.5e9 5.5e9])
 xlabel('Frequency(Hz)')
 ylabel('\beta(rad/m)')
 txt = cell(1,numLines);
