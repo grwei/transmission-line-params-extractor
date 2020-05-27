@@ -306,7 +306,7 @@ xlabel('Frequency(Hz)')
 ylabel('\alpha(Np/m)')
 txt = cell(1,numLines);
 for idx = 1:numLines
-    txt{1,idx} = ['\alpha_',sprintf('%u',idx)];
+    txt{1,idx} = ['\alpha_{',sprintf('%u}',idx)];
 end
 legend(txt,'Location','best','NumColumns',2)
 legend('boxoff')
@@ -327,7 +327,7 @@ xlabel('Frequency(Hz)')
 ylabel('\betaL(rad)')
 txt = cell(1,numLines);
 for idx = 1:numLines
-    txt{1,idx} = ['\beta_',sprintf('%u',idx)];
+    txt{1,idx} = ['\beta_{',sprintf('%u}',idx)];
 end
 legend(txt,'Location','best','NumColumns',2)
 legend('boxoff')
@@ -347,7 +347,7 @@ for idx = 1:numLines
     hold off
     txt = cell(1,numLines);
     for idx_col = 1:numLines
-        txt{1,idx_col} = ['Zc_{',sprintf('%u',idx),sprintf('%u',idx_col),'}'];
+        txt{1,idx_col} = ['Zc_{',sprintf('%u,',idx),sprintf('%u',idx_col),'}'];
     end
     legend(txt,'Location','best','NumColumns',2)
     legend('boxoff')
@@ -369,7 +369,7 @@ for idx = 1:numLines
     hold off
     txt = cell(1,numLines);
     for idx_col = 1:numLines
-        txt{1,idx_col} = ['Zc_{',sprintf('%u',idx),sprintf('%u',idx_col),'}'];
+        txt{1,idx_col} = ['Zc_{',sprintf('%u,',idx),sprintf('%u',idx_col),'}'];
     end
     legend(txt,'Location','best','NumColumns',2)
     legend('boxoff')
@@ -397,7 +397,7 @@ xlabel('Frequency(Hz)')
 ylabel('\alpha(Np/m)')
 txt = cell(1,numLines);
 for idx = 1:numLines
-    txt{1,idx} = ['\alpha_',sprintf('%u',idx)];
+    txt{1,idx} = ['\alpha_{',sprintf('%u}',idx)];
 end
 legend(txt,'Location','best','NumColumns',2)
 legend('boxoff')
@@ -418,7 +418,7 @@ xlabel('Frequency(Hz)')
 ylabel('\beta(rad/m)')
 txt = cell(1,numLines);
 for idx = 1:numLines
-    txt{1,idx} = ['\beta_',sprintf('%u',idx)];
+    txt{1,idx} = ['\beta_{',sprintf('%u}',idx)];
 end
 legend(txt,'Location','best','NumColumns',2)
 legend('boxoff')
@@ -522,7 +522,7 @@ for idx = 1:numLines
     hold off
     grid on
     xlabel('Freq(GHz)');
-    ylabel(sprintf('S1%u(Ohms/m)',idx));
+    ylabel(sprintf('S1%u(dB)',idx));
     title(sprintf('S1%u',idx));
     legend({'Extracted-RLGC','Original S-parameters'},'Location','best','NumColumns',1)
     legend('boxoff')
@@ -558,7 +558,7 @@ for idx = 1:numLines
     hold off
     grid on
     xlabel('Freq(GHz)');
-    ylabel(sprintf('S%u%u(Ohms/m)',numLines+1,idx));
+    ylabel(sprintf('S%u%u(dB)',numLines+1,idx));
     title(sprintf('S%u%u',numLines+1,idx));
     legend({'Extracted-RLGC','Original S-parameters'},'Location','best','NumColumns',1)
     legend('boxoff')
@@ -576,7 +576,7 @@ for idx = 1:numLines
     hold off
     grid on
     xlabel('Freq(GHz)');
-    ylabel(sprintf('S%u%u(Ohms/m)',numLines+1,numLines+idx));
+    ylabel(sprintf('S%u%u(dB)',numLines+1,numLines+idx));
     title(sprintf('S%u%u',numLines+1,numLines+idx));
     legend({'Extracted-RLGC','Original S-parameters'},'Location','best','NumColumns',1)
     legend('boxoff')

@@ -3,22 +3,22 @@
 % Transmission-line parameters extractor
 % MATLAB implementation of Patent US8892414B1
 % Author Name: Guorui Wei
-% Created in: 2020-03-15 12:45
+% Created in: 2020-05-27 12:48
 
 clc; clear; close all;
 
 %% Import data
 
 % Import simulated data
-lineLength = 0.01; % Line Length(meters)
-filename_4line = 'data/Four-line_10mm_20200506.s8p';
-SingleEnded8PortData = read(rfdata.data,filename_4line);
-freq = SingleEnded8PortData.Freq;
+lineLength = 0.00381; % Line Length(meters)
+filename_16line = 'data/16line/16-lines_8-diff-pairs.s32p';
+SingleEnded32PortData = read(rfdata.data,filename_16line);
+freq = SingleEnded32PortData.Freq;
 freqPts = length(freq);
-z0 = SingleEnded8PortData.Z0; % Reference Impedance
-SingleEnded8PortData.S_Parameters = snp2smp(SingleEnded8PortData.S_Parameters,...
-    z0,[4 2 1 3 8 6 5 7]); % Classic style
-numOfLines = size(SingleEnded8PortData.S_Parameters,1)/2;
+z0 = SingleEnded32PortData.Z0; % Reference Impedance
+SingleEnded32PortData.S_Parameters = snp2smp(SingleEnded32PortData.S_Parameters,...
+    z0,1:1:32); % Classic style
+numOfLines = size(SingleEnded32PortData.S_Parameters,1)/2;
 
 % Import Cadence-PowerSI-extracted params
 % Allocate memory
@@ -102,7 +102,7 @@ end
 
 %% Extract RLGC params using proposed method
 
-rlgc_t = s2rlgc_t(SingleEnded8PortData.S_Parameters,lineLength,freq,z0,[],true);
+rlgc_t = s2rlgc_t(SingleEnded32PortData.S_Parameters,lineLength,freq,z0,[],true);
 check_consistence(rlgc_t.R, rlgc_t.L, rlgc_t.G, rlgc_t.C, lineLength, freq, z0);
 %%% Test: rational fit
 % 结论：无区别？
