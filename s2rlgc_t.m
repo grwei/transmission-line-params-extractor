@@ -441,7 +441,7 @@ xlabel('Frequency(Hz)')
 ylabel('Value(Ohms/m)')
 txt = cell(1,numLines);
 for idx = 1:numLines
-    txt{1,idx} = sprintf('R1%u',idx);
+    txt{1,idx} = sprintf('R(1,%u)',idx);
 end
 legend(txt,'Location','best','NumColumns',2)
 legend('boxoff')
@@ -459,7 +459,7 @@ xlabel('Frequency(Hz)')
 ylabel('Value(H/m)')
 txt = cell(1,numLines);
 for idx = 1:numLines
-    txt{1,idx} = sprintf('L1%u',idx);
+    txt{1,idx} = sprintf('L(1,%u)',idx);
 end
 legend(txt,'Location','best','NumColumns',2)
 legend('boxoff')
@@ -477,7 +477,7 @@ xlabel('Frequency(Hz)')
 ylabel('Value(S/m)')
 txt = cell(1,numLines);
 for idx = 1:numLines
-    txt{1,idx} = sprintf('G1%u',idx);
+    txt{1,idx} = sprintf('G(1,%u)',idx);
 end
 legend(txt,'Location','best','NumColumns',2)
 legend('boxoff')
@@ -495,13 +495,13 @@ xlabel('Frequency(Hz)')
 ylabel('Value(F/m)')
 txt = cell(1,numLines);
 for idx = 1:numLines
-    txt{1,idx} = sprintf('C1%u',idx);
+    txt{1,idx} = sprintf('C(1,%u)',idx);
 end
 legend(txt,'Location','best','NumColumns',2)
 legend('boxoff')
 title('C matrix')
 
-%% Rebuilt S-parameters using extracted RLGC
+%% Rebuilt S-parameters (dB) using extracted RLGC
 % Expected to be consistent with the original S-parameters
 % 
 % <<doc\pic\port-ordering.png>>
@@ -522,8 +522,8 @@ for idx = 1:numLines
     hold off
     grid on
     xlabel('Freq(GHz)');
-    ylabel(sprintf('S1%u(dB)',idx));
-    title(sprintf('S1%u',idx));
+    ylabel(sprintf('S(1,%u)(dB)',idx));
+    title(sprintf('S(1,%u)',idx));
     legend({'Extracted-RLGC','Original S-parameters'},'Location','best','NumColumns',1)
     legend('boxoff')
 end
@@ -540,8 +540,8 @@ for idx = 1:numLines
     hold off
     grid on
     xlabel('Freq(GHz)');
-    ylabel(sprintf('S1%u(dB)',idx+numLines));
-    title(sprintf('S1%u',idx+numLines));
+    ylabel(sprintf('S(1,%u)(dB)',idx+numLines));
+    title(sprintf('S(1,%u)',idx+numLines));
     legend({'Extracted-RLGC','Original S-parameters'},'Location','best','NumColumns',1)
     legend('boxoff')
 end
@@ -558,8 +558,8 @@ for idx = 1:numLines
     hold off
     grid on
     xlabel('Freq(GHz)');
-    ylabel(sprintf('S%u%u(dB)',numLines+1,idx));
-    title(sprintf('S%u%u',numLines+1,idx));
+    ylabel(sprintf('S(%u,%u)(dB)',numLines+1,idx));
+    title(sprintf('S(%u,%u)',numLines+1,idx));
     legend({'Extracted-RLGC','Original S-parameters'},'Location','best','NumColumns',1)
     legend('boxoff')
 end
@@ -576,8 +576,164 @@ for idx = 1:numLines
     hold off
     grid on
     xlabel('Freq(GHz)');
-    ylabel(sprintf('S%u%u(dB)',numLines+1,numLines+idx));
-    title(sprintf('S%u%u',numLines+1,numLines+idx));
+    ylabel(sprintf('S(%u,%u)(dB)',numLines+1,numLines+idx));
+    title(sprintf('S(%u,%u)',numLines+1,numLines+idx));
+    legend({'Extracted-RLGC','Original S-parameters'},'Location','best','NumColumns',1)
+    legend('boxoff')
+end
+
+%% Rebuilt S-parameters (phase) using extracted RLGC
+% Expected to be consistent with the original S-parameters
+% 
+% <<doc\pic\port-ordering.png>>
+% 
+
+% external<-external
+figure('Name','Rebuilt S (phase) (Extracted-RLGC): See') 
+sgtitle({'Comparison Between Rebuilt S-parameters and';'Original S-parameters: See'})
+num_of_columes = ceil(numLines/2);
+for idx = 1:numLines
+    subplot(2,num_of_columes,idx)
+    plot(freq/1e9,angle(squeeze(s_params_rebuilt(1,idx,:))),'k-')
+    hold on
+    plot(freq/1e9,angle(squeeze(s_params(1,idx,:))),'g--')
+    hold off
+    grid on
+    xlabel('Freq(GHz)');
+    ylabel(sprintf('S(1,%u)(dB)',idx));
+    title(sprintf('S(1,%u)',idx));
+    legend({'Extracted-RLGC','Original S-parameters'},'Location','best','NumColumns',1)
+    legend('boxoff')
+end
+
+% external<-internal
+figure('Name','Rebuilt S (phase) (Extracted-RLGC): Sei')
+sgtitle({'Comparison Between Rebuilt S-parameters and';'Original S-parameters: Sei'})
+num_of_columes = ceil(numLines/2);
+for idx = 1:numLines
+    subplot(2,num_of_columes,idx)
+    plot(freq/1e9,angle(squeeze(s_params_rebuilt(1,idx+numLines,:))),'k-')
+    hold on
+    plot(freq/1e9,angle(squeeze(s_params(1,idx+numLines,:))),'g--')
+    hold off
+    grid on
+    xlabel('Freq(GHz)');
+    ylabel(sprintf('S(1,%u)(dB)',idx+numLines));
+    title(sprintf('S(1,%u)',idx+numLines));
+    legend({'Extracted-RLGC','Original S-parameters'},'Location','best','NumColumns',1)
+    legend('boxoff')
+end
+
+% internal<-external
+figure('Name','Rebuilt S (phase) (Extracted-RLGC): Sie') 
+sgtitle({'Comparison Between Rebuilt S-parameters and';'Original S-parameters: Sie'})
+num_of_columes = ceil(numLines/2);
+for idx = 1:numLines
+    subplot(2,num_of_columes,idx)
+    plot(freq/1e9,angle(squeeze(s_params_rebuilt(numLines+1,idx,:))),'k-')
+    hold on
+    plot(freq/1e9,angle(squeeze(s_params(numLines+1,idx,:))),'g--')
+    hold off
+    grid on
+    xlabel('Freq(GHz)');
+    ylabel(sprintf('S(%u,%u)(dB)',numLines+1,idx));
+    title(sprintf('S(%u,%u)',numLines+1,idx));
+    legend({'Extracted-RLGC','Original S-parameters'},'Location','best','NumColumns',1)
+    legend('boxoff')
+end
+
+% internal<-internal
+figure('Name','Rebuilt S (phase) (Extracted-RLGC): Sii') 
+sgtitle({'Comparison Between Rebuilt S-parameters and';'Original S-parameters: Sii'})
+num_of_columes = ceil(numLines/2);
+for idx = 1:numLines
+    subplot(2,num_of_columes,idx)
+    plot(freq/1e9,angle(squeeze(s_params_rebuilt(numLines+1,numLines+idx,:))),'k-')
+    hold on
+    plot(freq/1e9,angle(squeeze(s_params(numLines+1,numLines+idx,:))),'g--')
+    hold off
+    grid on
+    xlabel('Freq(GHz)');
+    ylabel(sprintf('S(%u,%u)(dB)',numLines+1,numLines+idx));
+    title(sprintf('S(%u,%u)',numLines+1,numLines+idx));
+    legend({'Extracted-RLGC','Original S-parameters'},'Location','best','NumColumns',1)
+    legend('boxoff')
+end
+
+%% Rebuilt S-parameters (phase) using extracted RLGC
+% Expected to be consistent with the original S-parameters
+% 
+% <<doc\pic\port-ordering.png>>
+% 
+
+% external<-external
+figure('Name','Rebuilt S (phase) (Extracted-RLGC): See') 
+sgtitle({'Comparison Between Rebuilt S-parameters and';'Original S-parameters: See'})
+num_of_columes = ceil(numLines/2);
+for idx = 1:numLines
+    subplot(2,num_of_columes,idx)
+    plot(freq/1e9,angle(squeeze(s_params_rebuilt(1,idx,:))),'k-')
+    hold on
+    plot(freq/1e9,angle(squeeze(s_params(1,idx,:))),'g--')
+    hold off
+    grid on
+    xlabel('Freq(GHz)');
+    ylabel(sprintf('S(1,%u)(dB)',idx));
+    title(sprintf('S(1,%u)',idx));
+    legend({'Extracted-RLGC','Original S-parameters'},'Location','best','NumColumns',1)
+    legend('boxoff')
+end
+
+% external<-internal
+figure('Name','Rebuilt S (phase) (Extracted-RLGC): Sei')
+sgtitle({'Comparison Between Rebuilt S-parameters and';'Original S-parameters: Sei'})
+num_of_columes = ceil(numLines/2);
+for idx = 1:numLines
+    subplot(2,num_of_columes,idx)
+    plot(freq/1e9,angle(squeeze(s_params_rebuilt(1,idx+numLines,:))),'k-')
+    hold on
+    plot(freq/1e9,angle(squeeze(s_params(1,idx+numLines,:))),'g--')
+    hold off
+    grid on
+    xlabel('Freq(GHz)');
+    ylabel(sprintf('S(1,%u)(dB)',idx+numLines));
+    title(sprintf('S(1,%u)',idx+numLines));
+    legend({'Extracted-RLGC','Original S-parameters'},'Location','best','NumColumns',1)
+    legend('boxoff')
+end
+
+% internal<-external
+figure('Name','Rebuilt S (phase) (Extracted-RLGC): Sie') 
+sgtitle({'Comparison Between Rebuilt S-parameters and';'Original S-parameters: Sie'})
+num_of_columes = ceil(numLines/2);
+for idx = 1:numLines
+    subplot(2,num_of_columes,idx)
+    plot(freq/1e9,angle(squeeze(s_params_rebuilt(numLines+1,idx,:))),'k-')
+    hold on
+    plot(freq/1e9,angle(squeeze(s_params(numLines+1,idx,:))),'g--')
+    hold off
+    grid on
+    xlabel('Freq(GHz)');
+    ylabel(sprintf('S(%u,%u)(dB)',numLines+1,idx));
+    title(sprintf('S(%u,%u)',numLines+1,idx));
+    legend({'Extracted-RLGC','Original S-parameters'},'Location','best','NumColumns',1)
+    legend('boxoff')
+end
+
+% internal<-internal
+figure('Name','Rebuilt S (phase) (Extracted-RLGC): Sii') 
+sgtitle({'Comparison Between Rebuilt S-parameters and';'Original S-parameters: Sii'})
+num_of_columes = ceil(numLines/2);
+for idx = 1:numLines
+    subplot(2,num_of_columes,idx)
+    plot(freq/1e9,angle(squeeze(s_params_rebuilt(numLines+1,numLines+idx,:))),'k-')
+    hold on
+    plot(freq/1e9,angle(squeeze(s_params(numLines+1,numLines+idx,:))),'g--')
+    hold off
+    grid on
+    xlabel('Freq(GHz)');
+    ylabel(sprintf('S(%u,%u)(dB)',numLines+1,numLines+idx));
+    title(sprintf('S(%u,%u)',numLines+1,numLines+idx));
     legend({'Extracted-RLGC','Original S-parameters'},'Location','best','NumColumns',1)
     legend('boxoff')
 end
