@@ -19,6 +19,7 @@ Matlab implementation of patent [Transmission-line simulators and methods](https
 1. [`test0.m`](test0.m): 500mil Single-line Transmission Line (Polar Si9000e)
 2. [`test1.m`](test1.m): 500mil Coupled Transmission Line (Polar Si9000e)
    1. [`test1_1.m`](test1_1.m): Using larger frequency intervals
+   2. [`test1_2.m`](test1_2.m): Add randn noise to S, observe the impact on extracted-RLGC
 3. [`test2.m`](test2.m): 200mil Four-line Transmission Line (Ansys 2020R1)
    1. [`test2_1.m`](test2_1.m): (deprecated) removing singular frequencies
    2. [`test2_2.m`](test2_2.m): (deprecated) 10mm, with freq range 10M ~ 70G, HFSS `Automatically use casual materials` enabled.

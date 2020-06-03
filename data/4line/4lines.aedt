@@ -1749,6 +1749,56 @@ $begin 'AnsoftProject'
 								Increment=0.0872664625997165
 								CreateIndexedSubsweepFlag=false
 							$end 'PostprocessSweep'
+							$begin 'Sweep'
+								Variable='H'
+								Column='13mil'
+								Units='mil'
+							$end 'Sweep'
+							$begin 'Sweep'
+								Variable='W'
+								Column='9.7mil'
+								Units='mil'
+							$end 'Sweep'
+							$begin 'Sweep'
+								Variable='S'
+								Column='6.3mil'
+								Units='mil'
+							$end 'Sweep'
+							$begin 'Sweep'
+								Variable='T'
+								Column='2.35mil'
+								Units='mil'
+							$end 'Sweep'
+							$begin 'Sweep'
+								Variable='LL'
+								Column='10mil'
+								Units='mil'
+							$end 'Sweep'
+							$begin 'Sweep'
+								Variable='ss_coef'
+								Column='2'
+								Units=''
+							$end 'Sweep'
+							$begin 'Sweep'
+								Variable='SS'
+								Column='12.6mil'
+								Units='mil'
+							$end 'Sweep'
+							$begin 'Sweep'
+								Variable='num_of_pairs'
+								Column='2'
+								Units=''
+							$end 'Sweep'
+							$begin 'Sweep'
+								Variable='sub_res'
+								Column='64mil;140.6mil'
+								Units='mil'
+							$end 'Sweep'
+							$begin 'Sweep'
+								Variable='sub_width'
+								Column='192mil;345.2mil'
+								Units='mil'
+							$end 'Sweep'
 						$end 'Sweeps'
 						IsPortOnly=false
 					$end 'SimDataExtractor'
@@ -1891,6 +1941,64 @@ $begin 'AnsoftProject'
 						SimValue('St(trace_p_5_T2,trace_p_5_T2)', 2, 90, false, SimValueID=2813, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
 						SimValue('St(trace_p_6_T2,trace_p_6_T2)', 2, 90, false, SimValueID=2814, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
 						SimValue('St(trace_p_7_T2,trace_p_7_T2)', 2, 90, false, SimValueID=2815, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(Diff1,Diff1)', 2, 90, false, SimValueID=2976, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '0')
+						SimValue('St(Diff1,Diff1)', 2, 90, false, SimValueID=2977, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_0_T2,trace_p_0_T1)', 2, 90, false, SimValueID=2978, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_0_T1,trace_p_0_T1)', 2, 90, false, SimValueID=2979, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_1_T1,trace_p_0_T1)', 2, 90, false, SimValueID=2980, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_1_T1,trace_p_0_T1)', 2, 90, false, SimValueID=2981, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_0_T2,trace_p_0_T1)', 2, 90, false, SimValueID=2982, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_1_T2,trace_p_0_T1)', 2, 90, false, SimValueID=2983, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_1_T2,trace_p_0_T1)', 2, 90, false, SimValueID=2984, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_0_T1,trace_n_0_T1)', 2, 90, false, SimValueID=2985, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_1_T1,trace_n_0_T1)', 2, 90, false, SimValueID=2986, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_1_T1,trace_n_0_T1)', 2, 90, false, SimValueID=2987, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_0_T2,trace_n_0_T1)', 2, 90, false, SimValueID=2988, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_0_T2,trace_n_0_T1)', 2, 90, false, SimValueID=2989, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_1_T2,trace_n_0_T1)', 2, 90, false, SimValueID=2990, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_1_T2,trace_n_0_T1)', 2, 90, false, SimValueID=2991, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_0_T1,trace_p_1_T1)', 2, 90, false, SimValueID=2992, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_0_T1,trace_p_1_T1)', 2, 90, false, SimValueID=2993, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_1_T1,trace_p_1_T1)', 2, 90, false, SimValueID=2994, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_0_T2,trace_p_1_T1)', 2, 90, false, SimValueID=2995, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_0_T2,trace_p_1_T1)', 2, 90, false, SimValueID=2996, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_1_T2,trace_p_1_T1)', 2, 90, false, SimValueID=2997, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_1_T2,trace_p_1_T1)', 2, 90, false, SimValueID=2998, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_0_T1,trace_n_1_T1)', 2, 90, false, SimValueID=2999, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_0_T1,trace_n_1_T1)', 2, 90, false, SimValueID=3000, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_1_T1,trace_n_1_T1)', 2, 90, false, SimValueID=3001, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_0_T2,trace_n_1_T1)', 2, 90, false, SimValueID=3002, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_0_T2,trace_n_1_T1)', 2, 90, false, SimValueID=3003, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_1_T2,trace_n_1_T1)', 2, 90, false, SimValueID=3004, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_1_T2,trace_n_1_T1)', 2, 90, false, SimValueID=3005, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_0_T1,trace_p_0_T2)', 2, 90, false, SimValueID=3006, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_0_T1,trace_p_0_T2)', 2, 90, false, SimValueID=3007, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_1_T1,trace_p_0_T2)', 2, 90, false, SimValueID=3008, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_1_T1,trace_p_0_T2)', 2, 90, false, SimValueID=3009, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_0_T2,trace_p_0_T2)', 2, 90, false, SimValueID=3010, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_1_T2,trace_p_0_T2)', 2, 90, false, SimValueID=3011, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_1_T2,trace_p_0_T2)', 2, 90, false, SimValueID=3012, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_0_T1,trace_n_0_T2)', 2, 90, false, SimValueID=3013, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_0_T1,trace_n_0_T2)', 2, 90, false, SimValueID=3014, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_1_T1,trace_n_0_T2)', 2, 90, false, SimValueID=3015, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_1_T1,trace_n_0_T2)', 2, 90, false, SimValueID=3016, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_0_T2,trace_n_0_T2)', 2, 90, false, SimValueID=3017, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_1_T2,trace_n_0_T2)', 2, 90, false, SimValueID=3018, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_1_T2,trace_n_0_T2)', 2, 90, false, SimValueID=3019, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_0_T1,trace_p_1_T2)', 2, 90, false, SimValueID=3020, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_0_T1,trace_p_1_T2)', 2, 90, false, SimValueID=3021, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_1_T1,trace_p_1_T2)', 2, 90, false, SimValueID=3022, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_1_T1,trace_p_1_T2)', 2, 90, false, SimValueID=3023, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_0_T2,trace_p_1_T2)', 2, 90, false, SimValueID=3024, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_0_T2,trace_p_1_T2)', 2, 90, false, SimValueID=3025, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_1_T2,trace_p_1_T2)', 2, 90, false, SimValueID=3026, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_0_T1,trace_n_1_T2)', 2, 90, false, SimValueID=3027, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_0_T1,trace_n_1_T2)', 2, 90, false, SimValueID=3028, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_1_T1,trace_n_1_T2)', 2, 90, false, SimValueID=3029, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_1_T1,trace_n_1_T2)', 2, 90, false, SimValueID=3030, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_0_T2,trace_n_1_T2)', 2, 90, false, SimValueID=3031, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_0_T2,trace_n_1_T2)', 2, 90, false, SimValueID=3032, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_1_T2,trace_n_1_T2)', 2, 90, false, SimValueID=3033, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
 						$begin 'Sweeps'
 							$begin 'PostprocessSweep'
 								Variable='Freq'
@@ -1979,12 +2087,12 @@ $begin 'AnsoftProject'
 							$end 'Sweep'
 							$begin 'Sweep'
 								Variable='sub_res'
-								Column='64mil'
+								Column='64mil;140.6mil'
 								Units='mil'
 							$end 'Sweep'
 							$begin 'Sweep'
 								Variable='sub_width'
-								Column='192mil'
+								Column='192mil;345.2mil'
 								Units='mil'
 							$end 'Sweep'
 						$end 'Sweeps'
@@ -2000,6 +2108,103 @@ $begin 'AnsoftProject'
 					ID=1371
 					Name='Sweep'
 					$begin 'SimDataExtractor'
+						$begin 'Sweeps'
+							$begin 'PostprocessSweep'
+								Variable='Freq'
+								Column='1GHz;1.5GHz;2GHz;2.5GHz;3GHz;3.5GHz;4GHz;4.5GHz;5GHz;5.5GHz;6GHz;6.5GHz;7GHz;7.5GHz;8GHz;8.5GHz;9GHz;9.5GHz;10GHz;10.5GHz;11GHz;11.5GHz;12GHz;12.5GHz;13GHz;13.5GHz;14GHz;14.5GHz;15GHz;15.5GHz;16GHz;16.5GHz;17GHz;17.5GHz;18GHz;18.5GHz;19GHz;19.5GHz;20GHz;20.5GHz;21GHz;21.5GHz;22GHz;22.5GHz;23GHz;23.5GHz;24GHz;24.5GHz;25GHz;25.5GHz;26GHz;26.5GHz;27GHz;27.5GHz;28GHz;28.5GHz;29GHz;29.5GHz;30GHz;30.5GHz;31GHz;31.5GHz;32GHz;32.5GHz;33GHz;33.5GHz;34GHz;34.5GHz;35GHz;35.5GHz;36GHz;36.5GHz;37GHz;37.5GHz;38GHz;38.5GHz;39GHz;39.5GHz;40GHz;40.5GHz;41GHz;41.5GHz;42GHz;42.5GHz;43GHz;43.5GHz;44GHz;44.5GHz;45GHz;45.5GHz;46GHz;46.5GHz;47GHz;47.5GHz;48GHz;48.5GHz;49GHz;49.5GHz;50GHz;50.5GHz;51GHz;51.5GHz;52GHz;52.5GHz;53GHz;53.5GHz;54GHz;54.5GHz;55GHz;55.5GHz;56GHz;56.5GHz;57GHz;57.5GHz;58GHz;58.5GHz;59GHz;59.5GHz;60GHz;60.5GHz;61GHz;61.5GHz;62GHz;62.5GHz;63GHz;63.5GHz;64GHz;64.5GHz;65GHz;65.5GHz;66GHz;66.5GHz;67GHz;67.5GHz;68GHz;68.5GHz;69GHz;69.5GHz;70GHz'
+								Units='GHz'
+								Minimum=1000000000
+								Maximum=70000000000
+								Increment=70000000000
+								CreateIndexedSubsweepFlag=false
+							$end 'PostprocessSweep'
+							$begin 'PostprocessSweep'
+								Variable='NormalizedDistance'
+								RegularSweep=1
+								Units=''
+								Minimum=0
+								Maximum=1
+								Increment=0.01
+								CreateIndexedSubsweepFlag=false
+							$end 'PostprocessSweep'
+							$begin 'PostprocessSweep'
+								Variable='Phi'
+								RegularSweep=1
+								Units='deg'
+								Minimum=0
+								Maximum=6.28318530717959
+								Increment=0.0872664625997165
+								CreateIndexedSubsweepFlag=false
+							$end 'PostprocessSweep'
+							$begin 'PostprocessSweep'
+								Variable='Theta'
+								RegularSweep=1
+								Units='deg'
+								Minimum=0
+								Maximum=6.28318530717959
+								Increment=0.0872664625997165
+								CreateIndexedSubsweepFlag=false
+							$end 'PostprocessSweep'
+							$begin 'PostprocessSweep'
+								Variable='Phase'
+								RegularSweep=1
+								Units='deg'
+								Minimum=0
+								Maximum=6.28318530717959
+								Increment=0.0872664625997165
+								CreateIndexedSubsweepFlag=false
+							$end 'PostprocessSweep'
+							$begin 'Sweep'
+								Variable='H'
+								Column='13mil'
+								Units='mil'
+							$end 'Sweep'
+							$begin 'Sweep'
+								Variable='W'
+								Column='9.7mil'
+								Units='mil'
+							$end 'Sweep'
+							$begin 'Sweep'
+								Variable='S'
+								Column='6.3mil'
+								Units='mil'
+							$end 'Sweep'
+							$begin 'Sweep'
+								Variable='T'
+								Column='2.35mil'
+								Units='mil'
+							$end 'Sweep'
+							$begin 'Sweep'
+								Variable='LL'
+								Column='10mil'
+								Units='mil'
+							$end 'Sweep'
+							$begin 'Sweep'
+								Variable='ss_coef'
+								Column='2'
+								Units=''
+							$end 'Sweep'
+							$begin 'Sweep'
+								Variable='SS'
+								Column='12.6mil'
+								Units='mil'
+							$end 'Sweep'
+							$begin 'Sweep'
+								Variable='num_of_pairs'
+								Column='2'
+								Units=''
+							$end 'Sweep'
+							$begin 'Sweep'
+								Variable='sub_res'
+								Column='64mil;140.6mil'
+								Units='mil'
+							$end 'Sweep'
+							$begin 'Sweep'
+								Variable='sub_width'
+								Column='192mil;345.2mil'
+								Units='mil'
+							$end 'Sweep'
+						$end 'Sweeps'
 						IsPortOnly=true
 					$end 'SimDataExtractor'
 				$end 'Solution'
@@ -2091,12 +2296,12 @@ $begin 'AnsoftProject'
 							$end 'Sweep'
 							$begin 'Sweep'
 								Variable='sub_res'
-								Column='64mil'
+								Column='64mil;140.6mil'
 								Units='mil'
 							$end 'Sweep'
 							$begin 'Sweep'
 								Variable='sub_width'
-								Column='192mil'
+								Column='192mil;345.2mil'
 								Units='mil'
 							$end 'Sweep'
 						$end 'Sweeps'
@@ -2186,17 +2391,17 @@ $begin 'AnsoftProject'
 				DesignInstanceID=1
 				$begin 'WindowPosition'
 					$begin 'EditorWindow'
-						Circuit(Editor3d(View(WindowPos(3, -1, -1, -13, -58, 0, 0, 1735, 755), OrientationMatrix(-0.00845489837229252, 0, 0, 0, 0, 0, 0.00845489744096994, 0, -1.65436122510606e-24, 0.00845489744096994, 0, 0, 0.27055686712265, -0.549568057060242, -5.89328289031982, 1, 0, -1.79918456077576, 1.79918456077576, -1, 1, -2.06879377365112, 13.601713180542), Drawings[10: 'trace_p_0', 'trace_n_0', 'trace_n_1', 'trace_p_1', 'substrate', 'GND', 'AirBox', 'Port1', 'Port2', 'Vector_E1'], 'View Data'('Render Mode'=1, 'Show Ruler'=1, 'Coordinate Systems View Mode'=0, 'CS Triad View Mode'=0, 'Render Facets'=1, GridVisible=1, GridAutoAdjust=1, GridAutoExtents=1, GridType='Rect', GridStyle='Line', NumPixels=30, dXForGrid=5, dYForGrid=5, dZForGrid=5, dRForGrid=5, dThetaForGrid=10), ClipPlanes(ClipPlaneOptions(DisableWhenDrawingNewPlane=true, ForceOpqaueForUnclipped=false, ShowClipped=false, Transparency=0, HandleColor=16776960)))))
+						Circuit(Editor3d(View(WindowPos(3, -1, -1, -13, -58, 0, 0, 1735, 755), OrientationMatrix(-0.00845489837229252, 0, 0, 0, 0, 0, 0.00845489744096994, 0, -1.65436122510606e-24, 0.00845489744096994, 0, 0, 0.27055686712265, -0.549568057060242, -5.89328289031982, 1, 0, -1.79918444156647, 1.79918444156647, -1, 1, -2.06879377365112, 13.601713180542), Drawings[10: 'trace_p_0', 'trace_n_0', 'trace_n_1', 'trace_p_1', 'substrate', 'GND', 'AirBox', 'Port1', 'Port2', 'Vector_E1'], 'View Data'('Render Mode'=1, 'Show Ruler'=1, 'Coordinate Systems View Mode'=0, 'CS Triad View Mode'=0, 'Render Facets'=1, GridVisible=1, GridAutoAdjust=1, GridAutoExtents=1, GridType='Rect', GridStyle='Line', NumPixels=30, dXForGrid=5, dYForGrid=5, dZForGrid=5, dRForGrid=5, dThetaForGrid=10), ClipPlanes(ClipPlaneOptions(DisableWhenDrawingNewPlane=true, ForceOpqaueForUnclipped=false, ShowClipped=false, Transparency=0, HandleColor=16776960)))))
 					$end 'EditorWindow'
 				$end 'WindowPosition'
 				$begin 'ReportSetup'
 					$begin 'ReportManager'
 						$begin 'Reports'
 						$end 'Reports'
-						NextUniqueID=37
+						NextUniqueID=102
 						MoveBackwards=false
 						$begin 'NextVersID'
-							NextUniqueID=1014
+							NextUniqueID=1142
 							MoveBackwards=false
 						$end 'NextVersID'
 					$end 'ReportManager'
