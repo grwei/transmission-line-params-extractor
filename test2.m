@@ -10,14 +10,14 @@ clc; clear; close all;
 %% Import data
 
 % Import simulated data
-lineLength = 0.02; % Line Length(meters)
-filename_4line = 'data/Four-line_20mm_20191020.s8p';
+lineLength = 0.00508; % Line Length(meters)
+filename_4line = 'data/4line/4lines_HFSS_200mil.s8p';
 SingleEnded8PortData = read(rfdata.data,filename_4line);
 freq = SingleEnded8PortData.Freq;
 freqPts = length(freq);
 z0 = SingleEnded8PortData.Z0; % Reference Impedance
 SingleEnded8PortData.S_Parameters = snp2smp(SingleEnded8PortData.S_Parameters,...
-    z0,[4 2 1 3 8 6 5 7]); % Classic style
+    z0,1:1:8); % Classic style
 numOfLines = size(SingleEnded8PortData.S_Parameters,1)/2;
 
 % Import Cadence-PowerSI-extracted params
@@ -27,77 +27,27 @@ rlgc_PowerSI.L = rlgc_PowerSI.R;
 rlgc_PowerSI.C = rlgc_PowerSI.R;
 rlgc_PowerSI.G = rlgc_PowerSI.R;
 % Load data
-filename_PowerSI = 'data/Four-line_20mm_20191020_PowerSI.csv';
+filename_PowerSI = 'data/4line/Transmission_RLGC_res.csv';
 opts = detectImportOptions(filename_PowerSI);
 rlgc_PowerSI_mat = readtable(filename_PowerSI);
 for freqIdx = 1:freqPts
-    rlgc_PowerSI.R(3,3,freqIdx) = rlgc_PowerSI_mat{4*freqIdx-3,3}/lineLength;
-    rlgc_PowerSI.R(2,3,freqIdx) = rlgc_PowerSI_mat{4*freqIdx-3,4}/lineLength;
-    rlgc_PowerSI.R(3,4,freqIdx) = rlgc_PowerSI_mat{4*freqIdx-3,5}/lineLength;
-    rlgc_PowerSI.R(1,3,freqIdx) = rlgc_PowerSI_mat{4*freqIdx-3,6}/lineLength;
-    rlgc_PowerSI.R(2,2,freqIdx) = rlgc_PowerSI_mat{4*freqIdx-3,7}/lineLength;
-    rlgc_PowerSI.R(2,4,freqIdx) = rlgc_PowerSI_mat{4*freqIdx-3,8}/lineLength;
-    rlgc_PowerSI.R(1,2,freqIdx) = rlgc_PowerSI_mat{4*freqIdx-3,9}/lineLength;
-    rlgc_PowerSI.R(4,4,freqIdx) = rlgc_PowerSI_mat{4*freqIdx-3,10}/lineLength;
-    rlgc_PowerSI.R(1,4,freqIdx) = rlgc_PowerSI_mat{4*freqIdx-3,11}/lineLength;
-    rlgc_PowerSI.R(1,1,freqIdx) = rlgc_PowerSI_mat{4*freqIdx-3,12}/lineLength;
-    rlgc_PowerSI.R(2,1,freqIdx) = rlgc_PowerSI.R(1,2,freqIdx);
-    rlgc_PowerSI.R(3,1,freqIdx) = rlgc_PowerSI.R(1,3,freqIdx);
-    rlgc_PowerSI.R(3,2,freqIdx) = rlgc_PowerSI.R(2,3,freqIdx);
-    rlgc_PowerSI.R(4,1,freqIdx) = rlgc_PowerSI.R(1,4,freqIdx);
-    rlgc_PowerSI.R(4,2,freqIdx) = rlgc_PowerSI.R(2,4,freqIdx);
-    rlgc_PowerSI.R(4,3,freqIdx) = rlgc_PowerSI.R(3,4,freqIdx);
-    
-    rlgc_PowerSI.L(3,3,freqIdx) = rlgc_PowerSI_mat{4*freqIdx-2,3}/lineLength;
-    rlgc_PowerSI.L(2,3,freqIdx) = rlgc_PowerSI_mat{4*freqIdx-2,4}/lineLength;
-    rlgc_PowerSI.L(3,4,freqIdx) = rlgc_PowerSI_mat{4*freqIdx-2,5}/lineLength;
-    rlgc_PowerSI.L(1,3,freqIdx) = rlgc_PowerSI_mat{4*freqIdx-2,6}/lineLength;
-    rlgc_PowerSI.L(2,2,freqIdx) = rlgc_PowerSI_mat{4*freqIdx-2,7}/lineLength;
-    rlgc_PowerSI.L(2,4,freqIdx) = rlgc_PowerSI_mat{4*freqIdx-2,8}/lineLength;
-    rlgc_PowerSI.L(1,2,freqIdx) = rlgc_PowerSI_mat{4*freqIdx-2,9}/lineLength;
-    rlgc_PowerSI.L(4,4,freqIdx) = rlgc_PowerSI_mat{4*freqIdx-2,10}/lineLength;
-    rlgc_PowerSI.L(1,4,freqIdx) = rlgc_PowerSI_mat{4*freqIdx-2,11}/lineLength;
-    rlgc_PowerSI.L(1,1,freqIdx) = rlgc_PowerSI_mat{4*freqIdx-2,12}/lineLength;
-    rlgc_PowerSI.L(2,1,freqIdx) = rlgc_PowerSI.L(1,2,freqIdx);
-    rlgc_PowerSI.L(3,1,freqIdx) = rlgc_PowerSI.L(1,3,freqIdx);
-    rlgc_PowerSI.L(3,2,freqIdx) = rlgc_PowerSI.L(2,3,freqIdx);
-    rlgc_PowerSI.L(4,1,freqIdx) = rlgc_PowerSI.L(1,4,freqIdx);
-    rlgc_PowerSI.L(4,2,freqIdx) = rlgc_PowerSI.L(2,4,freqIdx);
-    rlgc_PowerSI.L(4,3,freqIdx) = rlgc_PowerSI.L(3,4,freqIdx);
-    
-    rlgc_PowerSI.G(3,3,freqIdx) = rlgc_PowerSI_mat{4*freqIdx-1,3}/lineLength;
-    rlgc_PowerSI.G(2,3,freqIdx) = rlgc_PowerSI_mat{4*freqIdx-1,4}/lineLength;
-    rlgc_PowerSI.G(3,4,freqIdx) = rlgc_PowerSI_mat{4*freqIdx-1,5}/lineLength;
-    rlgc_PowerSI.G(1,3,freqIdx) = rlgc_PowerSI_mat{4*freqIdx-1,6}/lineLength;
-    rlgc_PowerSI.G(2,2,freqIdx) = rlgc_PowerSI_mat{4*freqIdx-1,7}/lineLength;
-    rlgc_PowerSI.G(2,4,freqIdx) = rlgc_PowerSI_mat{4*freqIdx-1,8}/lineLength;
-    rlgc_PowerSI.G(1,2,freqIdx) = rlgc_PowerSI_mat{4*freqIdx-1,9}/lineLength;
-    rlgc_PowerSI.G(4,4,freqIdx) = rlgc_PowerSI_mat{4*freqIdx-1,10}/lineLength;
-    rlgc_PowerSI.G(1,4,freqIdx) = rlgc_PowerSI_mat{4*freqIdx-1,11}/lineLength;
-    rlgc_PowerSI.G(1,1,freqIdx) = rlgc_PowerSI_mat{4*freqIdx-1,12}/lineLength;
-    rlgc_PowerSI.G(2,1,freqIdx) = rlgc_PowerSI.G(1,2,freqIdx);
-    rlgc_PowerSI.G(3,1,freqIdx) = rlgc_PowerSI.G(1,3,freqIdx);
-    rlgc_PowerSI.G(3,2,freqIdx) = rlgc_PowerSI.G(2,3,freqIdx);
-    rlgc_PowerSI.G(4,1,freqIdx) = rlgc_PowerSI.G(1,4,freqIdx);
-    rlgc_PowerSI.G(4,2,freqIdx) = rlgc_PowerSI.G(2,4,freqIdx);
-    rlgc_PowerSI.G(4,3,freqIdx) = rlgc_PowerSI.G(3,4,freqIdx);
-    
-    rlgc_PowerSI.C(3,3,freqIdx) = rlgc_PowerSI_mat{4*freqIdx-0,3}/lineLength;
-    rlgc_PowerSI.C(2,3,freqIdx) = rlgc_PowerSI_mat{4*freqIdx-0,4}/lineLength;
-    rlgc_PowerSI.C(3,4,freqIdx) = rlgc_PowerSI_mat{4*freqIdx-0,5}/lineLength;
-    rlgc_PowerSI.C(1,3,freqIdx) = rlgc_PowerSI_mat{4*freqIdx-0,6}/lineLength;
-    rlgc_PowerSI.C(2,2,freqIdx) = rlgc_PowerSI_mat{4*freqIdx-0,7}/lineLength;
-    rlgc_PowerSI.C(2,4,freqIdx) = rlgc_PowerSI_mat{4*freqIdx-0,8}/lineLength;
-    rlgc_PowerSI.C(1,2,freqIdx) = rlgc_PowerSI_mat{4*freqIdx-0,9}/lineLength;
-    rlgc_PowerSI.C(4,4,freqIdx) = rlgc_PowerSI_mat{4*freqIdx-0,10}/lineLength;
-    rlgc_PowerSI.C(1,4,freqIdx) = rlgc_PowerSI_mat{4*freqIdx-0,11}/lineLength;
-    rlgc_PowerSI.C(1,1,freqIdx) = rlgc_PowerSI_mat{4*freqIdx-0,12}/lineLength;
-    rlgc_PowerSI.C(2,1,freqIdx) = rlgc_PowerSI.C(1,2,freqIdx);
-    rlgc_PowerSI.C(3,1,freqIdx) = rlgc_PowerSI.C(1,3,freqIdx);
-    rlgc_PowerSI.C(3,2,freqIdx) = rlgc_PowerSI.C(2,3,freqIdx);
-    rlgc_PowerSI.C(4,1,freqIdx) = rlgc_PowerSI.C(1,4,freqIdx);
-    rlgc_PowerSI.C(4,2,freqIdx) = rlgc_PowerSI.C(2,4,freqIdx);
-    rlgc_PowerSI.C(4,3,freqIdx) = rlgc_PowerSI.C(3,4,freqIdx);
+    for i = 1:numOfLines
+        for j = i:numOfLines
+            rlgc_PowerSI.R(i,j,freqIdx) = rlgc_PowerSI_mat{4*freqIdx-3,(2*numOfLines+2-i)*(i-1)/2+j-i+3}/lineLength;
+            rlgc_PowerSI.L(i,j,freqIdx) = rlgc_PowerSI_mat{4*freqIdx-2,(2*numOfLines+2-i)*(i-1)/2+j-i+3}/lineLength;
+            rlgc_PowerSI.G(i,j,freqIdx) = rlgc_PowerSI_mat{4*freqIdx-1,(2*numOfLines+2-i)*(i-1)/2+j-i+3}/lineLength;
+            rlgc_PowerSI.C(i,j,freqIdx) = rlgc_PowerSI_mat{4*freqIdx-0,(2*numOfLines+2-i)*(i-1)/2+j-i+3}/lineLength;
+        end
+    end
+    % RLGC是对称阵
+    for i = 1:numOfLines
+        for j = i+1:numOfLines
+            rlgc_PowerSI.R(j,i,freqIdx) = rlgc_PowerSI.R(i,j,freqIdx);
+            rlgc_PowerSI.L(j,i,freqIdx) = rlgc_PowerSI.L(i,j,freqIdx);
+            rlgc_PowerSI.G(j,i,freqIdx) = rlgc_PowerSI.G(i,j,freqIdx);
+            rlgc_PowerSI.C(j,i,freqIdx) = rlgc_PowerSI.C(i,j,freqIdx);
+        end
+    end
 end
 
 %% Extract RLGC params using proposed method

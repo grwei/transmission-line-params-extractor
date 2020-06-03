@@ -11,17 +11,13 @@ clc; clear; close all;
 
 % Import simulated data
 lineLength = 0.00508; % Line Length(meters)
-filename_16line = 'data/16line/16-lines_8-diff-pairs.s32p';
+filename_16line = 'data/16line/16lines_HFSS_200mil.s32p';
 SingleEnded32PortData = read(rfdata.data,filename_16line);
 freq = SingleEnded32PortData.Freq;
 freqPts = length(freq);
 z0 = SingleEnded32PortData.Z0; % Reference Impedance
-port_order = nan(1,32);
-port_order(2:2:16) = 1:1:8;
-port_order(1:2:15) = 9:1:16;
-port_order(17:1:32) = port_order(1:1:16) + 16;
 SingleEnded32PortData.S_Parameters = snp2smp(SingleEnded32PortData.S_Parameters,...
-    z0,port_order); % Classic style
+    z0,1:1:32); % Classic style
 numOfLines = size(SingleEnded32PortData.S_Parameters,1)/2;
 
 % Import Cadence-PowerSI-extracted params
@@ -31,16 +27,16 @@ rlgc_PowerSI.L = rlgc_PowerSI.R;
 rlgc_PowerSI.C = rlgc_PowerSI.R;
 rlgc_PowerSI.G = rlgc_PowerSI.R;
 % Load data
-filename_PowerSI = 'data/16line/RLGC_PowerSI.csv';
+filename_PowerSI = 'data/16line/Transmission_RLGC_res.csv';
 opts = detectImportOptions(filename_PowerSI);
 rlgc_PowerSI_mat = readtable(filename_PowerSI);
 for freqIdx = 1:freqPts
     for i = 1:numOfLines
         for j = i:numOfLines
-            rlgc_PowerSI.R(i,j,freqIdx) = rlgc_PowerSI_mat{4*freqIdx-3,(34-i)*(i-1)/2+j-i+3}/lineLength;
-            rlgc_PowerSI.L(i,j,freqIdx) = rlgc_PowerSI_mat{4*freqIdx-2,(34-i)*(i-1)/2+j-i+3}/lineLength;
-            rlgc_PowerSI.G(i,j,freqIdx) = rlgc_PowerSI_mat{4*freqIdx-1,(34-i)*(i-1)/2+j-i+3}/lineLength;
-            rlgc_PowerSI.C(i,j,freqIdx) = rlgc_PowerSI_mat{4*freqIdx-0,(34-i)*(i-1)/2+j-i+3}/lineLength;
+            rlgc_PowerSI.R(i,j,freqIdx) = rlgc_PowerSI_mat{4*freqIdx-3,(2*numOfLines+2-i)*(i-1)/2+j-i+3}/lineLength;
+            rlgc_PowerSI.L(i,j,freqIdx) = rlgc_PowerSI_mat{4*freqIdx-2,(2*numOfLines+2-i)*(i-1)/2+j-i+3}/lineLength;
+            rlgc_PowerSI.G(i,j,freqIdx) = rlgc_PowerSI_mat{4*freqIdx-1,(2*numOfLines+2-i)*(i-1)/2+j-i+3}/lineLength;
+            rlgc_PowerSI.C(i,j,freqIdx) = rlgc_PowerSI_mat{4*freqIdx-0,(2*numOfLines+2-i)*(i-1)/2+j-i+3}/lineLength;
         end
     end
     % RLGC是对称阵
@@ -52,15 +48,6 @@ for freqIdx = 1:freqPts
             rlgc_PowerSI.C(j,i,freqIdx) = rlgc_PowerSI.C(i,j,freqIdx);
         end
     end
-    % 重排端口顺序
-    rlgc_PowerSI.R([2:2:16,1:2:15],:,freqIdx) = rlgc_PowerSI.R(:,:,freqIdx);
-    rlgc_PowerSI.R(:,[2:2:16,1:2:15],freqIdx) = rlgc_PowerSI.R(:,:,freqIdx);
-    rlgc_PowerSI.L([2:2:16,1:2:15],:,freqIdx) = rlgc_PowerSI.L(:,:,freqIdx);
-    rlgc_PowerSI.L(:,[2:2:16,1:2:15],freqIdx) = rlgc_PowerSI.L(:,:,freqIdx);
-    rlgc_PowerSI.G([2:2:16,1:2:15],:,freqIdx) = rlgc_PowerSI.G(:,:,freqIdx);
-    rlgc_PowerSI.G(:,[2:2:16,1:2:15],freqIdx) = rlgc_PowerSI.G(:,:,freqIdx);
-    rlgc_PowerSI.C([2:2:16,1:2:15],:,freqIdx) = rlgc_PowerSI.C(:,:,freqIdx);
-    rlgc_PowerSI.C(:,[2:2:16,1:2:15],freqIdx) = rlgc_PowerSI.C(:,:,freqIdx);
 end
 
 %% Extract RLGC params using proposed method
@@ -142,7 +129,7 @@ for idx = 1:numOfLines
     legend('boxoff')
 end
 
-%% Calculated S-parameters using powerSI-extracted RLGC
+%% Calculated S-parameters (dB) using powerSI-extracted RLGC
 % 结论：与原始S参数高度一致。用重建S参数再提取RLGC，此RLGC可以准确恢复重建S参数。
 % 说明PowerSI是对原始S参数作了前处理
 

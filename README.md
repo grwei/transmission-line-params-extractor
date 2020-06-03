@@ -16,12 +16,13 @@ Matlab implementation of patent [Transmission-line simulators and methods](https
 
 ## Tests
 
-1. [`test0.m`](test0.m): 25.4mm Single-line Transmission Line
-2. [`test1.m`](test1.m): 25.4mm Coupled Transmission Line
+1. [`test0.m`](test0.m): 500mil Single-line Transmission Line (Polar Si9000e)
+2. [`test1.m`](test1.m): 500mil Coupled Transmission Line (Polar Si9000e)
    1. [`test1_1.m`](test1_1.m): Using larger frequency intervals
-3. [`test2.m`](test2.m): 20mm Four-line Transmission Line
-   1. [`test2_1.m`](test2_1.m): removing singular frequencies
-   2. [`test2_2.m`](test2_2.m): 10mm, with freq range 10M ~ 70G, HFSS `Automatically use casual materials` enabled.
+3. [`test2.m`](test2.m): 200mil Four-line Transmission Line (Ansys 2020R1)
+   1. [`test2_1.m`](test2_1.m): (deprecated) removing singular frequencies
+   2. [`test2_2.m`](test2_2.m): (deprecated) 10mm, with freq range 10M ~ 70G, HFSS `Automatically use casual materials` enabled.
+4. [`test3.m`](test3.m): 200mil 16-line Transmission Line (Ansys 2020R1)
 
 ## Contact me
 

@@ -3,7 +3,7 @@ $begin 'AnsoftProject'
 	Product='ElectronicsDesktop'
 	FileOwnedByWorkbench=false
 	$begin 'Desktop'
-		Version(2019, 2)
+		Version(2020, 1)
 		InfrastructureVersion(1, 0)
 	$end 'Desktop'
 	UsesAdvancedFeatures=false
@@ -130,7 +130,7 @@ $begin 'AnsoftProject'
 				specific_heat='385'
 				youngs_modulus='120000000000'
 				poissons_ratio='0.38'
-				thermal_expansion_coeffcient='1.77e-05'
+				thermal_expansion_coefficient='1.77e-05'
 				ModTime=1499970477
 				Library='Materials'
 				LibLocation='SysLibrary'
@@ -157,7 +157,7 @@ $begin 'AnsoftProject'
 				specific_heat='1150'
 				youngs_modulus='11000000000'
 				poissons_ratio='0.28'
-				thermal_expansion_coeffcient='1.5e-05'
+				thermal_expansion_coefficient='1.5e-05'
 				ModTime=1499970477
 				Library='Materials'
 				LibLocation='SysLibrary'
@@ -183,7 +183,7 @@ $begin 'AnsoftProject'
 				thermal_conductivity='0.0261'
 				mass_density='1.1614'
 				specific_heat='1005'
-				thermal_expansion_coeffcient='0.00333'
+				thermal_expansion_coefficient='0.00333'
 				$begin 'thermal_material_type'
 					property_type='ChoiceProperty'
 					Choice='Fluid'
@@ -232,8 +232,8 @@ $begin 'AnsoftProject'
 				$end 'Properties'
 				CompExtID=6
 				$begin 'Parameters'
-					MenuProp('CoSimulator', 'D', '', 'DefaultNetlist', 0)
 					ButtonProp('CosimDefinition', 'D', '', '', 'Edit', 40501, ButtonPropClientData())
+					MenuProp('CoSimulator', 'D', '', 'DefaultNetlist', 0)
 				$end 'Parameters'
 				$begin 'CosimDefinitions'
 					$begin 'CosimDefinition'
@@ -322,9 +322,9 @@ $begin 'AnsoftProject'
 			WorkingCS=1
 			$begin 'GeometryCore'
 				BlockVersionID=3
-				DataVersion=14
+				DataVersion=15
 				NativeKernel='ACIS'
-				NativeKernelVersionID=12
+				NativeKernelVersionID=13
 				Units='mil'
 				InstanceID=-1
 				$begin 'ValidationOptions'
@@ -2296,13 +2296,19 @@ $begin 'AnsoftProject'
 				$end 'SBRWedgeSettings'
 				$begin 'SBRTxRxSettings'
 				$end 'SBRTxRxSettings'
+				$begin 'SBRCreepingWaveSettings'
+					CWRaySampleDensity=10
+					CWRayCutoffDb=40
+					CWCurvatureSensitivity=50
+					CWAngularRayInterval=2
+				$end 'SBRCreepingWaveSettings'
 				$begin 'PMLData'
 					$begin 'PMLGroups'
 					$end 'PMLGroups'
 				$end 'PMLData'
 				$begin 'SortOrder'
 					Port[1: -1]
-					Terminal[1: -1]
+					Terminal[32: 36, 37, 45, 38, 46, 39, 47, 40, 48, 41, 49, 42, 50, 43, 51, 44, 53, 54, 62, 55, 63, 56, 64, 57, 65, 58, 66, 59, 67, 60, 68, 61]
 				$end 'SortOrder'
 				$begin 'DiffPairs'
 					$begin 'Pair1'
@@ -2488,6 +2494,7 @@ $begin 'AnsoftProject'
 				$end 'GlobalModelRes'
 				MeshMethod='Auto'
 				UseLegacyFaceterForTauVolumeMesh=false
+				DynamicSurfaceResolution=false
 				UseFlexMeshingForTAUvolumeMesh=false
 			$end 'MeshSettings'
 			$begin 'MeshOperations'
@@ -2518,6 +2525,9 @@ $begin 'AnsoftProject'
 					MinimumConvergedPasses=2
 					PercentRefinement=30
 					IsEnabled=true
+					$begin 'MeshLink'
+						ImportMesh=false
+					$end 'MeshLink'
 					BasisOrder=-1
 					DoLambdaRefine=true
 					DoMaterialLambda=true
@@ -2533,11 +2543,10 @@ $begin 'AnsoftProject'
 					UseIterativeSolver=false
 					SaveRadFieldsOnly=false
 					SaveAnyFields=true
-					CacheSaveKind='Delta'
-					ConstantDelta='0s'
 					IESolverType='Auto'
 					LambdaTargetForIESolver=0.15
 					UseDefaultLambdaTgtForIESolver=true
+					'IE Solver Accuracy'='Balanced'
 					$begin 'Sweeps'
 						NextUniqueID=1
 						MoveBackwards=false
@@ -2547,11 +2556,11 @@ $begin 'AnsoftProject'
 							RangeType='LinearStep'
 							RangeStart='0.1GHz'
 							RangeEnd='70GHz'
-							RangeStep='0.5GHz'
+							RangeStep='0.1GHz'
 							Type='Interpolating'
 							SaveFields=false
 							SaveRadFields=false
-							InterpTolerance=0.5
+							InterpTolerance=0.1
 							InterpMaxSolns=250
 							InterpMinSolns=0
 							InterpMinSubranges=1
@@ -2582,6 +2591,9 @@ $begin 'AnsoftProject'
 					MinimumConvergedPasses=1
 					PercentRefinement=30
 					IsEnabled=true
+					$begin 'MeshLink'
+						ImportMesh=false
+					$end 'MeshLink'
 					BasisOrder=1
 					DoLambdaRefine=true
 					DoMaterialLambda=true
@@ -2600,6 +2612,7 @@ $begin 'AnsoftProject'
 					IESolverType='Auto'
 					LambdaTargetForIESolver=0.15
 					UseDefaultLambdaTgtForIESolver=true
+					'IE Solver Accuracy'='Balanced'
 					$begin 'Sweeps'
 						NextUniqueID=1
 						MoveBackwards=false
@@ -2644,36 +2657,36 @@ $begin 'AnsoftProject'
 			UseSpecifiedIncidentPower=false
 			SourceEntry(ID=35, Index=0, Terminal=false, Terminated=false, Magnitude='1V', Phase='0deg')
 			SourceEntry(ID=35, Index=1, Terminal=false, Terminated=false, Magnitude='1V', Phase='180deg')
-			SourceEntry(ID=35, Index=2, Terminal=false, Terminated=false, Magnitude='0V', Phase='0deg')
-			SourceEntry(ID=35, Index=3, Terminal=false, Terminated=false, Magnitude='0V', Phase='0deg')
-			SourceEntry(ID=35, Index=4, Terminal=false, Terminated=false, Magnitude='0V', Phase='0deg')
-			SourceEntry(ID=35, Index=5, Terminal=false, Terminated=false, Magnitude='0V', Phase='0deg')
-			SourceEntry(ID=35, Index=6, Terminal=false, Terminated=false, Magnitude='0V', Phase='0deg')
-			SourceEntry(ID=35, Index=7, Terminal=false, Terminated=false, Magnitude='0V', Phase='0deg')
+			SourceEntry(ID=35, Index=2, Terminal=false, Terminated=false, Magnitude='0', Phase='0deg')
+			SourceEntry(ID=35, Index=3, Terminal=false, Terminated=false, Magnitude='0', Phase='0deg')
+			SourceEntry(ID=35, Index=4, Terminal=false, Terminated=false, Magnitude='0', Phase='0deg')
+			SourceEntry(ID=35, Index=5, Terminal=false, Terminated=false, Magnitude='0', Phase='0deg')
+			SourceEntry(ID=35, Index=6, Terminal=false, Terminated=false, Magnitude='0', Phase='0deg')
+			SourceEntry(ID=35, Index=7, Terminal=false, Terminated=false, Magnitude='0', Phase='0deg')
 			SourceEntry(ID=35, Index=8, Terminal=false, Terminated=false, Magnitude='1V', Phase='180deg')
-			SourceEntry(ID=35, Index=9, Terminal=false, Terminated=false, Magnitude='0V', Phase='0deg')
-			SourceEntry(ID=35, Index=10, Terminal=false, Terminated=false, Magnitude='0V', Phase='0deg')
-			SourceEntry(ID=35, Index=11, Terminal=false, Terminated=false, Magnitude='0V', Phase='0deg')
-			SourceEntry(ID=35, Index=12, Terminal=false, Terminated=false, Magnitude='0V', Phase='0deg')
-			SourceEntry(ID=35, Index=13, Terminal=false, Terminated=false, Magnitude='0V', Phase='0deg')
-			SourceEntry(ID=35, Index=14, Terminal=false, Terminated=false, Magnitude='0V', Phase='0deg')
+			SourceEntry(ID=35, Index=9, Terminal=false, Terminated=false, Magnitude='0', Phase='0deg')
+			SourceEntry(ID=35, Index=10, Terminal=false, Terminated=false, Magnitude='0', Phase='0deg')
+			SourceEntry(ID=35, Index=11, Terminal=false, Terminated=false, Magnitude='0', Phase='0deg')
+			SourceEntry(ID=35, Index=12, Terminal=false, Terminated=false, Magnitude='0', Phase='0deg')
+			SourceEntry(ID=35, Index=13, Terminal=false, Terminated=false, Magnitude='0', Phase='0deg')
+			SourceEntry(ID=35, Index=14, Terminal=false, Terminated=false, Magnitude='0', Phase='0deg')
 			SourceEntry(ID=35, Index=15, Terminal=false, Terminated=false, Magnitude='1V', Phase='0deg')
-			SourceEntry(ID=52, Index=0, Terminal=false, Terminated=false, Magnitude='0V', Phase='0deg')
-			SourceEntry(ID=52, Index=1, Terminal=false, Terminated=false, Magnitude='0V', Phase='0deg')
-			SourceEntry(ID=52, Index=2, Terminal=false, Terminated=false, Magnitude='0V', Phase='0deg')
-			SourceEntry(ID=52, Index=3, Terminal=false, Terminated=false, Magnitude='0V', Phase='0deg')
-			SourceEntry(ID=52, Index=4, Terminal=false, Terminated=false, Magnitude='0V', Phase='0deg')
-			SourceEntry(ID=52, Index=5, Terminal=false, Terminated=false, Magnitude='0V', Phase='0deg')
-			SourceEntry(ID=52, Index=6, Terminal=false, Terminated=false, Magnitude='0V', Phase='0deg')
-			SourceEntry(ID=52, Index=7, Terminal=false, Terminated=false, Magnitude='0V', Phase='0deg')
-			SourceEntry(ID=52, Index=8, Terminal=false, Terminated=false, Magnitude='1V', Phase='180deg')
-			SourceEntry(ID=52, Index=9, Terminal=false, Terminated=false, Magnitude='0V', Phase='0deg')
-			SourceEntry(ID=52, Index=10, Terminal=false, Terminated=false, Magnitude='0V', Phase='0deg')
-			SourceEntry(ID=52, Index=11, Terminal=false, Terminated=false, Magnitude='0V', Phase='0deg')
-			SourceEntry(ID=52, Index=12, Terminal=false, Terminated=false, Magnitude='0V', Phase='0deg')
-			SourceEntry(ID=52, Index=13, Terminal=false, Terminated=false, Magnitude='0V', Phase='0deg')
-			SourceEntry(ID=52, Index=14, Terminal=false, Terminated=false, Magnitude='0V', Phase='0deg')
-			SourceEntry(ID=52, Index=15, Terminal=false, Terminated=false, Magnitude='1V', Phase='0deg')
+			SourceEntry(ID=52, Index=0, Terminal=false, Terminated=false, Magnitude='0', Phase='0deg')
+			SourceEntry(ID=52, Index=1, Terminal=false, Terminated=false, Magnitude='0', Phase='0deg')
+			SourceEntry(ID=52, Index=2, Terminal=false, Terminated=false, Magnitude='0', Phase='0deg')
+			SourceEntry(ID=52, Index=3, Terminal=false, Terminated=false, Magnitude='0', Phase='0deg')
+			SourceEntry(ID=52, Index=4, Terminal=false, Terminated=false, Magnitude='0', Phase='0deg')
+			SourceEntry(ID=52, Index=5, Terminal=false, Terminated=false, Magnitude='0', Phase='0deg')
+			SourceEntry(ID=52, Index=6, Terminal=false, Terminated=false, Magnitude='0', Phase='0deg')
+			SourceEntry(ID=52, Index=7, Terminal=false, Terminated=false, Magnitude='0', Phase='0deg')
+			SourceEntry(ID=52, Index=8, Terminal=false, Terminated=false, Magnitude='0', Phase='0deg')
+			SourceEntry(ID=52, Index=9, Terminal=false, Terminated=false, Magnitude='0', Phase='0deg')
+			SourceEntry(ID=52, Index=10, Terminal=false, Terminated=false, Magnitude='0', Phase='0deg')
+			SourceEntry(ID=52, Index=11, Terminal=false, Terminated=false, Magnitude='0', Phase='0deg')
+			SourceEntry(ID=52, Index=12, Terminal=false, Terminated=false, Magnitude='0', Phase='0deg')
+			SourceEntry(ID=52, Index=13, Terminal=false, Terminated=false, Magnitude='0', Phase='0deg')
+			SourceEntry(ID=52, Index=14, Terminal=false, Terminated=false, Magnitude='0', Phase='0deg')
+			SourceEntry(ID=52, Index=15, Terminal=false, Terminated=false, Magnitude='0', Phase='0deg')
 			SourceEntry(ID=35, Index=0, Terminal=true, Terminated=false, Resistance='50ohm', Reactance='0')
 			SourceEntry(ID=35, Index=1, Terminal=true, Terminated=false, Resistance='50ohm', Reactance='0')
 			SourceEntry(ID=35, Index=2, Terminal=true, Terminated=true, Resistance='50ohm', Reactance='0')
@@ -2746,11 +2759,11 @@ $begin 'AnsoftProject'
 					$begin 'Scale3DSettings'
 						unit=154
 						m_nLevels=15
-						minvalue=1.43760016726446e-05
-						maxvalue=12927.400390625
+						minvalue=1.42612223340895e-05
+						maxvalue=12927.4023810813
 						log=true
-						IntrinsicMin=1.43760016726446e-05
-						IntrinsicMax=12927.400390625
+						IntrinsicMin=1.42612223340895e-05
+						IntrinsicMax=12927.4023810813
 						LimitFieldValuePrecision=false
 						FieldValuePrecisionDigits=4
 						dB=false
@@ -2777,8 +2790,8 @@ $begin 'AnsoftProject'
 						ArrowMaxMagnitude=9483.67
 						ArrowMagnitudeThreshold=0
 						ArrowMagnitudeFilteringFlag=false
-						ArrowMinIntrinsicMagnitude=-0.499985623998327
-						ArrowMaxIntrinsicMagnitude=12927.900390625
+						ArrowMinIntrinsicMagnitude=-0.499985738777666
+						ArrowMaxIntrinsicMagnitude=12927.9023810813
 					$end 'Arrow3DSettings'
 					$begin 'DeformScaleSettings'
 						ShowDeformation=true
@@ -2793,7 +2806,7 @@ $begin 'AnsoftProject'
 					PlotDefinitionType='Mesh_field_type'
 					PlotName='Vector_E1'
 					PlotDefinitionId=2
-					VersionID=74
+					VersionID=108
 					SolutionId=42
 					UserSpecifyName=0
 					UserSpecifyFolder=0
@@ -2822,12 +2835,13 @@ $begin 'AnsoftProject'
 						$end 'Arrow3DSpacingSettings'
 						GridColor(255, 255, 255)
 					$end 'PlotOnSurfaceSettings'
+					EnableGaussianSmoothing=false
 				$end 'PlotDefinition_1'
 				$begin 'PlotDefinition_2'
 					PlotDefinitionType='Mesh_field_type'
 					PlotName='Vector_E2'
 					PlotDefinitionId=4
-					VersionID=62
+					VersionID=96
 					SolutionId=42
 					UserSpecifyName=0
 					UserSpecifyFolder=0
@@ -2856,6 +2870,7 @@ $begin 'AnsoftProject'
 						$end 'Arrow3DSpacingSettings'
 						GridColor(255, 255, 255)
 					$end 'PlotOnSurfaceSettings'
+					EnableGaussianSmoothing=false
 				$end 'PlotDefinition_2'
 			$end 'FieldsPlotManagerID'
 			$begin 'Report3dInGeomWnd'
@@ -2973,8 +2988,8 @@ $begin 'AnsoftProject'
 					ID=42
 					Name='LastAdaptive'
 					$begin 'SimDataExtractor'
-						SimValue('Vector_E', 1, 154, false, SimValueID=1708, 3, 0, 2, 0, false, false, 1339, 1, 0, 1, 1, '', 0, 0)
-						SimValue('Vector_E', 1, 154, false, SimValueID=2442, 3, 0, 2, 0, false, false, 1343, 1, 0, 1, 1, '', 0, 0)
+						SimValue('Vector_E', 1, 154, false, SimValueID=2970, 3, 0, 2, 0, false, false, 1339, 1, 0, 1, 1, '', 0, 0)
+						SimValue('Vector_E', 1, 154, false, SimValueID=2971, 3, 0, 2, 0, false, false, 1343, 1, 0, 1, 1, '', 0, 0)
 						$begin 'Sweeps'
 							$begin 'Sweep'
 								Variable='Freq'
@@ -3075,47 +3090,46 @@ $begin 'AnsoftProject'
 					ID=49
 					Name='Sweep'
 					$begin 'SimDataExtractor'
-						SimValue('St(trace_n_0_T1,trace_n_0_T1)', 2, 90, false, SimValueID=1716, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_n_1_T1,trace_n_1_T1)', 2, 90, false, SimValueID=1717, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_n_2_T1,trace_n_2_T1)', 2, 90, false, SimValueID=1718, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_n_3_T1,trace_n_3_T1)', 2, 90, false, SimValueID=1719, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_n_4_T1,trace_n_4_T1)', 2, 90, false, SimValueID=1720, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_n_5_T1,trace_n_5_T1)', 2, 90, false, SimValueID=1721, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_n_6_T1,trace_n_6_T1)', 2, 90, false, SimValueID=1722, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_n_7_T1,trace_n_7_T1)', 2, 90, false, SimValueID=1723, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_p_0_T1,trace_p_0_T1)', 2, 90, false, SimValueID=1724, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_p_1_T1,trace_p_1_T1)', 2, 90, false, SimValueID=1725, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_p_2_T1,trace_p_2_T1)', 2, 90, false, SimValueID=1726, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_p_3_T1,trace_p_3_T1)', 2, 90, false, SimValueID=1727, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_p_4_T1,trace_p_4_T1)', 2, 90, false, SimValueID=1728, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_p_5_T1,trace_p_5_T1)', 2, 90, false, SimValueID=1729, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_p_6_T1,trace_p_6_T1)', 2, 90, false, SimValueID=1730, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_p_7_T1,trace_p_7_T1)', 2, 90, false, SimValueID=1731, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_n_0_T2,trace_n_0_T2)', 2, 90, false, SimValueID=1733, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_n_1_T2,trace_n_1_T2)', 2, 90, false, SimValueID=1734, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_n_2_T2,trace_n_2_T2)', 2, 90, false, SimValueID=1735, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_n_3_T2,trace_n_3_T2)', 2, 90, false, SimValueID=1736, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_n_4_T2,trace_n_4_T2)', 2, 90, false, SimValueID=1737, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_n_5_T2,trace_n_5_T2)', 2, 90, false, SimValueID=1738, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_n_6_T2,trace_n_6_T2)', 2, 90, false, SimValueID=1739, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_n_7_T2,trace_n_7_T2)', 2, 90, false, SimValueID=1740, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_p_0_T2,trace_p_0_T2)', 2, 90, false, SimValueID=1741, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_p_1_T2,trace_p_1_T2)', 2, 90, false, SimValueID=1742, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_p_2_T2,trace_p_2_T2)', 2, 90, false, SimValueID=1743, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_p_3_T2,trace_p_3_T2)', 2, 90, false, SimValueID=1744, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_p_4_T2,trace_p_4_T2)', 2, 90, false, SimValueID=1745, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_p_5_T2,trace_p_5_T2)', 2, 90, false, SimValueID=1746, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_p_6_T2,trace_p_6_T2)', 2, 90, false, SimValueID=1747, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_p_7_T2,trace_p_7_T2)', 2, 90, false, SimValueID=1748, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_n_0_T1,trace_n_0_T1)', 2, 90, false, SimValueID=2007, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0)
+						SimValue('St(trace_n_0_T1,trace_n_0_T1)', 2, 90, false, SimValueID=2972, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_1_T1,trace_n_1_T1)', 2, 90, false, SimValueID=2973, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_2_T1,trace_n_2_T1)', 2, 90, false, SimValueID=2974, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_3_T1,trace_n_3_T1)', 2, 90, false, SimValueID=2975, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_4_T1,trace_n_4_T1)', 2, 90, false, SimValueID=2976, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_5_T1,trace_n_5_T1)', 2, 90, false, SimValueID=2977, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_6_T1,trace_n_6_T1)', 2, 90, false, SimValueID=2978, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_7_T1,trace_n_7_T1)', 2, 90, false, SimValueID=2979, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_0_T1,trace_p_0_T1)', 2, 90, false, SimValueID=2980, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_1_T1,trace_p_1_T1)', 2, 90, false, SimValueID=2981, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_2_T1,trace_p_2_T1)', 2, 90, false, SimValueID=2982, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_3_T1,trace_p_3_T1)', 2, 90, false, SimValueID=2983, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_4_T1,trace_p_4_T1)', 2, 90, false, SimValueID=2984, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_5_T1,trace_p_5_T1)', 2, 90, false, SimValueID=2985, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_6_T1,trace_p_6_T1)', 2, 90, false, SimValueID=2986, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_7_T1,trace_p_7_T1)', 2, 90, false, SimValueID=2987, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_0_T2,trace_n_0_T2)', 2, 90, false, SimValueID=2988, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_1_T2,trace_n_1_T2)', 2, 90, false, SimValueID=2989, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_2_T2,trace_n_2_T2)', 2, 90, false, SimValueID=2990, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_3_T2,trace_n_3_T2)', 2, 90, false, SimValueID=2991, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_4_T2,trace_n_4_T2)', 2, 90, false, SimValueID=2992, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_5_T2,trace_n_5_T2)', 2, 90, false, SimValueID=2993, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_6_T2,trace_n_6_T2)', 2, 90, false, SimValueID=2994, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_7_T2,trace_n_7_T2)', 2, 90, false, SimValueID=2995, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_0_T2,trace_p_0_T2)', 2, 90, false, SimValueID=2996, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_1_T2,trace_p_1_T2)', 2, 90, false, SimValueID=2997, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_2_T2,trace_p_2_T2)', 2, 90, false, SimValueID=2998, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_3_T2,trace_p_3_T2)', 2, 90, false, SimValueID=2999, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_4_T2,trace_p_4_T2)', 2, 90, false, SimValueID=3000, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_5_T2,trace_p_5_T2)', 2, 90, false, SimValueID=3001, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_6_T2,trace_p_6_T2)', 2, 90, false, SimValueID=3002, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_7_T2,trace_p_7_T2)', 2, 90, false, SimValueID=3003, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
 						$begin 'Sweeps'
 							$begin 'PostprocessSweep'
 								Variable='Freq'
-								Column='0.1GHz;0.6GHz;1.1GHz;1.6GHz;2.1GHz;2.6GHz;3.1GHz;3.6GHz;4.1GHz;4.6GHz;5.1GHz;5.6GHz;6.1GHz;6.6GHz;7.1GHz;7.6GHz;8.1GHz;8.6GHz;9.1GHz;9.6GHz;10.1GHz;10.6GHz;11.1GHz;11.6GHz;12.1GHz;12.6GHz;13.1GHz;13.6GHz;14.1GHz;14.6GHz;15.1GHz;15.6GHz;16.1GHz;16.6GHz;17.1GHz;17.6GHz;18.1GHz;18.6GHz;19.1GHz;19.6GHz;20.1GHz;20.6GHz;21.1GHz;21.6GHz;22.1GHz;22.6GHz;23.1GHz;23.6GHz;24.1GHz;24.6GHz;25.1GHz;25.6GHz;26.1GHz;26.6GHz;27.1GHz;27.6GHz;28.1GHz;28.6GHz;29.1GHz;29.6GHz;30.1GHz;30.6GHz;31.1GHz;31.6GHz;32.1GHz;32.6GHz;33.1GHz;33.6GHz;34.1GHz;34.6GHz;35.1GHz;35.6GHz;36.1GHz;36.6GHz;37.1GHz;37.6GHz;38.1GHz;38.6GHz;39.1GHz;39.6GHz;40.1GHz;40.6GHz;41.1GHz;41.6GHz;42.1GHz;42.6GHz;43.1GHz;43.6GHz;44.1GHz;44.6GHz;45.1GHz;45.6GHz;46.1GHz;46.6GHz;47.1GHz;47.6GHz;48.1GHz;48.6GHz;49.1GHz;49.6GHz;50.1GHz;50.6GHz;51.1GHz;51.6GHz;52.1GHz;52.6GHz;53.1GHz;53.6GHz;54.1GHz;54.6GHz;55.1GHz;55.6GHz;56.1GHz;56.6GHz;57.1GHz;57.6GHz;58.1GHz;58.6GHz;59.1GHz;59.6GHz;60.1GHz;60.6GHz;61.1GHz;61.6GHz;62.1GHz;62.6GHz;63.1GHz;63.6GHz;64.1GHz;64.6GHz;65.1GHz;65.6GHz;66.1GHz;66.6GHz;67.1GHz;67.6GHz;68.1GHz;68.6GHz;69.1GHz;69.6GHz'
+								Column='0.1GHz;0.2GHz;0.3GHz;0.4GHz;0.5GHz;0.6GHz;0.7GHz;0.8GHz;0.9GHz;1GHz;1.1GHz;1.2GHz;1.3GHz;1.4GHz;1.5GHz;1.6GHz;1.7GHz;1.8GHz;1.9GHz;2GHz;2.1GHz;2.2GHz;2.3GHz;2.4GHz;2.5GHz;2.6GHz;2.7GHz;2.8GHz;2.9GHz;3GHz;3.1GHz;3.2GHz;3.3GHz;3.4GHz;3.5GHz;3.6GHz;3.7GHz;3.8GHz;3.9GHz;4GHz;4.1GHz;4.2GHz;4.3GHz;4.4GHz;4.5GHz;4.6GHz;4.7GHz;4.8GHz;4.9GHz;5GHz;5.1GHz;5.2GHz;5.3GHz;5.4GHz;5.5GHz;5.6GHz;5.7GHz;5.8GHz;5.9GHz;6GHz;6.1GHz;6.2GHz;6.3GHz;6.4GHz;6.5GHz;6.6GHz;6.7GHz;6.8GHz;6.9GHz;7GHz;7.1GHz;7.2GHz;7.3GHz;7.4GHz;7.5GHz;7.6GHz;7.7GHz;7.8GHz;7.9GHz;8GHz;8.1GHz;8.2GHz;8.3GHz;8.4GHz;8.5GHz;8.6GHz;8.7GHz;8.8GHz;8.9GHz;9GHz;9.1GHz;9.2GHz;9.3GHz;9.4GHz;9.5GHz;9.6GHz;9.7GHz;9.8GHz;9.9GHz;10GHz;10.1GHz;10.2GHz;10.3GHz;10.4GHz;10.5GHz;10.6GHz;10.7GHz;10.8GHz;10.9GHz;11GHz;11.1GHz;11.2GHz;11.3GHz;11.4GHz;11.5GHz;11.6GHz;11.7GHz;11.8GHz;11.9GHz;12GHz;12.1GHz;12.2GHz;12.3GHz;12.4GHz;12.5GHz;12.6GHz;12.7GHz;12.8GHz;12.9GHz;13GHz;13.1GHz;13.2GHz;13.3GHz;13.4GHz;13.5GHz;13.6GHz;13.7GHz;13.8GHz;13.9GHz;14GHz;14.1GHz;14.2GHz;14.3GHz;14.4GHz;14.5GHz;14.6GHz;14.7GHz;14.8GHz;14.9GHz;15GHz;15.1GHz;15.2GHz;15.3GHz;15.4GHz;15.5GHz;15.6GHz;15.7GHz;15.8GHz;15.9GHz;16GHz;16.1GHz;16.2GHz;16.3GHz;16.4GHz;16.5GHz;16.6GHz;16.7GHz;16.8GHz;16.9GHz;17GHz;17.1GHz;17.2GHz;17.3GHz;17.4GHz;17.5GHz;17.6GHz;17.7GHz;17.8GHz;17.9GHz;18GHz;18.1GHz;18.2GHz;18.3GHz;18.4GHz;18.5GHz;18.6GHz;18.7GHz;18.8GHz;18.9GHz;19GHz;19.1GHz;19.2GHz;19.3GHz;19.4GHz;19.5GHz;19.6GHz;19.7GHz;19.8GHz;19.9GHz;20GHz;20.1GHz;20.2GHz;20.3GHz;20.4GHz;20.5GHz;20.6GHz;20.7GHz;20.8GHz;20.9GHz;21GHz;21.1GHz;21.2GHz;21.3GHz;21.4GHz;21.5GHz;21.6GHz;21.7GHz;21.8GHz;21.9GHz;22GHz;22.1GHz;22.2GHz;22.3GHz;22.4GHz;22.5GHz;22.6GHz;22.7GHz;22.8GHz;22.9GHz;23GHz;23.1GHz;23.2GHz;23.3GHz;23.4GHz;23.5GHz;23.6GHz;23.7GHz;23.8GHz;23.9GHz;24GHz;24.1GHz;24.2GHz;24.3GHz;24.4GHz;24.5GHz;24.6GHz;24.7GHz;24.8GHz;24.9GHz;25GHz;25.1GHz;25.2GHz;25.3GHz;25.4GHz;25.5GHz;25.6GHz;25.7GHz;25.8GHz;25.9GHz;26GHz;26.1GHz;26.2GHz;26.3GHz;26.4GHz;26.5GHz;26.6GHz;26.7GHz;26.8GHz;26.9GHz;27GHz;27.1GHz;27.2GHz;27.3GHz;27.4GHz;27.5GHz;27.6GHz;27.7GHz;27.8GHz;27.9GHz;28GHz;28.1GHz;28.2GHz;28.3GHz;28.4GHz;28.5GHz;28.6GHz;28.7GHz;28.8GHz;28.9GHz;29GHz;29.1GHz;29.2GHz;29.3GHz;29.4GHz;29.5GHz;29.6GHz;29.7GHz;29.8GHz;29.9GHz;30GHz;30.1GHz;30.2GHz;30.3GHz;30.4GHz;30.5GHz;30.6GHz;30.7GHz;30.8GHz;30.9GHz;31GHz;31.1GHz;31.2GHz;31.3GHz;31.4GHz;31.5GHz;31.6GHz;31.7GHz;31.8GHz;31.9GHz;32GHz;32.1GHz;32.2GHz;32.3GHz;32.4GHz;32.5GHz;32.6GHz;32.7GHz;32.8GHz;32.9GHz;33GHz;33.1GHz;33.2GHz;33.3GHz;33.4GHz;33.5GHz;33.6GHz;33.7GHz;33.8GHz;33.9GHz;34GHz;34.1GHz;34.2GHz;34.3GHz;34.4GHz;34.5GHz;34.6GHz;34.7GHz;34.8GHz;34.9GHz;35GHz;35.1GHz;35.2GHz;35.3GHz;35.4GHz;35.5GHz;35.6GHz;35.7GHz;35.8GHz;35.9GHz;36GHz;36.1GHz;36.2GHz;36.3GHz;36.4GHz;36.5GHz;36.6GHz;36.7GHz;36.8GHz;36.9GHz;37GHz;37.1GHz;37.2GHz;37.3GHz;37.4GHz;37.5GHz;37.6GHz;37.7GHz;37.8GHz;37.9GHz;38GHz;38.1GHz;38.2GHz;38.3GHz;38.4GHz;38.5GHz;38.6GHz;38.7GHz;38.8GHz;38.9GHz;39GHz;39.1GHz;39.2GHz;39.3GHz;39.4GHz;39.5GHz;39.6GHz;39.7GHz;39.8GHz;39.9GHz;40GHz;40.1GHz;40.2GHz;40.3GHz;40.4GHz;40.5GHz;40.6GHz;40.7GHz;40.8GHz;40.9GHz;41GHz;41.1GHz;41.2GHz;41.3GHz;41.4GHz;41.5GHz;41.6GHz;41.7GHz;41.8GHz;41.9GHz;42GHz;42.1GHz;42.2GHz;42.3GHz;42.4GHz;42.5GHz;42.6GHz;42.7GHz;42.8GHz;42.9GHz;43GHz;43.1GHz;43.2GHz;43.3GHz;43.4GHz;43.5GHz;43.6GHz;43.7GHz;43.8GHz;43.9GHz;44GHz;44.1GHz;44.2GHz;44.3GHz;44.4GHz;44.5GHz;44.6GHz;44.7GHz;44.8GHz;44.9GHz;45GHz;45.1GHz;45.2GHz;45.3GHz;45.4GHz;45.5GHz;45.6GHz;45.7GHz;45.8GHz;45.9GHz;46GHz;46.1GHz;46.2GHz;46.3GHz;46.4GHz;46.5GHz;46.6GHz;46.7GHz;46.8GHz;46.9GHz;47GHz;47.1GHz;47.2GHz;47.3GHz;47.4GHz;47.5GHz;47.6GHz;47.7GHz;47.8GHz;47.9GHz;48GHz;48.1GHz;48.2GHz;48.3GHz;48.4GHz;48.5GHz;48.6GHz;48.7GHz;48.8GHz;48.9GHz;49GHz;49.1GHz;49.2GHz;49.3GHz;49.4GHz;49.5GHz;49.6GHz;49.7GHz;49.8GHz;49.9GHz;50GHz;50.1GHz;50.2GHz;50.3GHz;50.4GHz;50.5GHz;50.6GHz;50.7GHz;50.8GHz;50.9GHz;51GHz;51.1GHz;51.2GHz;51.3GHz;51.4GHz;51.5GHz;51.6GHz;51.7GHz;51.8GHz;51.9GHz;52GHz;52.1GHz;52.2GHz;52.3GHz;52.4GHz;52.5GHz;52.6GHz;52.7GHz;52.8GHz;52.9GHz;53GHz;53.1GHz;53.2GHz;53.3GHz;53.4GHz;53.5GHz;53.6GHz;53.7GHz;53.8GHz;53.9GHz;54GHz;54.1GHz;54.2GHz;54.3GHz;54.4GHz;54.5GHz;54.6GHz;54.7GHz;54.8GHz;54.9GHz;55GHz;55.1GHz;55.2GHz;55.3GHz;55.4GHz;55.5GHz;55.6GHz;55.7GHz;55.8GHz;55.9GHz;56GHz;56.1GHz;56.2GHz;56.3GHz;56.4GHz;56.5GHz;56.6GHz;56.7GHz;56.8GHz;56.9GHz;57GHz;57.1GHz;57.2GHz;57.3GHz;57.4GHz;57.5GHz;57.6GHz;57.7GHz;57.8GHz;57.9GHz;58GHz;58.1GHz;58.2GHz;58.3GHz;58.4GHz;58.5GHz;58.6GHz;58.7GHz;58.8GHz;58.9GHz;59GHz;59.1GHz;59.2GHz;59.3GHz;59.4GHz;59.5GHz;59.6GHz;59.7GHz;59.8GHz;59.9GHz;60GHz;60.1GHz;60.2GHz;60.3GHz;60.4GHz;60.5GHz;60.6GHz;60.7GHz;60.8GHz;60.9GHz;61GHz;61.1GHz;61.2GHz;61.3GHz;61.4GHz;61.5GHz;61.6GHz;61.7GHz;61.8GHz;61.9GHz;62GHz;62.1GHz;62.2GHz;62.3GHz;62.4GHz;62.5GHz;62.6GHz;62.7GHz;62.8GHz;62.9GHz;63GHz;63.1GHz;63.2GHz;63.3GHz;63.4GHz;63.5GHz;63.6GHz;63.7GHz;63.8GHz;63.9GHz;64GHz;64.1GHz;64.2GHz;64.3GHz;64.4GHz;64.5GHz;64.6GHz;64.7GHz;64.8GHz;64.9GHz;65GHz;65.1GHz;65.2GHz;65.3GHz;65.4GHz;65.5GHz;65.6GHz;65.7GHz;65.8GHz;65.9GHz;66GHz;66.1GHz;66.2GHz;66.3GHz;66.4GHz;66.5GHz;66.6GHz;66.7GHz;66.8GHz;66.9GHz;67GHz;67.1GHz;67.2GHz;67.3GHz;67.4GHz;67.5GHz;67.6GHz;67.7GHz;67.8GHz;67.9GHz;68GHz;68.1GHz;68.2GHz;68.3GHz;68.4GHz;68.5GHz;68.6GHz;68.7GHz;68.8GHz;68.9GHz;69GHz;69.1GHz;69.2GHz;69.3GHz;69.4GHz;69.5GHz;69.6GHz;69.7GHz;69.8GHz;69.9GHz;70GHz'
 								Units='GHz'
 								Minimum=100000000
-								Maximum=69600000000
-								Increment=69600000000
+								Maximum=70000000000
+								Increment=70000000000
 								CreateIndexedSubsweepFlag=false
 							$end 'PostprocessSweep'
 							$begin 'PostprocessSweep'
@@ -3308,12 +3322,12 @@ $begin 'AnsoftProject'
 							$end 'Sweep'
 							$begin 'Sweep'
 								Variable='sub_res'
-								Column='293.8mil'
+								Column='293.8mil;293.8mil'
 								Units='mil'
 							$end 'Sweep'
 							$begin 'Sweep'
 								Variable='sub_width'
-								Column='881.4mil'
+								Column='881.4mil;881.4mil'
 								Units='mil'
 							$end 'Sweep'
 						$end 'Sweeps'
@@ -3403,7 +3417,7 @@ $begin 'AnsoftProject'
 				DesignInstanceID=1
 				$begin 'WindowPosition'
 					$begin 'EditorWindow'
-						Circuit(Editor3d(View(WindowPos(3, -1, -1, -13, -58, 0, 0, 1735, 755), OrientationMatrix(-0.00377569440752268, -0.00125856581144035, 0.0035597572568804, 0, 0.00377569440752268, -0.00125856464728713, 0.00355975679121912, 0, 8.69032179551255e-10, 0.00503425998613238, 0.00177987990900874, 0, 0.535771250724792, -0.136050775647163, -7.16287803649902, 1, 0, -2.365562915802, 2.365562915802, -1, 1, -5.39678573608398, 18.4097061157227), Drawings[21: 'trace_p_0', 'trace_n_0', 'trace_n_1', 'trace_n_2', 'trace_n_3', 'trace_n_4', 'trace_n_5', 'trace_n_6', 'trace_n_7', 'trace_p_1', 'trace_p_2', 'trace_p_3', 'trace_p_4', 'trace_p_5', 'trace_p_6', 'trace_p_7', 'substrate', 'GND', 'AirBox', 'Port1', 'Port2'], 'View Data'('Render Mode'=1, 'Show Ruler'=1, 'Coordinate Systems View Mode'=0, 'CS Triad View Mode'=0, 'Render Facets'=1, GridVisible=1, GridAutoAdjust=1, GridAutoExtents=1, GridType='Rect', GridStyle='Line', NumPixels=30, dXForGrid=10, dYForGrid=10, dZForGrid=10, dRForGrid=10, dThetaForGrid=10), ClipPlanes(ClipPlaneOptions(DisableWhenDrawingNewPlane=true, ForceOpqaueForUnclipped=false, ShowClipped=false, Transparency=0, HandleColor=16776960)))))
+						Circuit(Editor3d(View(WindowPos(5, -1, -1, -13, -58, 0, 0, 1735, 755), OrientationMatrix(-0.00338994897902012, -0.00112998229451478, 0.00319607369601727, 0, 0.00338994921185076, -0.00112998252734542, 0.00319607416167855, 0, -3.53773815797709e-11, 0.00451993057504296, 0.00159803673159331, 0, 0.481033533811569, -0.122151225805283, -6.92147445678711, 1, 0, -2.22499966621399, 2.22499966621399, -1, 1, -4.3550271987915, 17.0192642211914), Drawings[21: 'trace_p_0', 'trace_n_0', 'trace_n_1', 'trace_n_2', 'trace_n_3', 'trace_n_4', 'trace_n_5', 'trace_n_6', 'trace_n_7', 'trace_p_1', 'trace_p_2', 'trace_p_3', 'trace_p_4', 'trace_p_5', 'trace_p_6', 'trace_p_7', 'substrate', 'GND', 'AirBox', 'Port1', 'Port2'], 'View Data'('Render Mode'=1, 'Show Ruler'=1, 'Coordinate Systems View Mode'=0, 'CS Triad View Mode'=0, 'Render Facets'=1, GridVisible=1, GridAutoAdjust=1, GridAutoExtents=1, GridType='Rect', GridStyle='Line', NumPixels=30, dXForGrid=20, dYForGrid=20, dZForGrid=20, dRForGrid=20, dThetaForGrid=10), ClipPlanes(ClipPlaneOptions(DisableWhenDrawingNewPlane=true, ForceOpqaueForUnclipped=false, ShowClipped=false, Transparency=0, HandleColor=16776960)))))
 					$end 'EditorWindow'
 				$end 'WindowPosition'
 				$begin 'ReportSetup'
@@ -3425,7 +3439,7 @@ $begin 'AnsoftProject'
 										$end 'DESIGN_SOLUTION_SIM_VALUE_CONTEXT'
 									$end 'DesignSolnDefn'
 									ID=0
-									VersionID=794
+									VersionID=858
 									Name='dB(St(trace_n_0_T1,trace_n_0_T1))'
 									TieNameToExpr=true
 									$begin 'Components'
@@ -3465,41 +3479,57 @@ $begin 'AnsoftProject'
 												SubsweepType='Specifiable'
 												SubsweepChoiceType='All'
 												SweepVariableName='Freq'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '0'
 											$begin '1'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='H'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '1'
 											$begin '2'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='W'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '2'
 											$begin '3'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='S'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '3'
 											$begin '4'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='T'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '4'
 											$begin '5'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='LL'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '5'
 											$begin '6'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='ss_coef'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '6'
 											$begin '7'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='num_of_pairs'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '7'
 										$end 'SubsweepDefParamsContainer'
 										FamilyBlock()
@@ -3519,7 +3549,7 @@ $begin 'AnsoftProject'
 										$end 'DESIGN_SOLUTION_SIM_VALUE_CONTEXT'
 									$end 'DesignSolnDefn'
 									ID=1
-									VersionID=795
+									VersionID=859
 									Name='dB(St(trace_n_1_T1,trace_n_1_T1))'
 									TieNameToExpr=true
 									$begin 'Components'
@@ -3559,41 +3589,57 @@ $begin 'AnsoftProject'
 												SubsweepType='Specifiable'
 												SubsweepChoiceType='All'
 												SweepVariableName='Freq'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '0'
 											$begin '1'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='H'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '1'
 											$begin '2'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='W'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '2'
 											$begin '3'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='S'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '3'
 											$begin '4'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='T'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '4'
 											$begin '5'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='LL'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '5'
 											$begin '6'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='ss_coef'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '6'
 											$begin '7'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='num_of_pairs'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '7'
 										$end 'SubsweepDefParamsContainer'
 										FamilyBlock()
@@ -3613,7 +3659,7 @@ $begin 'AnsoftProject'
 										$end 'DESIGN_SOLUTION_SIM_VALUE_CONTEXT'
 									$end 'DesignSolnDefn'
 									ID=2
-									VersionID=796
+									VersionID=860
 									Name='dB(St(trace_n_2_T1,trace_n_2_T1))'
 									TieNameToExpr=true
 									$begin 'Components'
@@ -3653,41 +3699,57 @@ $begin 'AnsoftProject'
 												SubsweepType='Specifiable'
 												SubsweepChoiceType='All'
 												SweepVariableName='Freq'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '0'
 											$begin '1'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='H'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '1'
 											$begin '2'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='W'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '2'
 											$begin '3'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='S'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '3'
 											$begin '4'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='T'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '4'
 											$begin '5'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='LL'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '5'
 											$begin '6'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='ss_coef'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '6'
 											$begin '7'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='num_of_pairs'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '7'
 										$end 'SubsweepDefParamsContainer'
 										FamilyBlock()
@@ -3707,7 +3769,7 @@ $begin 'AnsoftProject'
 										$end 'DESIGN_SOLUTION_SIM_VALUE_CONTEXT'
 									$end 'DesignSolnDefn'
 									ID=3
-									VersionID=797
+									VersionID=861
 									Name='dB(St(trace_n_3_T1,trace_n_3_T1))'
 									TieNameToExpr=true
 									$begin 'Components'
@@ -3747,41 +3809,57 @@ $begin 'AnsoftProject'
 												SubsweepType='Specifiable'
 												SubsweepChoiceType='All'
 												SweepVariableName='Freq'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '0'
 											$begin '1'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='H'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '1'
 											$begin '2'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='W'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '2'
 											$begin '3'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='S'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '3'
 											$begin '4'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='T'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '4'
 											$begin '5'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='LL'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '5'
 											$begin '6'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='ss_coef'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '6'
 											$begin '7'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='num_of_pairs'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '7'
 										$end 'SubsweepDefParamsContainer'
 										FamilyBlock()
@@ -3801,7 +3879,7 @@ $begin 'AnsoftProject'
 										$end 'DESIGN_SOLUTION_SIM_VALUE_CONTEXT'
 									$end 'DesignSolnDefn'
 									ID=4
-									VersionID=798
+									VersionID=862
 									Name='dB(St(trace_n_4_T1,trace_n_4_T1))'
 									TieNameToExpr=true
 									$begin 'Components'
@@ -3841,41 +3919,57 @@ $begin 'AnsoftProject'
 												SubsweepType='Specifiable'
 												SubsweepChoiceType='All'
 												SweepVariableName='Freq'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '0'
 											$begin '1'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='H'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '1'
 											$begin '2'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='W'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '2'
 											$begin '3'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='S'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '3'
 											$begin '4'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='T'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '4'
 											$begin '5'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='LL'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '5'
 											$begin '6'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='ss_coef'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '6'
 											$begin '7'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='num_of_pairs'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '7'
 										$end 'SubsweepDefParamsContainer'
 										FamilyBlock()
@@ -3895,7 +3989,7 @@ $begin 'AnsoftProject'
 										$end 'DESIGN_SOLUTION_SIM_VALUE_CONTEXT'
 									$end 'DesignSolnDefn'
 									ID=5
-									VersionID=799
+									VersionID=863
 									Name='dB(St(trace_n_5_T1,trace_n_5_T1))'
 									TieNameToExpr=true
 									$begin 'Components'
@@ -3935,41 +4029,57 @@ $begin 'AnsoftProject'
 												SubsweepType='Specifiable'
 												SubsweepChoiceType='All'
 												SweepVariableName='Freq'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '0'
 											$begin '1'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='H'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '1'
 											$begin '2'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='W'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '2'
 											$begin '3'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='S'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '3'
 											$begin '4'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='T'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '4'
 											$begin '5'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='LL'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '5'
 											$begin '6'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='ss_coef'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '6'
 											$begin '7'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='num_of_pairs'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '7'
 										$end 'SubsweepDefParamsContainer'
 										FamilyBlock()
@@ -3989,7 +4099,7 @@ $begin 'AnsoftProject'
 										$end 'DESIGN_SOLUTION_SIM_VALUE_CONTEXT'
 									$end 'DesignSolnDefn'
 									ID=6
-									VersionID=800
+									VersionID=864
 									Name='dB(St(trace_n_6_T1,trace_n_6_T1))'
 									TieNameToExpr=true
 									$begin 'Components'
@@ -4029,41 +4139,57 @@ $begin 'AnsoftProject'
 												SubsweepType='Specifiable'
 												SubsweepChoiceType='All'
 												SweepVariableName='Freq'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '0'
 											$begin '1'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='H'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '1'
 											$begin '2'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='W'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '2'
 											$begin '3'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='S'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '3'
 											$begin '4'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='T'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '4'
 											$begin '5'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='LL'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '5'
 											$begin '6'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='ss_coef'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '6'
 											$begin '7'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='num_of_pairs'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '7'
 										$end 'SubsweepDefParamsContainer'
 										FamilyBlock()
@@ -4083,7 +4209,7 @@ $begin 'AnsoftProject'
 										$end 'DESIGN_SOLUTION_SIM_VALUE_CONTEXT'
 									$end 'DesignSolnDefn'
 									ID=7
-									VersionID=801
+									VersionID=865
 									Name='dB(St(trace_n_7_T1,trace_n_7_T1))'
 									TieNameToExpr=true
 									$begin 'Components'
@@ -4123,41 +4249,57 @@ $begin 'AnsoftProject'
 												SubsweepType='Specifiable'
 												SubsweepChoiceType='All'
 												SweepVariableName='Freq'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '0'
 											$begin '1'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='H'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '1'
 											$begin '2'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='W'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '2'
 											$begin '3'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='S'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '3'
 											$begin '4'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='T'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '4'
 											$begin '5'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='LL'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '5'
 											$begin '6'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='ss_coef'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '6'
 											$begin '7'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='num_of_pairs'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '7'
 										$end 'SubsweepDefParamsContainer'
 										FamilyBlock()
@@ -4177,7 +4319,7 @@ $begin 'AnsoftProject'
 										$end 'DESIGN_SOLUTION_SIM_VALUE_CONTEXT'
 									$end 'DesignSolnDefn'
 									ID=8
-									VersionID=802
+									VersionID=866
 									Name='dB(St(trace_p_0_T1,trace_p_0_T1))'
 									TieNameToExpr=true
 									$begin 'Components'
@@ -4217,41 +4359,57 @@ $begin 'AnsoftProject'
 												SubsweepType='Specifiable'
 												SubsweepChoiceType='All'
 												SweepVariableName='Freq'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '0'
 											$begin '1'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='H'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '1'
 											$begin '2'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='W'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '2'
 											$begin '3'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='S'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '3'
 											$begin '4'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='T'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '4'
 											$begin '5'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='LL'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '5'
 											$begin '6'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='ss_coef'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '6'
 											$begin '7'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='num_of_pairs'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '7'
 										$end 'SubsweepDefParamsContainer'
 										FamilyBlock()
@@ -4271,7 +4429,7 @@ $begin 'AnsoftProject'
 										$end 'DESIGN_SOLUTION_SIM_VALUE_CONTEXT'
 									$end 'DesignSolnDefn'
 									ID=9
-									VersionID=803
+									VersionID=867
 									Name='dB(St(trace_p_1_T1,trace_p_1_T1))'
 									TieNameToExpr=true
 									$begin 'Components'
@@ -4311,41 +4469,57 @@ $begin 'AnsoftProject'
 												SubsweepType='Specifiable'
 												SubsweepChoiceType='All'
 												SweepVariableName='Freq'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '0'
 											$begin '1'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='H'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '1'
 											$begin '2'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='W'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '2'
 											$begin '3'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='S'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '3'
 											$begin '4'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='T'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '4'
 											$begin '5'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='LL'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '5'
 											$begin '6'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='ss_coef'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '6'
 											$begin '7'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='num_of_pairs'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '7'
 										$end 'SubsweepDefParamsContainer'
 										FamilyBlock()
@@ -4365,7 +4539,7 @@ $begin 'AnsoftProject'
 										$end 'DESIGN_SOLUTION_SIM_VALUE_CONTEXT'
 									$end 'DesignSolnDefn'
 									ID=10
-									VersionID=804
+									VersionID=868
 									Name='dB(St(trace_p_2_T1,trace_p_2_T1))'
 									TieNameToExpr=true
 									$begin 'Components'
@@ -4405,41 +4579,57 @@ $begin 'AnsoftProject'
 												SubsweepType='Specifiable'
 												SubsweepChoiceType='All'
 												SweepVariableName='Freq'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '0'
 											$begin '1'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='H'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '1'
 											$begin '2'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='W'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '2'
 											$begin '3'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='S'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '3'
 											$begin '4'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='T'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '4'
 											$begin '5'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='LL'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '5'
 											$begin '6'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='ss_coef'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '6'
 											$begin '7'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='num_of_pairs'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '7'
 										$end 'SubsweepDefParamsContainer'
 										FamilyBlock()
@@ -4459,7 +4649,7 @@ $begin 'AnsoftProject'
 										$end 'DESIGN_SOLUTION_SIM_VALUE_CONTEXT'
 									$end 'DesignSolnDefn'
 									ID=11
-									VersionID=805
+									VersionID=869
 									Name='dB(St(trace_p_3_T1,trace_p_3_T1))'
 									TieNameToExpr=true
 									$begin 'Components'
@@ -4499,41 +4689,57 @@ $begin 'AnsoftProject'
 												SubsweepType='Specifiable'
 												SubsweepChoiceType='All'
 												SweepVariableName='Freq'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '0'
 											$begin '1'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='H'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '1'
 											$begin '2'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='W'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '2'
 											$begin '3'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='S'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '3'
 											$begin '4'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='T'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '4'
 											$begin '5'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='LL'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '5'
 											$begin '6'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='ss_coef'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '6'
 											$begin '7'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='num_of_pairs'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '7'
 										$end 'SubsweepDefParamsContainer'
 										FamilyBlock()
@@ -4553,7 +4759,7 @@ $begin 'AnsoftProject'
 										$end 'DESIGN_SOLUTION_SIM_VALUE_CONTEXT'
 									$end 'DesignSolnDefn'
 									ID=12
-									VersionID=806
+									VersionID=870
 									Name='dB(St(trace_p_4_T1,trace_p_4_T1))'
 									TieNameToExpr=true
 									$begin 'Components'
@@ -4593,41 +4799,57 @@ $begin 'AnsoftProject'
 												SubsweepType='Specifiable'
 												SubsweepChoiceType='All'
 												SweepVariableName='Freq'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '0'
 											$begin '1'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='H'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '1'
 											$begin '2'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='W'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '2'
 											$begin '3'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='S'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '3'
 											$begin '4'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='T'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '4'
 											$begin '5'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='LL'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '5'
 											$begin '6'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='ss_coef'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '6'
 											$begin '7'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='num_of_pairs'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '7'
 										$end 'SubsweepDefParamsContainer'
 										FamilyBlock()
@@ -4647,7 +4869,7 @@ $begin 'AnsoftProject'
 										$end 'DESIGN_SOLUTION_SIM_VALUE_CONTEXT'
 									$end 'DesignSolnDefn'
 									ID=13
-									VersionID=807
+									VersionID=871
 									Name='dB(St(trace_p_5_T1,trace_p_5_T1))'
 									TieNameToExpr=true
 									$begin 'Components'
@@ -4687,41 +4909,57 @@ $begin 'AnsoftProject'
 												SubsweepType='Specifiable'
 												SubsweepChoiceType='All'
 												SweepVariableName='Freq'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '0'
 											$begin '1'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='H'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '1'
 											$begin '2'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='W'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '2'
 											$begin '3'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='S'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '3'
 											$begin '4'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='T'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '4'
 											$begin '5'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='LL'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '5'
 											$begin '6'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='ss_coef'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '6'
 											$begin '7'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='num_of_pairs'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '7'
 										$end 'SubsweepDefParamsContainer'
 										FamilyBlock()
@@ -4741,7 +4979,7 @@ $begin 'AnsoftProject'
 										$end 'DESIGN_SOLUTION_SIM_VALUE_CONTEXT'
 									$end 'DesignSolnDefn'
 									ID=14
-									VersionID=808
+									VersionID=872
 									Name='dB(St(trace_p_6_T1,trace_p_6_T1))'
 									TieNameToExpr=true
 									$begin 'Components'
@@ -4781,41 +5019,57 @@ $begin 'AnsoftProject'
 												SubsweepType='Specifiable'
 												SubsweepChoiceType='All'
 												SweepVariableName='Freq'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '0'
 											$begin '1'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='H'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '1'
 											$begin '2'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='W'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '2'
 											$begin '3'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='S'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '3'
 											$begin '4'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='T'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '4'
 											$begin '5'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='LL'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '5'
 											$begin '6'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='ss_coef'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '6'
 											$begin '7'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='num_of_pairs'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '7'
 										$end 'SubsweepDefParamsContainer'
 										FamilyBlock()
@@ -4835,7 +5089,7 @@ $begin 'AnsoftProject'
 										$end 'DESIGN_SOLUTION_SIM_VALUE_CONTEXT'
 									$end 'DesignSolnDefn'
 									ID=15
-									VersionID=809
+									VersionID=873
 									Name='dB(St(trace_p_7_T1,trace_p_7_T1))'
 									TieNameToExpr=true
 									$begin 'Components'
@@ -4875,41 +5129,57 @@ $begin 'AnsoftProject'
 												SubsweepType='Specifiable'
 												SubsweepChoiceType='All'
 												SweepVariableName='Freq'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '0'
 											$begin '1'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='H'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '1'
 											$begin '2'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='W'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '2'
 											$begin '3'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='S'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '3'
 											$begin '4'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='T'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '4'
 											$begin '5'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='LL'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '5'
 											$begin '6'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='ss_coef'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '6'
 											$begin '7'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='num_of_pairs'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '7'
 										$end 'SubsweepDefParamsContainer'
 										FamilyBlock()
@@ -4929,7 +5199,7 @@ $begin 'AnsoftProject'
 										$end 'DESIGN_SOLUTION_SIM_VALUE_CONTEXT'
 									$end 'DesignSolnDefn'
 									ID=16
-									VersionID=810
+									VersionID=874
 									Name='dB(St(trace_n_0_T2,trace_n_0_T2))'
 									TieNameToExpr=true
 									$begin 'Components'
@@ -4969,41 +5239,57 @@ $begin 'AnsoftProject'
 												SubsweepType='Specifiable'
 												SubsweepChoiceType='All'
 												SweepVariableName='Freq'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '0'
 											$begin '1'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='H'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '1'
 											$begin '2'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='W'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '2'
 											$begin '3'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='S'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '3'
 											$begin '4'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='T'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '4'
 											$begin '5'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='LL'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '5'
 											$begin '6'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='ss_coef'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '6'
 											$begin '7'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='num_of_pairs'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '7'
 										$end 'SubsweepDefParamsContainer'
 										FamilyBlock()
@@ -5023,7 +5309,7 @@ $begin 'AnsoftProject'
 										$end 'DESIGN_SOLUTION_SIM_VALUE_CONTEXT'
 									$end 'DesignSolnDefn'
 									ID=17
-									VersionID=811
+									VersionID=875
 									Name='dB(St(trace_n_1_T2,trace_n_1_T2))'
 									TieNameToExpr=true
 									$begin 'Components'
@@ -5063,41 +5349,57 @@ $begin 'AnsoftProject'
 												SubsweepType='Specifiable'
 												SubsweepChoiceType='All'
 												SweepVariableName='Freq'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '0'
 											$begin '1'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='H'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '1'
 											$begin '2'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='W'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '2'
 											$begin '3'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='S'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '3'
 											$begin '4'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='T'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '4'
 											$begin '5'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='LL'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '5'
 											$begin '6'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='ss_coef'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '6'
 											$begin '7'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='num_of_pairs'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '7'
 										$end 'SubsweepDefParamsContainer'
 										FamilyBlock()
@@ -5117,7 +5419,7 @@ $begin 'AnsoftProject'
 										$end 'DESIGN_SOLUTION_SIM_VALUE_CONTEXT'
 									$end 'DesignSolnDefn'
 									ID=18
-									VersionID=812
+									VersionID=876
 									Name='dB(St(trace_n_2_T2,trace_n_2_T2))'
 									TieNameToExpr=true
 									$begin 'Components'
@@ -5157,41 +5459,57 @@ $begin 'AnsoftProject'
 												SubsweepType='Specifiable'
 												SubsweepChoiceType='All'
 												SweepVariableName='Freq'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '0'
 											$begin '1'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='H'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '1'
 											$begin '2'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='W'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '2'
 											$begin '3'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='S'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '3'
 											$begin '4'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='T'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '4'
 											$begin '5'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='LL'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '5'
 											$begin '6'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='ss_coef'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '6'
 											$begin '7'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='num_of_pairs'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '7'
 										$end 'SubsweepDefParamsContainer'
 										FamilyBlock()
@@ -5211,7 +5529,7 @@ $begin 'AnsoftProject'
 										$end 'DESIGN_SOLUTION_SIM_VALUE_CONTEXT'
 									$end 'DesignSolnDefn'
 									ID=19
-									VersionID=813
+									VersionID=877
 									Name='dB(St(trace_n_3_T2,trace_n_3_T2))'
 									TieNameToExpr=true
 									$begin 'Components'
@@ -5251,41 +5569,57 @@ $begin 'AnsoftProject'
 												SubsweepType='Specifiable'
 												SubsweepChoiceType='All'
 												SweepVariableName='Freq'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '0'
 											$begin '1'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='H'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '1'
 											$begin '2'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='W'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '2'
 											$begin '3'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='S'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '3'
 											$begin '4'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='T'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '4'
 											$begin '5'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='LL'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '5'
 											$begin '6'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='ss_coef'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '6'
 											$begin '7'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='num_of_pairs'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '7'
 										$end 'SubsweepDefParamsContainer'
 										FamilyBlock()
@@ -5305,7 +5639,7 @@ $begin 'AnsoftProject'
 										$end 'DESIGN_SOLUTION_SIM_VALUE_CONTEXT'
 									$end 'DesignSolnDefn'
 									ID=20
-									VersionID=814
+									VersionID=878
 									Name='dB(St(trace_n_4_T2,trace_n_4_T2))'
 									TieNameToExpr=true
 									$begin 'Components'
@@ -5345,41 +5679,57 @@ $begin 'AnsoftProject'
 												SubsweepType='Specifiable'
 												SubsweepChoiceType='All'
 												SweepVariableName='Freq'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '0'
 											$begin '1'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='H'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '1'
 											$begin '2'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='W'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '2'
 											$begin '3'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='S'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '3'
 											$begin '4'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='T'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '4'
 											$begin '5'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='LL'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '5'
 											$begin '6'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='ss_coef'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '6'
 											$begin '7'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='num_of_pairs'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '7'
 										$end 'SubsweepDefParamsContainer'
 										FamilyBlock()
@@ -5399,7 +5749,7 @@ $begin 'AnsoftProject'
 										$end 'DESIGN_SOLUTION_SIM_VALUE_CONTEXT'
 									$end 'DesignSolnDefn'
 									ID=21
-									VersionID=815
+									VersionID=879
 									Name='dB(St(trace_n_5_T2,trace_n_5_T2))'
 									TieNameToExpr=true
 									$begin 'Components'
@@ -5439,41 +5789,57 @@ $begin 'AnsoftProject'
 												SubsweepType='Specifiable'
 												SubsweepChoiceType='All'
 												SweepVariableName='Freq'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '0'
 											$begin '1'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='H'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '1'
 											$begin '2'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='W'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '2'
 											$begin '3'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='S'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '3'
 											$begin '4'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='T'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '4'
 											$begin '5'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='LL'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '5'
 											$begin '6'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='ss_coef'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '6'
 											$begin '7'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='num_of_pairs'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '7'
 										$end 'SubsweepDefParamsContainer'
 										FamilyBlock()
@@ -5493,7 +5859,7 @@ $begin 'AnsoftProject'
 										$end 'DESIGN_SOLUTION_SIM_VALUE_CONTEXT'
 									$end 'DesignSolnDefn'
 									ID=22
-									VersionID=816
+									VersionID=880
 									Name='dB(St(trace_n_6_T2,trace_n_6_T2))'
 									TieNameToExpr=true
 									$begin 'Components'
@@ -5533,41 +5899,57 @@ $begin 'AnsoftProject'
 												SubsweepType='Specifiable'
 												SubsweepChoiceType='All'
 												SweepVariableName='Freq'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '0'
 											$begin '1'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='H'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '1'
 											$begin '2'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='W'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '2'
 											$begin '3'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='S'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '3'
 											$begin '4'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='T'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '4'
 											$begin '5'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='LL'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '5'
 											$begin '6'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='ss_coef'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '6'
 											$begin '7'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='num_of_pairs'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '7'
 										$end 'SubsweepDefParamsContainer'
 										FamilyBlock()
@@ -5587,7 +5969,7 @@ $begin 'AnsoftProject'
 										$end 'DESIGN_SOLUTION_SIM_VALUE_CONTEXT'
 									$end 'DesignSolnDefn'
 									ID=23
-									VersionID=817
+									VersionID=881
 									Name='dB(St(trace_n_7_T2,trace_n_7_T2))'
 									TieNameToExpr=true
 									$begin 'Components'
@@ -5627,41 +6009,57 @@ $begin 'AnsoftProject'
 												SubsweepType='Specifiable'
 												SubsweepChoiceType='All'
 												SweepVariableName='Freq'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '0'
 											$begin '1'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='H'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '1'
 											$begin '2'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='W'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '2'
 											$begin '3'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='S'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '3'
 											$begin '4'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='T'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '4'
 											$begin '5'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='LL'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '5'
 											$begin '6'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='ss_coef'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '6'
 											$begin '7'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='num_of_pairs'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '7'
 										$end 'SubsweepDefParamsContainer'
 										FamilyBlock()
@@ -5681,7 +6079,7 @@ $begin 'AnsoftProject'
 										$end 'DESIGN_SOLUTION_SIM_VALUE_CONTEXT'
 									$end 'DesignSolnDefn'
 									ID=24
-									VersionID=818
+									VersionID=882
 									Name='dB(St(trace_p_0_T2,trace_p_0_T2))'
 									TieNameToExpr=true
 									$begin 'Components'
@@ -5721,41 +6119,57 @@ $begin 'AnsoftProject'
 												SubsweepType='Specifiable'
 												SubsweepChoiceType='All'
 												SweepVariableName='Freq'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '0'
 											$begin '1'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='H'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '1'
 											$begin '2'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='W'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '2'
 											$begin '3'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='S'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '3'
 											$begin '4'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='T'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '4'
 											$begin '5'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='LL'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '5'
 											$begin '6'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='ss_coef'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '6'
 											$begin '7'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='num_of_pairs'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '7'
 										$end 'SubsweepDefParamsContainer'
 										FamilyBlock()
@@ -5775,7 +6189,7 @@ $begin 'AnsoftProject'
 										$end 'DESIGN_SOLUTION_SIM_VALUE_CONTEXT'
 									$end 'DesignSolnDefn'
 									ID=25
-									VersionID=819
+									VersionID=883
 									Name='dB(St(trace_p_1_T2,trace_p_1_T2))'
 									TieNameToExpr=true
 									$begin 'Components'
@@ -5815,41 +6229,57 @@ $begin 'AnsoftProject'
 												SubsweepType='Specifiable'
 												SubsweepChoiceType='All'
 												SweepVariableName='Freq'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '0'
 											$begin '1'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='H'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '1'
 											$begin '2'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='W'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '2'
 											$begin '3'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='S'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '3'
 											$begin '4'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='T'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '4'
 											$begin '5'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='LL'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '5'
 											$begin '6'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='ss_coef'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '6'
 											$begin '7'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='num_of_pairs'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '7'
 										$end 'SubsweepDefParamsContainer'
 										FamilyBlock()
@@ -5869,7 +6299,7 @@ $begin 'AnsoftProject'
 										$end 'DESIGN_SOLUTION_SIM_VALUE_CONTEXT'
 									$end 'DesignSolnDefn'
 									ID=26
-									VersionID=820
+									VersionID=884
 									Name='dB(St(trace_p_2_T2,trace_p_2_T2))'
 									TieNameToExpr=true
 									$begin 'Components'
@@ -5909,41 +6339,57 @@ $begin 'AnsoftProject'
 												SubsweepType='Specifiable'
 												SubsweepChoiceType='All'
 												SweepVariableName='Freq'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '0'
 											$begin '1'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='H'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '1'
 											$begin '2'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='W'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '2'
 											$begin '3'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='S'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '3'
 											$begin '4'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='T'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '4'
 											$begin '5'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='LL'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '5'
 											$begin '6'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='ss_coef'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '6'
 											$begin '7'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='num_of_pairs'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '7'
 										$end 'SubsweepDefParamsContainer'
 										FamilyBlock()
@@ -5963,7 +6409,7 @@ $begin 'AnsoftProject'
 										$end 'DESIGN_SOLUTION_SIM_VALUE_CONTEXT'
 									$end 'DesignSolnDefn'
 									ID=27
-									VersionID=821
+									VersionID=885
 									Name='dB(St(trace_p_3_T2,trace_p_3_T2))'
 									TieNameToExpr=true
 									$begin 'Components'
@@ -6003,41 +6449,57 @@ $begin 'AnsoftProject'
 												SubsweepType='Specifiable'
 												SubsweepChoiceType='All'
 												SweepVariableName='Freq'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '0'
 											$begin '1'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='H'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '1'
 											$begin '2'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='W'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '2'
 											$begin '3'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='S'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '3'
 											$begin '4'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='T'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '4'
 											$begin '5'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='LL'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '5'
 											$begin '6'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='ss_coef'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '6'
 											$begin '7'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='num_of_pairs'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '7'
 										$end 'SubsweepDefParamsContainer'
 										FamilyBlock()
@@ -6057,7 +6519,7 @@ $begin 'AnsoftProject'
 										$end 'DESIGN_SOLUTION_SIM_VALUE_CONTEXT'
 									$end 'DesignSolnDefn'
 									ID=28
-									VersionID=822
+									VersionID=886
 									Name='dB(St(trace_p_4_T2,trace_p_4_T2))'
 									TieNameToExpr=true
 									$begin 'Components'
@@ -6097,41 +6559,57 @@ $begin 'AnsoftProject'
 												SubsweepType='Specifiable'
 												SubsweepChoiceType='All'
 												SweepVariableName='Freq'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '0'
 											$begin '1'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='H'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '1'
 											$begin '2'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='W'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '2'
 											$begin '3'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='S'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '3'
 											$begin '4'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='T'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '4'
 											$begin '5'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='LL'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '5'
 											$begin '6'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='ss_coef'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '6'
 											$begin '7'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='num_of_pairs'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '7'
 										$end 'SubsweepDefParamsContainer'
 										FamilyBlock()
@@ -6151,7 +6629,7 @@ $begin 'AnsoftProject'
 										$end 'DESIGN_SOLUTION_SIM_VALUE_CONTEXT'
 									$end 'DesignSolnDefn'
 									ID=29
-									VersionID=823
+									VersionID=887
 									Name='dB(St(trace_p_5_T2,trace_p_5_T2))'
 									TieNameToExpr=true
 									$begin 'Components'
@@ -6191,41 +6669,57 @@ $begin 'AnsoftProject'
 												SubsweepType='Specifiable'
 												SubsweepChoiceType='All'
 												SweepVariableName='Freq'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '0'
 											$begin '1'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='H'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '1'
 											$begin '2'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='W'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '2'
 											$begin '3'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='S'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '3'
 											$begin '4'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='T'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '4'
 											$begin '5'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='LL'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '5'
 											$begin '6'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='ss_coef'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '6'
 											$begin '7'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='num_of_pairs'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '7'
 										$end 'SubsweepDefParamsContainer'
 										FamilyBlock()
@@ -6245,7 +6739,7 @@ $begin 'AnsoftProject'
 										$end 'DESIGN_SOLUTION_SIM_VALUE_CONTEXT'
 									$end 'DesignSolnDefn'
 									ID=30
-									VersionID=824
+									VersionID=888
 									Name='dB(St(trace_p_6_T2,trace_p_6_T2))'
 									TieNameToExpr=true
 									$begin 'Components'
@@ -6285,41 +6779,57 @@ $begin 'AnsoftProject'
 												SubsweepType='Specifiable'
 												SubsweepChoiceType='All'
 												SweepVariableName='Freq'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '0'
 											$begin '1'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='H'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '1'
 											$begin '2'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='W'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '2'
 											$begin '3'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='S'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '3'
 											$begin '4'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='T'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '4'
 											$begin '5'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='LL'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '5'
 											$begin '6'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='ss_coef'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '6'
 											$begin '7'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='num_of_pairs'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '7'
 										$end 'SubsweepDefParamsContainer'
 										FamilyBlock()
@@ -6339,7 +6849,7 @@ $begin 'AnsoftProject'
 										$end 'DESIGN_SOLUTION_SIM_VALUE_CONTEXT'
 									$end 'DesignSolnDefn'
 									ID=31
-									VersionID=825
+									VersionID=889
 									Name='dB(St(trace_p_7_T2,trace_p_7_T2))'
 									TieNameToExpr=true
 									$begin 'Components'
@@ -6379,41 +6889,57 @@ $begin 'AnsoftProject'
 												SubsweepType='Specifiable'
 												SubsweepChoiceType='All'
 												SweepVariableName='Freq'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '0'
 											$begin '1'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='H'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '1'
 											$begin '2'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='W'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '2'
 											$begin '3'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='S'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '3'
 											$begin '4'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='T'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '4'
 											$begin '5'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='LL'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '5'
 											$begin '6'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='ss_coef'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '6'
 											$begin '7'
 												SubsweepType='Regular'
 												SubsweepChoiceType='Nominal'
 												SweepVariableName='num_of_pairs'
+												AllowSelecteValues=true
+												SweepHasConsistentValues=true
 											$end '7'
 										$end 'SubsweepDefParamsContainer'
 										FamilyBlock()
@@ -6425,7 +6951,7 @@ $begin 'AnsoftProject'
 						NextUniqueID=37
 						MoveBackwards=false
 						$begin 'NextVersID'
-							NextUniqueID=826
+							NextUniqueID=890
 							MoveBackwards=false
 						$end 'NextVersID'
 					$end 'ReportManager'
@@ -6602,7 +7128,7 @@ $begin 'AnsoftProject'
 									$end 'Graph2D'
 								$end 'Graph2DsV2'
 								$begin 'PlotDisplayDataManager'
-									NextUniqueID=107
+									NextUniqueID=113
 									MoveBackwards=false
 									$begin 'PlotHeaderDataSource'
 										CompanyName=''
@@ -8637,17 +9163,17 @@ $begin 'AnsoftProject'
 									$end 'DocDefaultAttributes'
 									$begin 'PerViewPlotAttributeStoreMap'
 										$begin 'MapItem'
-											ItemID=106
+											ItemID=112
 											$begin 'PlotAttributeStoreMap'
 												$begin 'MainMapItem'
 													$begin 'SubMapItem'
 														DataSourceID=4
 														$begin 'BasicLayoutAttribute'
 															$begin 'LayoutRect'
-																Top=712
-																Left=1352
-																Bottom=9764
-																Right=8241
+																Top=592
+																Left=660
+																Bottom=9794
+																Right=9172
 															$end 'LayoutRect'
 														$end 'BasicLayoutAttribute'
 													$end 'SubMapItem'
@@ -8655,10 +9181,10 @@ $begin 'AnsoftProject'
 														DataSourceID=28
 														$begin 'BasicLayoutAttribute'
 															$begin 'LayoutRect'
-																Top=712
-																Left=1352
-																Bottom=9764
-																Right=8241
+																Top=592
+																Left=660
+																Bottom=9794
+																Right=9172
 															$end 'LayoutRect'
 														$end 'BasicLayoutAttribute'
 													$end 'SubMapItem'
@@ -8669,7 +9195,7 @@ $begin 'AnsoftProject'
 																Top=75
 																Left=75
 																Bottom=9925
-																Right=1031
+																Right=503
 															$end 'LayoutRect'
 														$end 'BasicLayoutAttribute'
 													$end 'SubMapItem'
@@ -8680,15 +9206,15 @@ $begin 'AnsoftProject'
 														$begin 'CartesianAxisLayoutAttribute'
 															$begin 'AxisRect'
 																Top=75
-																Left=8241
+																Left=9172
 																Bottom=9925
 																Right=9925
 															$end 'AxisRect'
 															$begin 'GridRect'
-																Top=712
-																Left=1352
-																Bottom=9764
-																Right=8241
+																Top=592
+																Left=660
+																Bottom=9794
+																Right=9172
 															$end 'GridRect'
 															AxisCollapsed=false
 															AxisExpandCollapseByUser=false
@@ -8699,15 +9225,15 @@ $begin 'AnsoftProject'
 														$begin 'CartesianAxisLayoutAttribute'
 															$begin 'AxisRect'
 																Top=75
-																Left=1352
-																Bottom=712
-																Right=8241
+																Left=660
+																Bottom=592
+																Right=9172
 															$end 'AxisRect'
 															$begin 'GridRect'
-																Top=712
-																Left=1352
-																Bottom=9764
-																Right=8241
+																Top=592
+																Left=660
+																Bottom=9794
+																Right=9172
 															$end 'GridRect'
 															AxisCollapsed=false
 															AxisExpandCollapseByUser=false
@@ -8721,7 +9247,7 @@ $begin 'AnsoftProject'
 															X_spc=10000000000
 															X_fwd=4
 															X_fpr=2
-															Y1_spc=10
+															Y1_spc=5
 															Y1_fwd=4
 															Y1_fpr=2
 														$end 'CartesianCurveGroupLayoutAttribute'
@@ -8841,7 +9367,7 @@ $begin 'AnsoftProject'
 								$begin 'Report2D'
 									$begin 'ViewInfo'
 										$begin 'WrapperView'
-											ID(106)
+											ID(112)
 										$end 'WrapperView'
 										$begin 'WrapperDoc'
 											HiddenDrawings()
@@ -8851,13 +9377,13 @@ $begin 'AnsoftProject'
 													$begin 'MedCamera'
 														$begin 'svrc'
 															svid=4
-															view(106, cam(XYCam(false, true, true, true, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1)))
+															view(112, cam(XYCam(false, true, true, true, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1)))
 														$end 'svrc'
 													$end 'MedCamera'
 												$end 'CurveMed'
 											$end 'DispType'
 										$end 'WrapperDoc'
-										WindowPos(WindowPos(5, -1, -1, -13, -58, 49, 49, 1935, 563))
+										WindowPos(WindowPos(3, -1, -1, -13, -58, 245, 245, 2082, 936))
 									$end 'ViewInfo'
 								$end 'Report2D'
 							$end 'WindowInfoList'
@@ -8907,69 +9433,61 @@ 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\
-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'
+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'
 	$begin 'DesignInfo'
 		DesignName='8-diff-pairs'
 		Notes=''
@@ -8990,153 +9508,159 @@ AECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHB\
 CSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ\
 3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4u\
 Pk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD+/iiiigAooooAKKKKACiiigAooooAKKKKACiii\
-gAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACii\
-igAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACi\
-iigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiivjD4v/8ABQP9k7\
-4M2viptb+K+jeLNW8FaleeHfFuifDZh46/4QjxlDrEXhnTPBnxY8W6NI3hz4A6zqXi2ZdJsJ/iFrfhT\
-S5L62vFm1GCDTNUnsonUhTXNUmoLu2l+ZFSrTpR5qs1Tj3bS/M+z6K/E/xF/wAFJv2kviw0lv8Asr/s\
-2waFo80hl0n4ifGy0vvEWlYeL+z9HPiXQ9I8YeEvD+p/D7V9Ta91Sy8Z/C74h/F9YvDmiW91L4XkvvE\
-WnWdp4R4h+CP7RPx2DP8AtMftKeLfEGizLEq/D7Sx4U8X6D9l01j/AGX4f8caBq/w50X4TfGLQF1aW+\
-1+G71T4FWPirTtXfSIoPFM9t4ZsJLnjnmFJaUoSrPv8Mfvf6Jnn1M0or+BTlXfde7H/wACl+if4H6sf\
-F//AIKB/snfBm18VNrfxX0bxZq3grUrzw74t0T4bMPHX/CEeModYi8M6Z4M+LHi3RpG8OfAHWdS8WzL\
-pNhP8Qtb8KaXJfW14s2owQaZqk9l87/AT/gqDbfHb9pHw/8ABe2/Zy+I/g7wB46tYLbwJ8Wtf1/QJXu\
-/E9z4S+LPjjTdO1rw5ZQtpWr+EtV8LfAr4m6jofirwL4o8e+HtQshoTy31ldardWek+EeAv2cfgr8N7\
-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\
-fD3h7QdOs9H0PQdD0ezh0/SdF0XSdPhjt9L0m1sLe3gtraCOOGCGBIokVFVRrV1wyarV1zDMata/8Ay\
-7oN4SkmtE06Unidt1PEzg23LkVoKHo4ThfhzB1HW/sqOa4l3vWzRxzKpKMmpShOjXgsutzJKFSll9Gv\
-GlFU3Vlz15VvyV+BP/BEz9gP4KarF4m1j4d6/wDtB+MbbVtS1G08UftG+Ik+IixWeo+H4fDv9g3vgew\
-0zTPCviHSbe3W7uLN9V0C+vra8vzcxXoa104WX6qaDoOh+FdD0Xwx4Y0XSfDfhrw3pOnaD4e8PaDp1n\
-o+h6Doej2cOn6Toui6Tp8Mdvpek2thb28FtbQRxwwQwJFEioqqNaivTwuCweBg6eCwtPC05O7VOEYJu\
-yV3ypXdkld3dkl0R9DVrV8RKE8RXnialOKhGVScqklBNyUVKblLlUpSdr2u292wooorqMwooooAKKKK\
-ACiiigAooooAKKKKACiiigAooooAK/lu8cf8G83xG8UftZ/tDfGjQv2n/hv4S8I/Hv4gfFb4yy+LIfg\
-bPrHxY8N+I/id8WfEXjl/hJNot74ySx1/wTa6Zr0TyeJRrdld3l3odnbDwrawxm9b+pGiufFYWljKTo\
-1nNQk03yVJ0paO+k6coTXnaSutHo2jlr4HBYurhauMwdHG/VJSlCFelTr0ryi4PnoVo1KNRcrdlUpy5\
-ZWnG0opr8mvgb/wRS/YJ+DOpWfiLXfAHiT9ofxdpuo6nd6X4l/aR8TD4jxWem6nov8AYp8NzeBbLTdN\
-8Ka5oluZtSvLQ6noF9e22oarJdx3gkt9P+x/qfoOg6H4V0PRfDHhjRdJ8N+GvDek6doPh7w9oOnWej6\
-HoOh6PZw6fpOi6LpOnwx2+l6Ta2FvbwW1tBHHDBDAkUSKiqo1qKnC4HB4GDp4LC08JTk7tU4Rgm7JXf\
-Kld2SV3d2S7HfWr18RKE8TXqYmpTioRlUnKpJQTbUFKblLlTk2leybb3bCiiiuoyCiiigAooooAKKKK\
-ACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKK\
-KACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKK\
-KKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAK\
-KKKACiiigD/9k='
+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'
 	$end 'DesignInfo'
 $end 'ProjectPreview'

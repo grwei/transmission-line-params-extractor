@@ -1,4 +1,4 @@
-%% Basic Information
+%% Basic Information (deprecated)
 %%% Overview
 % Transmission-line parameters extractor
 % MATLAB implementation of Patent US8892414B1
