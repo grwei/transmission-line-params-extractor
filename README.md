@@ -24,6 +24,7 @@ Matlab implementation of patent [Transmission-line simulators and methods](https
    1. [`test2_1.m`](test2_1.m): (deprecated) removing singular frequencies
    2. [`test2_2.m`](test2_2.m): (deprecated) 10mm, with freq range 10M ~ 70G, HFSS `Automatically use casual materials` enabled.
 4. [`test3.m`](test3.m): 200mil 16-line Transmission Line (Ansys 2020R1)
+   1. [`test3_1.m`](test3_1.m): HFSS_Welement -> ADS -> S 
 
 ## Contact me
 

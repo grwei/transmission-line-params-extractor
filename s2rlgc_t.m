@@ -168,6 +168,26 @@ discontCount = cumsum(abs(betaLenEigWrapDiff) > pi,2);
 % discontCount(:) = 0;
 
 betaLenEigUnwrap = imag(gammaLenEigWrap) + 2*pi*discontCount;
+
+%%% Test: 首次解折叠后，再去除多余的上跳点 (Good -grwei, 20200604)
+% 见[US8892414B1]第10-14行
+betaLenEigUnwrap = abs(betaLenEigUnwrap);   % beta >= 0 
+discontCount(1) = 1;                        % 初始化
+while sum(discontCount(:))
+    betaLenEigUnWrapDiff(:,2:freqpts) = diff(betaLenEigUnwrap,1,2);
+    discontCount = cumsum(betaLenEigUnWrapDiff > pi,2);
+    betaLenEigUnwrap = betaLenEigUnwrap - 2*pi*discontCount;
+end
+
+%%% Test: 再去除多余的下跳点 (Good -grwei, 20200604)
+% 见[US8892414B1]第10-14行
+discontCount(1) = 1;            % 初始化
+while sum(discontCount(:))
+    betaLenEigUnWrapDiff(:,2:freqpts) = diff(betaLenEigUnwrap,1,2);
+    discontCount = cumsum(betaLenEigUnWrapDiff < -pi,2);
+    betaLenEigUnwrap = betaLenEigUnwrap + 2*pi*discontCount;
+end
+
 gammaEigUnwrap = complex(real(gammaLenEigWrap),betaLenEigUnwrap) / linelength;
 
 gamma = nan(numLines,numLines,freqpts);
@@ -189,6 +209,25 @@ for idx = 1:freqpts
         diag(1./sinh(gammaLenEigWrap(:,idx)))   /               ...
         eigVec(:,:,idx)                         *               ...
         TB(:,:,idx);
+end
+
+%%% Test: 改用解折叠后的gamma计算Zc
+% 见[US8892414B1]第10-43行
+for idx = 1:freqpts
+    Zc(:,:,idx) = eigVec(:,:,idx)                           *           ...
+        diag(1./sinh(gammaEigUnwrap(:,idx) * linelength))   /           ...
+        eigVec(:,:,idx)                                     *           ...
+        TB(:,:,idx);
+    
+    %%% Test: 强制令Zc的实部非负
+%     for i = 1:numLines
+%         for j = 1:numLines
+%             if real(Zc(i,j,idx)) < 0
+%                 Zc(i,j,idx) = -Zc(i,j,idx);
+%             end
+%         end
+%     end
+    
 end
 
 %% Extract RLGC
@@ -600,7 +639,7 @@ for idx = 1:numLines
     hold off
     grid on
     xlabel('Freq(GHz)');
-    ylabel(sprintf('S(1,%u)(dB)',idx));
+    ylabel(sprintf('S(1,%u) (rad)',idx));
     title(sprintf('S(1,%u)',idx));
     legend({'Extracted-RLGC','Original S-parameters'},'Location','best','NumColumns',1)
     legend('boxoff')
@@ -618,7 +657,7 @@ for idx = 1:numLines
     hold off
     grid on
     xlabel('Freq(GHz)');
-    ylabel(sprintf('S(1,%u)(dB)',idx+numLines));
+    ylabel(sprintf('S(1,%u) (rad)',idx+numLines));
     title(sprintf('S(1,%u)',idx+numLines));
     legend({'Extracted-RLGC','Original S-parameters'},'Location','best','NumColumns',1)
     legend('boxoff')
@@ -636,7 +675,7 @@ for idx = 1:numLines
     hold off
     grid on
     xlabel('Freq(GHz)');
-    ylabel(sprintf('S(%u,%u)(dB)',numLines+1,idx));
+    ylabel(sprintf('S(%u,%u) (rad)',numLines+1,idx));
     title(sprintf('S(%u,%u)',numLines+1,idx));
     legend({'Extracted-RLGC','Original S-parameters'},'Location','best','NumColumns',1)
     legend('boxoff')
@@ -654,7 +693,7 @@ for idx = 1:numLines
     hold off
     grid on
     xlabel('Freq(GHz)');
-    ylabel(sprintf('S(%u,%u)(dB)',numLines+1,numLines+idx));
+    ylabel(sprintf('S(%u,%u) (rad)',numLines+1,numLines+idx));
     title(sprintf('S(%u,%u)',numLines+1,numLines+idx));
     legend({'Extracted-RLGC','Original S-parameters'},'Location','best','NumColumns',1)
     legend('boxoff')
@@ -678,7 +717,7 @@ for idx = 1:numLines
     hold off
     grid on
     xlabel('Freq(GHz)');
-    ylabel(sprintf('S(1,%u)(dB)',idx));
+    ylabel(sprintf('S(1,%u) (rad)',idx));
     title(sprintf('S(1,%u)',idx));
     legend({'Extracted-RLGC','Original S-parameters'},'Location','best','NumColumns',1)
     legend('boxoff')
@@ -696,7 +735,7 @@ for idx = 1:numLines
     hold off
     grid on
     xlabel('Freq(GHz)');
-    ylabel(sprintf('S(1,%u)(dB)',idx+numLines));
+    ylabel(sprintf('S(1,%u) (rad)',idx+numLines));
     title(sprintf('S(1,%u)',idx+numLines));
     legend({'Extracted-RLGC','Original S-parameters'},'Location','best','NumColumns',1)
     legend('boxoff')
@@ -714,7 +753,7 @@ for idx = 1:numLines
     hold off
     grid on
     xlabel('Freq(GHz)');
-    ylabel(sprintf('S(%u,%u)(dB)',numLines+1,idx));
+    ylabel(sprintf('S(%u,%u) (rad)',numLines+1,idx));
     title(sprintf('S(%u,%u)',numLines+1,idx));
     legend({'Extracted-RLGC','Original S-parameters'},'Location','best','NumColumns',1)
     legend('boxoff')
@@ -732,7 +771,7 @@ for idx = 1:numLines
     hold off
     grid on
     xlabel('Freq(GHz)');
-    ylabel(sprintf('S(%u,%u)(dB)',numLines+1,numLines+idx));
+    ylabel(sprintf('S(%u,%u) (rad)',numLines+1,numLines+idx));
     title(sprintf('S(%u,%u)',numLines+1,numLines+idx));
     legend({'Extracted-RLGC','Original S-parameters'},'Location','best','NumColumns',1)
     legend('boxoff')

@@ -11,7 +11,7 @@ clc; clear; close all;
 
 % Import simulated data
 lineLength = 0.00508; % Line Length(meters)
-filename_4line = 'data/4line/4lines_HFSS_200mil.s8p';
+filename_4line = 'data/4line/4lines_HFSS/4lines_HFSS_200mil.s8p';
 SingleEnded8PortData = read(rfdata.data,filename_4line);
 freq = SingleEnded8PortData.Freq;
 freqPts = length(freq);
@@ -27,7 +27,7 @@ rlgc_PowerSI.L = rlgc_PowerSI.R;
 rlgc_PowerSI.C = rlgc_PowerSI.R;
 rlgc_PowerSI.G = rlgc_PowerSI.R;
 % Load data
-filename_PowerSI = 'data/4line/Transmission_RLGC_res.csv';
+filename_PowerSI = 'data/4line/4lines_HFSS/Transmission_RLGC_res.csv';
 opts = detectImportOptions(filename_PowerSI);
 rlgc_PowerSI_mat = readtable(filename_PowerSI);
 for freqIdx = 1:freqPts
@@ -60,150 +60,6 @@ check_consistence(rlgc_t.R, rlgc_t.L, rlgc_t.G, rlgc_t.C, lineLength, freq, z0);
 % fit_data = rationalfit(freq, data);
 % [resp,freq]=freqresp(fit_data,freq);
 % rlgc_t = s2rlgc_t(resp,lineLength,freq,z0,[],true);
-
-%% Extracted RLGC using proposed method(before 1st resonance frequency)
-
-figure('Name','Extracted RLGC using proposed method(before 1st resonance frequency)')
-sgtitle({'Extracted RLGC using proposed algorithm','(before 1st resonance frequency)'})
-subplot(2,2,1)
-plot(freq,squeeze(rlgc_t.R(1,1,:)))
-grid on
-hold on
-plot(freq,squeeze(rlgc_t.R(2,1,:)))
-plot(freq,squeeze(rlgc_t.R(2,2,:)))
-plot(freq,squeeze(rlgc_t.R(3,1,:)))
-plot(freq,squeeze(rlgc_t.R(3,2,:)))
-plot(freq,squeeze(rlgc_t.R(4,1,:)))
-hold off
-xlabel('Frequency')
-xlim([0 3e9])
-ylabel('R(Ohms/m)')
-legend({'R11','R21','R22','R31','R32','R41'},'Location','best','NumColumns',2)
-legend('boxoff')
-title('R matrix')
-
-subplot(2,2,2)
-plot(freq,squeeze(rlgc_t.L(1,1,:)))
-grid on
-hold on
-plot(freq,squeeze(rlgc_t.L(2,1,:)))
-plot(freq,squeeze(rlgc_t.L(2,2,:)))
-plot(freq,squeeze(rlgc_t.L(3,1,:)))
-plot(freq,squeeze(rlgc_t.L(3,2,:)))
-plot(freq,squeeze(rlgc_t.L(4,1,:)))
-hold off
-xlabel('Frequency')
-xlim([0 3e9])
-ylabel('L(H/m)')
-legend({'L11','L21','L22','L31','L32','L41'},'Location','best','NumColumns',2)
-legend('boxoff')
-title('L matrix')
-
-subplot(2,2,3)
-plot(freq,squeeze(rlgc_t.C(1,1,:)))
-grid on
-hold on
-plot(freq,squeeze(rlgc_t.C(2,1,:)))
-plot(freq,squeeze(rlgc_t.C(2,2,:)))
-plot(freq,squeeze(rlgc_t.C(3,1,:)))
-plot(freq,squeeze(rlgc_t.C(3,2,:)))
-plot(freq,squeeze(rlgc_t.C(4,1,:)))
-hold off
-xlabel('Frequency')
-xlim([0 3e9])
-ylabel('C(F/m)')
-legend({'C11','C21','C22','C31','C32','C41'},'Location','best','NumColumns',2)
-legend('boxoff')
-title('C matrix')
-
-subplot(2,2,4)
-plot(freq,squeeze(rlgc_t.G(1,1,:)))
-grid on
-hold on
-plot(freq,squeeze(rlgc_t.G(2,1,:)))
-plot(freq,squeeze(rlgc_t.G(2,2,:)))
-plot(freq,squeeze(rlgc_t.G(3,1,:)))
-plot(freq,squeeze(rlgc_t.G(3,2,:)))
-plot(freq,squeeze(rlgc_t.G(4,1,:)))
-hold off
-xlabel('Frequency')
-xlim([0 3e9])
-ylabel('G(S/m)')
-legend({'G11','G21','G22','G31','G32','G41'},'Location','best','NumColumns',2)
-legend('boxoff')
-title('G matrix')
-
-%% Candence Sigrity PowerSI extracted RLGC(before 1st resonance frequency)
-
-figure('Name','Candence Sigrity PowerSI extracted RLGC(before 1st resonance frequency)')
-sgtitle({'Candence Sigrity PowerSI extracted RLGC','(before 1st resonance frequency)'})
-subplot(2,2,1)
-plot(freq,squeeze(rlgc_PowerSI.R(1,1,:)))
-grid on
-hold on
-plot(freq,squeeze(rlgc_PowerSI.R(2,1,:)))
-plot(freq,squeeze(rlgc_PowerSI.R(2,2,:)))
-plot(freq,squeeze(rlgc_PowerSI.R(3,1,:)))
-plot(freq,squeeze(rlgc_PowerSI.R(3,2,:)))
-plot(freq,squeeze(rlgc_PowerSI.R(4,1,:)))
-hold off
-xlabel('Frequency')
-xlim([0 3e9])
-ylabel('R(Ohms/m)')
-legend({'R11','R21','R22','R31','R32','R41'},'Location','best','NumColumns',2)
-legend('boxoff')
-title('R matrix')
-
-subplot(2,2,2)
-plot(freq,squeeze(rlgc_PowerSI.L(1,1,:)))
-grid on
-hold on
-plot(freq,squeeze(rlgc_PowerSI.L(2,1,:)))
-plot(freq,squeeze(rlgc_PowerSI.L(2,2,:)))
-plot(freq,squeeze(rlgc_PowerSI.L(3,1,:)))
-plot(freq,squeeze(rlgc_PowerSI.L(3,2,:)))
-plot(freq,squeeze(rlgc_PowerSI.L(4,1,:)))
-hold off
-xlabel('Frequency')
-xlim([0 3e9])
-ylabel('L(H/m)')
-legend({'L11','L21','L22','L31','L32','L41'},'Location','best','NumColumns',2)
-legend('boxoff')
-title('L matrix')
-
-subplot(2,2,3)
-plot(freq,squeeze(rlgc_PowerSI.C(1,1,:)))
-grid on
-hold on
-plot(freq,squeeze(rlgc_PowerSI.C(2,1,:)))
-plot(freq,squeeze(rlgc_PowerSI.C(2,2,:)))
-plot(freq,squeeze(rlgc_PowerSI.C(3,1,:)))
-plot(freq,squeeze(rlgc_PowerSI.C(3,2,:)))
-plot(freq,squeeze(rlgc_PowerSI.C(4,1,:)))
-hold off
-xlabel('Frequency')
-xlim([0 3e9])
-ylabel('C(F/m)')
-legend({'C11','C21','C22','C31','C32','C41'},'Location','best','NumColumns',2)
-legend('boxoff')
-title('C matrix')
-
-subplot(2,2,4)
-plot(freq,squeeze(rlgc_PowerSI.G(1,1,:)))
-grid on
-hold on
-plot(freq,squeeze(rlgc_PowerSI.G(2,1,:)))
-plot(freq,squeeze(rlgc_PowerSI.G(2,2,:)))
-plot(freq,squeeze(rlgc_PowerSI.G(3,1,:)))
-plot(freq,squeeze(rlgc_PowerSI.G(3,2,:)))
-plot(freq,squeeze(rlgc_PowerSI.G(4,1,:)))
-hold off
-xlabel('Frequency')
-xlim([0 3e9])
-ylabel('G(S/m)')
-legend({'G11','G21','G22','G31','G32','G41'},'Location','best','NumColumns',2)
-legend('boxoff')
-title('G matrix')
 
 %% Extracted RLGC compared with Cadence PowerSI
 
@@ -359,7 +215,7 @@ end
 %% 初始S参数经PowerSI提取RLGC，用此RLGC重建S以实现对S参数的“合理化”，再用本文方法提取RLGC
 % 测试结论：完全一致！说明PowerSI是对S参数作了前处理！
 
-rlgc_from_refined_S = s2rlgc_t(s_params_using_cadence_extracted_rlgc,lineLength,freq,z0);
+rlgc_from_refined_S = s2rlgc_t(s_params_using_cadence_extracted_rlgc,lineLength,freq,z0,[],false);
 %%% Extracted RLGC compared with Cadence PowerSI
 
 % R

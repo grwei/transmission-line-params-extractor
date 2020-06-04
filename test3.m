@@ -11,7 +11,7 @@ clc; clear; close all;
 
 % Import simulated data
 lineLength = 0.00508; % Line Length(meters)
-filename_16line = 'data/16line/16lines_HFSS_200mil.s32p';
+filename_16line = 'data/16line/16lines_HFSS/16lines_HFSS_200mil.s32p';
 SingleEnded32PortData = read(rfdata.data,filename_16line);
 freq = SingleEnded32PortData.Freq;
 freqPts = length(freq);
@@ -27,7 +27,7 @@ rlgc_PowerSI.L = rlgc_PowerSI.R;
 rlgc_PowerSI.C = rlgc_PowerSI.R;
 rlgc_PowerSI.G = rlgc_PowerSI.R;
 % Load data
-filename_PowerSI = 'data/16line/Transmission_RLGC_res.csv';
+filename_PowerSI = 'data/16line/16lines_HFSS/Transmission_RLGC_res.csv';
 opts = detectImportOptions(filename_PowerSI);
 rlgc_PowerSI_mat = readtable(filename_PowerSI);
 for freqIdx = 1:freqPts
