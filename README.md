@@ -20,12 +20,15 @@ Matlab implementation of patent [Transmission-line simulators and methods](https
 2. [`test1.m`](test1.m): 500mil Coupled Transmission Line (Polar Si9000e)
    1. [`test1_1.m`](test1_1.m): Using larger frequency intervals
    2. [`test1_2.m`](test1_2.m): Add randn noise to S, observe the impact on extracted-RLGC
+   3. [`test1_2.mlx`](test1_2.mlx): Try to clean outliers or smooth of RLGC.
+      - [使用实时编辑器任务清理杂乱数据并找到极值](https://ww2.mathworks.cn/help/matlab/data_analysis/cleandatawithliveeditortasks.html)
+      - [数据平滑和离群值检测](https://ww2.mathworks.cn/help/matlab/data_analysis/data-smoothing-and-outlier-detection.html)
 3. [`test2.m`](test2.m): 200mil Four-line Transmission Line (Ansys 2020R1)
-   1. [`test2_1.m`](test2_1.m): (deprecated) removing singular frequencies
-   2. [`test2_2.m`](test2_2.m): (deprecated) 10mm, with freq range 10M ~ 70G, HFSS `Automatically use casual materials` enabled.
-   3. [`test2_3.m`](test2_3.m): HFSS_Welement -> ADS -> S 
+   1. [~~`test2_1.m`~~](test2_1.m): (deprecated) removing singular frequencies
+   2. [~~`test2_2.m`~~](test2_2.m): (deprecated) 10mm, with freq range 10M ~ 70G, HFSS `Automatically use casual materials` enabled.
+   3. [`test2_3.m`](test2_3.m): HFSS_Welement -> ADS -> S
 4. [`test3.m`](test3.m): 200mil 16-line Transmission Line (Ansys 2020R1)
-   1. [`test3_1.m`](test3_1.m): HFSS_Welement -> ADS -> S 
+   1. [`test3_1.m`](test3_1.m): HFSS_Welement -> ADS -> S
 
 ## Contact me
 
