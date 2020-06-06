@@ -8,7 +8,8 @@
 clc; clear; close all;
 
 %% initialize
-% 此节在每个调试周期只需执行一次
+% 此节只需在每次数据改变后执行一次。
+% 读取仿真数据，然后以.mat文件存储到工程根目录，以缩短程序多次运行时读数据时间。
 
 % %%% Import simulated S
 % filename_16line = 'data/16line/16lines_HFSS/16lines_HFSS_200mil.s32p';
