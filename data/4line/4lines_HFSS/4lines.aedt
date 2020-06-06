@@ -1386,7 +1386,7 @@ $begin 'AnsoftProject'
 					SetLambdaTarget=false
 					Target=0.6667
 					UseMaxTetIncrease=false
-					PortAccuracy=0.5
+					PortAccuracy=0.1
 					UseABCOnPort=false
 					SetPortMinMaxTri=false
 					PortMinTri=100
@@ -1413,7 +1413,7 @@ $begin 'AnsoftProject'
 							SaveFields=false
 							SaveRadFields=false
 							InterpTolerance=0.1
-							InterpMaxSolns=250
+							InterpMaxSolns=10000
 							InterpMinSolns=0
 							InterpMinSubranges=1
 							ExtrapToDC=false
@@ -1452,7 +1452,7 @@ $begin 'AnsoftProject'
 					SetLambdaTarget=false
 					Target=0.3333
 					UseMaxTetIncrease=false
-					PortAccuracy=0.5
+					PortAccuracy=0.1
 					UseABCOnPort=false
 					SetPortMinMaxTri=false
 					PortMinTri=100
@@ -1461,6 +1461,9 @@ $begin 'AnsoftProject'
 					UseIterativeSolver=false
 					SaveRadFieldsOnly=false
 					SaveAnyFields=true
+					CacheSaveKind='Delta'
+					ConstantDelta='0s'
+					VariableFlagsForDerivatives(1, 1, 1, 1)
 					IESolverType='Auto'
 					LambdaTargetForIESolver=0.15
 					UseDefaultLambdaTgtForIESolver=true
@@ -1472,17 +1475,18 @@ $begin 'AnsoftProject'
 							ID=0
 							IsEnabled=true
 							RangeType='LinearStep'
-							RangeStart='1GHz'
+							RangeStart='0GHz'
 							RangeEnd='70GHz'
-							RangeStep='0.5GHz'
+							RangeStep='0.1GHz'
 							Type='Interpolating'
 							SaveFields=false
 							SaveRadFields=false
-							InterpTolerance=0.5
-							InterpMaxSolns=250
+							InterpTolerance=0.1
+							InterpMaxSolns=10000
 							InterpMinSolns=0
 							InterpMinSubranges=1
-							ExtrapToDC=false
+							ExtrapToDC=true
+							MinSolvedFreq='0.01GHz'
 							InterpUseS=false
 							InterpUsePortImped=true
 							InterpUsePropConst=true
@@ -1542,6 +1546,8 @@ $begin 'AnsoftProject'
 			$begin 'PlotDefaults'
 				Default_SolutionId=42
 				Default_PlotFolder='Automatic'
+				Default_Phase='0deg'
+				Default_Freq='10GHz'
 			$end 'PlotDefaults'
 			$begin 'FieldsPlotManagerID'
 				NextUniqueID=6
@@ -1608,7 +1614,7 @@ $begin 'AnsoftProject'
 					PlotDefinitionType='Mesh_field_type'
 					PlotName='Vector_E1'
 					PlotDefinitionId=5
-					VersionID=20
+					VersionID=63
 					SolutionId=42
 					UserSpecifyName=0
 					UserSpecifyFolder=0
@@ -1747,56 +1753,6 @@ $begin 'AnsoftProject'
 								Increment=0.0872664625997165
 								CreateIndexedSubsweepFlag=false
 							$end 'PostprocessSweep'
-							$begin 'Sweep'
-								Variable='H'
-								Column='13mil'
-								Units='mil'
-							$end 'Sweep'
-							$begin 'Sweep'
-								Variable='W'
-								Column='9.7mil'
-								Units='mil'
-							$end 'Sweep'
-							$begin 'Sweep'
-								Variable='S'
-								Column='6.3mil'
-								Units='mil'
-							$end 'Sweep'
-							$begin 'Sweep'
-								Variable='T'
-								Column='2.35mil'
-								Units='mil'
-							$end 'Sweep'
-							$begin 'Sweep'
-								Variable='LL'
-								Column='10mil'
-								Units='mil'
-							$end 'Sweep'
-							$begin 'Sweep'
-								Variable='ss_coef'
-								Column='2'
-								Units=''
-							$end 'Sweep'
-							$begin 'Sweep'
-								Variable='SS'
-								Column='12.6mil'
-								Units='mil'
-							$end 'Sweep'
-							$begin 'Sweep'
-								Variable='num_of_pairs'
-								Column='2'
-								Units=''
-							$end 'Sweep'
-							$begin 'Sweep'
-								Variable='sub_res'
-								Column='64mil;140.6mil'
-								Units='mil'
-							$end 'Sweep'
-							$begin 'Sweep'
-								Variable='sub_width'
-								Column='192mil;345.2mil'
-								Units='mil'
-							$end 'Sweep'
 						$end 'Sweeps'
 						IsPortOnly=false
 					$end 'SimDataExtractor'
@@ -1805,7 +1761,7 @@ $begin 'AnsoftProject'
 					ID=42
 					Name='LastAdaptive'
 					$begin 'SimDataExtractor'
-						SimValue('Vector_E', 1, 154, false, SimValueID=3216, 3, 0, 2, 0, false, false, 1339, 1, 0, 1, 1, '', 0, 0)
+						SimValue('Vector_E', 1, 154, false, SimValueID=3469, 3, 0, 2, 0, false, false, 1339, 1, 0, 1, 1, '', 0, 0)
 						$begin 'Sweeps'
 							$begin 'Sweep'
 								Variable='Freq'
@@ -1890,12 +1846,12 @@ $begin 'AnsoftProject'
 							$end 'Sweep'
 							$begin 'Sweep'
 								Variable='sub_res'
-								Column='64mil;140.6mil'
+								Column='140.6mil'
 								Units='mil'
 							$end 'Sweep'
 							$begin 'Sweep'
 								Variable='sub_width'
-								Column='192mil;345.2mil'
+								Column='345.2mil'
 								Units='mil'
 							$end 'Sweep'
 						$end 'Sweeps'
@@ -1906,72 +1862,71 @@ $begin 'AnsoftProject'
 					ID=49
 					Name='Sweep'
 					$begin 'SimDataExtractor'
-						SimValue('St(trace_n_0_T1,trace_n_0_T1)', 2, 90, false, SimValueID=3150, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_n_1_T1,trace_n_1_T1)', 2, 90, false, SimValueID=3151, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_p_0_T1,trace_p_0_T1)', 2, 90, false, SimValueID=3152, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_p_1_T1,trace_p_1_T1)', 2, 90, false, SimValueID=3153, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_n_0_T2,trace_n_0_T2)', 2, 90, false, SimValueID=3154, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_n_1_T2,trace_n_1_T2)', 2, 90, false, SimValueID=3155, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_p_0_T2,trace_p_0_T2)', 2, 90, false, SimValueID=3156, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_p_1_T2,trace_p_1_T2)', 2, 90, false, SimValueID=3157, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_p_0_T2,trace_p_0_T1)', 2, 90, false, SimValueID=3158, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_n_0_T1,trace_p_0_T1)', 2, 90, false, SimValueID=3159, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_p_1_T1,trace_p_0_T1)', 2, 90, false, SimValueID=3160, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_n_1_T1,trace_p_0_T1)', 2, 90, false, SimValueID=3161, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_n_0_T2,trace_p_0_T1)', 2, 90, false, SimValueID=3162, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_p_1_T2,trace_p_0_T1)', 2, 90, false, SimValueID=3163, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_n_1_T2,trace_p_0_T1)', 2, 90, false, SimValueID=3164, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_p_0_T1,trace_n_0_T1)', 2, 90, false, SimValueID=3165, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_p_1_T1,trace_n_0_T1)', 2, 90, false, SimValueID=3166, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_n_1_T1,trace_n_0_T1)', 2, 90, false, SimValueID=3167, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_p_0_T2,trace_n_0_T1)', 2, 90, false, SimValueID=3168, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_n_0_T2,trace_n_0_T1)', 2, 90, false, SimValueID=3169, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_p_1_T2,trace_n_0_T1)', 2, 90, false, SimValueID=3170, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_n_1_T2,trace_n_0_T1)', 2, 90, false, SimValueID=3171, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_p_0_T1,trace_p_1_T1)', 2, 90, false, SimValueID=3172, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_n_0_T1,trace_p_1_T1)', 2, 90, false, SimValueID=3173, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_n_1_T1,trace_p_1_T1)', 2, 90, false, SimValueID=3174, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_p_0_T2,trace_p_1_T1)', 2, 90, false, SimValueID=3175, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_n_0_T2,trace_p_1_T1)', 2, 90, false, SimValueID=3176, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_p_1_T2,trace_p_1_T1)', 2, 90, false, SimValueID=3177, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_n_1_T2,trace_p_1_T1)', 2, 90, false, SimValueID=3178, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_p_0_T1,trace_n_1_T1)', 2, 90, false, SimValueID=3179, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_n_0_T1,trace_n_1_T1)', 2, 90, false, SimValueID=3180, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_p_1_T1,trace_n_1_T1)', 2, 90, false, SimValueID=3181, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_p_0_T2,trace_n_1_T1)', 2, 90, false, SimValueID=3182, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_n_0_T2,trace_n_1_T1)', 2, 90, false, SimValueID=3183, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_p_1_T2,trace_n_1_T1)', 2, 90, false, SimValueID=3184, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_n_1_T2,trace_n_1_T1)', 2, 90, false, SimValueID=3185, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_p_0_T1,trace_p_0_T2)', 2, 90, false, SimValueID=3186, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_n_0_T1,trace_p_0_T2)', 2, 90, false, SimValueID=3187, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_p_1_T1,trace_p_0_T2)', 2, 90, false, SimValueID=3188, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_n_1_T1,trace_p_0_T2)', 2, 90, false, SimValueID=3189, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_n_0_T2,trace_p_0_T2)', 2, 90, false, SimValueID=3190, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_p_1_T2,trace_p_0_T2)', 2, 90, false, SimValueID=3191, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_n_1_T2,trace_p_0_T2)', 2, 90, false, SimValueID=3192, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_p_0_T1,trace_n_0_T2)', 2, 90, false, SimValueID=3193, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_n_0_T1,trace_n_0_T2)', 2, 90, false, SimValueID=3194, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_p_1_T1,trace_n_0_T2)', 2, 90, false, SimValueID=3195, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_n_1_T1,trace_n_0_T2)', 2, 90, false, SimValueID=3196, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_p_0_T2,trace_n_0_T2)', 2, 90, false, SimValueID=3197, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_p_1_T2,trace_n_0_T2)', 2, 90, false, SimValueID=3198, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_n_1_T2,trace_n_0_T2)', 2, 90, false, SimValueID=3199, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_p_0_T1,trace_p_1_T2)', 2, 90, false, SimValueID=3200, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_n_0_T1,trace_p_1_T2)', 2, 90, false, SimValueID=3201, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_p_1_T1,trace_p_1_T2)', 2, 90, false, SimValueID=3202, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_n_1_T1,trace_p_1_T2)', 2, 90, false, SimValueID=3203, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_p_0_T2,trace_p_1_T2)', 2, 90, false, SimValueID=3204, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_n_0_T2,trace_p_1_T2)', 2, 90, false, SimValueID=3205, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_n_1_T2,trace_p_1_T2)', 2, 90, false, SimValueID=3206, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_p_0_T1,trace_n_1_T2)', 2, 90, false, SimValueID=3207, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_n_0_T1,trace_n_1_T2)', 2, 90, false, SimValueID=3208, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_p_1_T1,trace_n_1_T2)', 2, 90, false, SimValueID=3209, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_n_1_T1,trace_n_1_T2)', 2, 90, false, SimValueID=3210, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_p_0_T2,trace_n_1_T2)', 2, 90, false, SimValueID=3211, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_n_0_T2,trace_n_1_T2)', 2, 90, false, SimValueID=3212, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(trace_p_1_T2,trace_n_1_T2)', 2, 90, false, SimValueID=3213, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
-						SimValue('St(Diff1,Diff1)', 2, 90, false, SimValueID=3214, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '0')
-						SimValue('St(Diff1,Diff1)', 2, 90, false, SimValueID=3215, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_0_T1,trace_n_0_T1)', 2, 90, false, SimValueID=3405, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_1_T1,trace_n_1_T1)', 2, 90, false, SimValueID=3406, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_0_T1,trace_p_0_T1)', 2, 90, false, SimValueID=3407, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_1_T1,trace_p_1_T1)', 2, 90, false, SimValueID=3408, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_0_T2,trace_n_0_T2)', 2, 90, false, SimValueID=3409, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_1_T2,trace_n_1_T2)', 2, 90, false, SimValueID=3410, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_0_T2,trace_p_0_T2)', 2, 90, false, SimValueID=3411, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_1_T2,trace_p_1_T2)', 2, 90, false, SimValueID=3412, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_0_T2,trace_p_0_T1)', 2, 90, false, SimValueID=3413, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_0_T1,trace_p_0_T1)', 2, 90, false, SimValueID=3414, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_1_T1,trace_p_0_T1)', 2, 90, false, SimValueID=3415, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_1_T1,trace_p_0_T1)', 2, 90, false, SimValueID=3416, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_0_T2,trace_p_0_T1)', 2, 90, false, SimValueID=3417, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_1_T2,trace_p_0_T1)', 2, 90, false, SimValueID=3418, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_1_T2,trace_p_0_T1)', 2, 90, false, SimValueID=3419, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_0_T1,trace_n_0_T1)', 2, 90, false, SimValueID=3420, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_1_T1,trace_n_0_T1)', 2, 90, false, SimValueID=3421, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_1_T1,trace_n_0_T1)', 2, 90, false, SimValueID=3422, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_0_T2,trace_n_0_T1)', 2, 90, false, SimValueID=3423, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_0_T2,trace_n_0_T1)', 2, 90, false, SimValueID=3424, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_1_T2,trace_n_0_T1)', 2, 90, false, SimValueID=3425, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_1_T2,trace_n_0_T1)', 2, 90, false, SimValueID=3426, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_0_T1,trace_p_1_T1)', 2, 90, false, SimValueID=3427, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_0_T1,trace_p_1_T1)', 2, 90, false, SimValueID=3428, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_1_T1,trace_p_1_T1)', 2, 90, false, SimValueID=3429, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_0_T2,trace_p_1_T1)', 2, 90, false, SimValueID=3430, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_0_T2,trace_p_1_T1)', 2, 90, false, SimValueID=3431, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_1_T2,trace_p_1_T1)', 2, 90, false, SimValueID=3432, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_1_T2,trace_p_1_T1)', 2, 90, false, SimValueID=3433, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_0_T1,trace_n_1_T1)', 2, 90, false, SimValueID=3434, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_0_T1,trace_n_1_T1)', 2, 90, false, SimValueID=3435, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_1_T1,trace_n_1_T1)', 2, 90, false, SimValueID=3436, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_0_T2,trace_n_1_T1)', 2, 90, false, SimValueID=3437, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_0_T2,trace_n_1_T1)', 2, 90, false, SimValueID=3438, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_1_T2,trace_n_1_T1)', 2, 90, false, SimValueID=3439, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_1_T2,trace_n_1_T1)', 2, 90, false, SimValueID=3440, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_0_T1,trace_p_0_T2)', 2, 90, false, SimValueID=3441, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_0_T1,trace_p_0_T2)', 2, 90, false, SimValueID=3442, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_1_T1,trace_p_0_T2)', 2, 90, false, SimValueID=3443, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_1_T1,trace_p_0_T2)', 2, 90, false, SimValueID=3444, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_0_T2,trace_p_0_T2)', 2, 90, false, SimValueID=3445, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_1_T2,trace_p_0_T2)', 2, 90, false, SimValueID=3446, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_1_T2,trace_p_0_T2)', 2, 90, false, SimValueID=3447, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_0_T1,trace_n_0_T2)', 2, 90, false, SimValueID=3448, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_0_T1,trace_n_0_T2)', 2, 90, false, SimValueID=3449, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_1_T1,trace_n_0_T2)', 2, 90, false, SimValueID=3450, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_1_T1,trace_n_0_T2)', 2, 90, false, SimValueID=3451, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_0_T2,trace_n_0_T2)', 2, 90, false, SimValueID=3452, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_1_T2,trace_n_0_T2)', 2, 90, false, SimValueID=3453, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_1_T2,trace_n_0_T2)', 2, 90, false, SimValueID=3454, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_0_T1,trace_p_1_T2)', 2, 90, false, SimValueID=3455, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_0_T1,trace_p_1_T2)', 2, 90, false, SimValueID=3456, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_1_T1,trace_p_1_T2)', 2, 90, false, SimValueID=3457, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_1_T1,trace_p_1_T2)', 2, 90, false, SimValueID=3458, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_0_T2,trace_p_1_T2)', 2, 90, false, SimValueID=3459, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_0_T2,trace_p_1_T2)', 2, 90, false, SimValueID=3460, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_1_T2,trace_p_1_T2)', 2, 90, false, SimValueID=3461, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_0_T1,trace_n_1_T2)', 2, 90, false, SimValueID=3462, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_0_T1,trace_n_1_T2)', 2, 90, false, SimValueID=3463, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_1_T1,trace_n_1_T2)', 2, 90, false, SimValueID=3464, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_1_T1,trace_n_1_T2)', 2, 90, false, SimValueID=3465, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_0_T2,trace_n_1_T2)', 2, 90, false, SimValueID=3466, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_n_0_T2,trace_n_1_T2)', 2, 90, false, SimValueID=3467, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(trace_p_1_T2,trace_n_1_T2)', 2, 90, false, SimValueID=3468, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('St(Diff1,Diff1)', 2, 90, false, SimValueID=3709, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '0')
 						$begin 'Sweeps'
 							$begin 'PostprocessSweep'
 								Variable='Freq'
@@ -2060,12 +2015,12 @@ $begin 'AnsoftProject'
 							$end 'Sweep'
 							$begin 'Sweep'
 								Variable='sub_res'
-								Column='64mil;140.6mil'
+								Column='140.6mil'
 								Units='mil'
 							$end 'Sweep'
 							$begin 'Sweep'
 								Variable='sub_width'
-								Column='192mil;345.2mil'
+								Column='345.2mil'
 								Units='mil'
 							$end 'Sweep'
 						$end 'Sweeps'
@@ -2081,12 +2036,14 @@ $begin 'AnsoftProject'
 					ID=1371
 					Name='Sweep'
 					$begin 'SimDataExtractor'
+						SimValue('St(Diff1,Diff1)', 2, 90, false, SimValueID=3712, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
+						SimValue('Zo(trace_n_0_T2,trace_p_0_T1)', 2, 90, false, SimValueID=3713, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
 						$begin 'Sweeps'
 							$begin 'PostprocessSweep'
 								Variable='Freq'
-								Column='1GHz;1.5GHz;2GHz;2.5GHz;3GHz;3.5GHz;4GHz;4.5GHz;5GHz;5.5GHz;6GHz;6.5GHz;7GHz;7.5GHz;8GHz;8.5GHz;9GHz;9.5GHz;10GHz;10.5GHz;11GHz;11.5GHz;12GHz;12.5GHz;13GHz;13.5GHz;14GHz;14.5GHz;15GHz;15.5GHz;16GHz;16.5GHz;17GHz;17.5GHz;18GHz;18.5GHz;19GHz;19.5GHz;20GHz;20.5GHz;21GHz;21.5GHz;22GHz;22.5GHz;23GHz;23.5GHz;24GHz;24.5GHz;25GHz;25.5GHz;26GHz;26.5GHz;27GHz;27.5GHz;28GHz;28.5GHz;29GHz;29.5GHz;30GHz;30.5GHz;31GHz;31.5GHz;32GHz;32.5GHz;33GHz;33.5GHz;34GHz;34.5GHz;35GHz;35.5GHz;36GHz;36.5GHz;37GHz;37.5GHz;38GHz;38.5GHz;39GHz;39.5GHz;40GHz;40.5GHz;41GHz;41.5GHz;42GHz;42.5GHz;43GHz;43.5GHz;44GHz;44.5GHz;45GHz;45.5GHz;46GHz;46.5GHz;47GHz;47.5GHz;48GHz;48.5GHz;49GHz;49.5GHz;50GHz;50.5GHz;51GHz;51.5GHz;52GHz;52.5GHz;53GHz;53.5GHz;54GHz;54.5GHz;55GHz;55.5GHz;56GHz;56.5GHz;57GHz;57.5GHz;58GHz;58.5GHz;59GHz;59.5GHz;60GHz;60.5GHz;61GHz;61.5GHz;62GHz;62.5GHz;63GHz;63.5GHz;64GHz;64.5GHz;65GHz;65.5GHz;66GHz;66.5GHz;67GHz;67.5GHz;68GHz;68.5GHz;69GHz;69.5GHz;70GHz'
+								Column='0.1GHz;0.2GHz;0.3GHz;0.4GHz;0.5GHz;0.6GHz;0.7GHz;0.8GHz;0.9GHz;1GHz;1.1GHz;1.2GHz;1.3GHz;1.4GHz;1.5GHz;1.6GHz;1.7GHz;1.8GHz;1.9GHz;2GHz;2.1GHz;2.2GHz;2.3GHz;2.4GHz;2.5GHz;2.6GHz;2.7GHz;2.8GHz;2.9GHz;3GHz;3.1GHz;3.2GHz;3.3GHz;3.4GHz;3.5GHz;3.6GHz;3.7GHz;3.8GHz;3.9GHz;4GHz;4.1GHz;4.2GHz;4.3GHz;4.4GHz;4.5GHz;4.6GHz;4.7GHz;4.8GHz;4.9GHz;5GHz;5.1GHz;5.2GHz;5.3GHz;5.4GHz;5.5GHz;5.6GHz;5.7GHz;5.8GHz;5.9GHz;6GHz;6.1GHz;6.2GHz;6.3GHz;6.4GHz;6.5GHz;6.6GHz;6.7GHz;6.8GHz;6.9GHz;7GHz;7.1GHz;7.2GHz;7.3GHz;7.4GHz;7.5GHz;7.6GHz;7.7GHz;7.8GHz;7.9GHz;8GHz;8.1GHz;8.2GHz;8.3GHz;8.4GHz;8.5GHz;8.6GHz;8.7GHz;8.8GHz;8.9GHz;9GHz;9.1GHz;9.2GHz;9.3GHz;9.4GHz;9.5GHz;9.6GHz;9.7GHz;9.8GHz;9.9GHz;10GHz;10.1GHz;10.2GHz;10.3GHz;10.4GHz;10.5GHz;10.6GHz;10.7GHz;10.8GHz;10.9GHz;11GHz;11.1GHz;11.2GHz;11.3GHz;11.4GHz;11.5GHz;11.6GHz;11.7GHz;11.8GHz;11.9GHz;12GHz;12.1GHz;12.2GHz;12.3GHz;12.4GHz;12.5GHz;12.6GHz;12.7GHz;12.8GHz;12.9GHz;13GHz;13.1GHz;13.2GHz;13.3GHz;13.4GHz;13.5GHz;13.6GHz;13.7GHz;13.8GHz;13.9GHz;14GHz;14.1GHz;14.2GHz;14.3GHz;14.4GHz;14.5GHz;14.6GHz;14.7GHz;14.8GHz;14.9GHz;15GHz;15.1GHz;15.2GHz;15.3GHz;15.4GHz;15.5GHz;15.6GHz;15.7GHz;15.8GHz;15.9GHz;16GHz;16.1GHz;16.2GHz;16.3GHz;16.4GHz;16.5GHz;16.6GHz;16.7GHz;16.8GHz;16.9GHz;17GHz;17.1GHz;17.2GHz;17.3GHz;17.4GHz;17.5GHz;17.6GHz;17.7GHz;17.8GHz;17.9GHz;18GHz;18.1GHz;18.2GHz;18.3GHz;18.4GHz;18.5GHz;18.6GHz;18.7GHz;18.8GHz;18.9GHz;19GHz;19.1GHz;19.2GHz;19.3GHz;19.4GHz;19.5GHz;19.6GHz;19.7GHz;19.8GHz;19.9GHz;20GHz;20.1GHz;20.2GHz;20.3GHz;20.4GHz;20.5GHz;20.6GHz;20.7GHz;20.8GHz;20.9GHz;21GHz;21.1GHz;21.2GHz;21.3GHz;21.4GHz;21.5GHz;21.6GHz;21.7GHz;21.8GHz;21.9GHz;22GHz;22.1GHz;22.2GHz;22.3GHz;22.4GHz;22.5GHz;22.6GHz;22.7GHz;22.8GHz;22.9GHz;23GHz;23.1GHz;23.2GHz;23.3GHz;23.4GHz;23.5GHz;23.6GHz;23.7GHz;23.8GHz;23.9GHz;24GHz;24.1GHz;24.2GHz;24.3GHz;24.4GHz;24.5GHz;24.6GHz;24.7GHz;24.8GHz;24.9GHz;25GHz;25.1GHz;25.2GHz;25.3GHz;25.4GHz;25.5GHz;25.6GHz;25.7GHz;25.8GHz;25.9GHz;26GHz;26.1GHz;26.2GHz;26.3GHz;26.4GHz;26.5GHz;26.6GHz;26.7GHz;26.8GHz;26.9GHz;27GHz;27.1GHz;27.2GHz;27.3GHz;27.4GHz;27.5GHz;27.6GHz;27.7GHz;27.8GHz;27.9GHz;28GHz;28.1GHz;28.2GHz;28.3GHz;28.4GHz;28.5GHz;28.6GHz;28.7GHz;28.8GHz;28.9GHz;29GHz;29.1GHz;29.2GHz;29.3GHz;29.4GHz;29.5GHz;29.6GHz;29.7GHz;29.8GHz;29.9GHz;30GHz;30.1GHz;30.2GHz;30.3GHz;30.4GHz;30.5GHz;30.6GHz;30.7GHz;30.8GHz;30.9GHz;31GHz;31.1GHz;31.2GHz;31.3GHz;31.4GHz;31.5GHz;31.6GHz;31.7GHz;31.8GHz;31.9GHz;32GHz;32.1GHz;32.2GHz;32.3GHz;32.4GHz;32.5GHz;32.6GHz;32.7GHz;32.8GHz;32.9GHz;33GHz;33.1GHz;33.2GHz;33.3GHz;33.4GHz;33.5GHz;33.6GHz;33.7GHz;33.8GHz;33.9GHz;34GHz;34.1GHz;34.2GHz;34.3GHz;34.4GHz;34.5GHz;34.6GHz;34.7GHz;34.8GHz;34.9GHz;35GHz;35.1GHz;35.2GHz;35.3GHz;35.4GHz;35.5GHz;35.6GHz;35.7GHz;35.8GHz;35.9GHz;36GHz;36.1GHz;36.2GHz;36.3GHz;36.4GHz;36.5GHz;36.6GHz;36.7GHz;36.8GHz;36.9GHz;37GHz;37.1GHz;37.2GHz;37.3GHz;37.4GHz;37.5GHz;37.6GHz;37.7GHz;37.8GHz;37.9GHz;38GHz;38.1GHz;38.2GHz;38.3GHz;38.4GHz;38.5GHz;38.6GHz;38.7GHz;38.8GHz;38.9GHz;39GHz;39.1GHz;39.2GHz;39.3GHz;39.4GHz;39.5GHz;39.6GHz;39.7GHz;39.8GHz;39.9GHz;40GHz;40.1GHz;40.2GHz;40.3GHz;40.4GHz;40.5GHz;40.6GHz;40.7GHz;40.8GHz;40.9GHz;41GHz;41.1GHz;41.2GHz;41.3GHz;41.4GHz;41.5GHz;41.6GHz;41.7GHz;41.8GHz;41.9GHz;42GHz;42.1GHz;42.2GHz;42.3GHz;42.4GHz;42.5GHz;42.6GHz;42.7GHz;42.8GHz;42.9GHz;43GHz;43.1GHz;43.2GHz;43.3GHz;43.4GHz;43.5GHz;43.6GHz;43.7GHz;43.8GHz;43.9GHz;44GHz;44.1GHz;44.2GHz;44.3GHz;44.4GHz;44.5GHz;44.6GHz;44.7GHz;44.8GHz;44.9GHz;45GHz;45.1GHz;45.2GHz;45.3GHz;45.4GHz;45.5GHz;45.6GHz;45.7GHz;45.8GHz;45.9GHz;46GHz;46.1GHz;46.2GHz;46.3GHz;46.4GHz;46.5GHz;46.6GHz;46.7GHz;46.8GHz;46.9GHz;47GHz;47.1GHz;47.2GHz;47.3GHz;47.4GHz;47.5GHz;47.6GHz;47.7GHz;47.8GHz;47.9GHz;48GHz;48.1GHz;48.2GHz;48.3GHz;48.4GHz;48.5GHz;48.6GHz;48.7GHz;48.8GHz;48.9GHz;49GHz;49.1GHz;49.2GHz;49.3GHz;49.4GHz;49.5GHz;49.6GHz;49.7GHz;49.8GHz;49.9GHz;50GHz;50.1GHz;50.2GHz;50.3GHz;50.4GHz;50.5GHz;50.6GHz;50.7GHz;50.8GHz;50.9GHz;51GHz;51.1GHz;51.2GHz;51.3GHz;51.4GHz;51.5GHz;51.6GHz;51.7GHz;51.8GHz;51.9GHz;52GHz;52.1GHz;52.2GHz;52.3GHz;52.4GHz;52.5GHz;52.6GHz;52.7GHz;52.8GHz;52.9GHz;53GHz;53.1GHz;53.2GHz;53.3GHz;53.4GHz;53.5GHz;53.6GHz;53.7GHz;53.8GHz;53.9GHz;54GHz;54.1GHz;54.2GHz;54.3GHz;54.4GHz;54.5GHz;54.6GHz;54.7GHz;54.8GHz;54.9GHz;55GHz;55.1GHz;55.2GHz;55.3GHz;55.4GHz;55.5GHz;55.6GHz;55.7GHz;55.8GHz;55.9GHz;56GHz;56.1GHz;56.2GHz;56.3GHz;56.4GHz;56.5GHz;56.6GHz;56.7GHz;56.8GHz;56.9GHz;57GHz;57.1GHz;57.2GHz;57.3GHz;57.4GHz;57.5GHz;57.6GHz;57.7GHz;57.8GHz;57.9GHz;58GHz;58.1GHz;58.2GHz;58.3GHz;58.4GHz;58.5GHz;58.6GHz;58.7GHz;58.8GHz;58.9GHz;59GHz;59.1GHz;59.2GHz;59.3GHz;59.4GHz;59.5GHz;59.6GHz;59.7GHz;59.8GHz;59.9GHz;60GHz;60.1GHz;60.2GHz;60.3GHz;60.4GHz;60.5GHz;60.6GHz;60.7GHz;60.8GHz;60.9GHz;61GHz;61.1GHz;61.2GHz;61.3GHz;61.4GHz;61.5GHz;61.6GHz;61.7GHz;61.8GHz;61.9GHz;62GHz;62.1GHz;62.2GHz;62.3GHz;62.4GHz;62.5GHz;62.6GHz;62.7GHz;62.8GHz;62.9GHz;63GHz;63.1GHz;63.2GHz;63.3GHz;63.4GHz;63.5GHz;63.6GHz;63.7GHz;63.8GHz;63.9GHz;64GHz;64.1GHz;64.2GHz;64.3GHz;64.4GHz;64.5GHz;64.6GHz;64.7GHz;64.8GHz;64.9GHz;65GHz;65.1GHz;65.2GHz;65.3GHz;65.4GHz;65.5GHz;65.6GHz;65.7GHz;65.8GHz;65.9GHz;66GHz;66.1GHz;66.2GHz;66.3GHz;66.4GHz;66.5GHz;66.6GHz;66.7GHz;66.8GHz;66.9GHz;67GHz;67.1GHz;67.2GHz;67.3GHz;67.4GHz;67.5GHz;67.6GHz;67.7GHz;67.8GHz;67.9GHz;68GHz;68.1GHz;68.2GHz;68.3GHz;68.4GHz;68.5GHz;68.6GHz;68.7GHz;68.8GHz;68.9GHz;69GHz;69.1GHz;69.2GHz;69.3GHz;69.4GHz;69.5GHz;69.6GHz;69.7GHz;69.8GHz;69.9GHz;70GHz'
 								Units='GHz'
-								Minimum=1000000000
+								Minimum=100000000
 								Maximum=70000000000
 								Increment=70000000000
 								CreateIndexedSubsweepFlag=false
@@ -2169,12 +2126,12 @@ $begin 'AnsoftProject'
 							$end 'Sweep'
 							$begin 'Sweep'
 								Variable='sub_res'
-								Column='64mil;140.6mil'
+								Column='140.6mil'
 								Units='mil'
 							$end 'Sweep'
 							$begin 'Sweep'
 								Variable='sub_width'
-								Column='192mil;345.2mil'
+								Column='345.2mil'
 								Units='mil'
 							$end 'Sweep'
 						$end 'Sweeps'
@@ -2185,6 +2142,8 @@ $begin 'AnsoftProject'
 					ID=2374
 					Name='PortOnly'
 					$begin 'SimDataExtractor'
+						SimValue('St(Diff1,Diff1)', 2, 90, false, SimValueID=3710, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '0')
+						SimValue('St(Diff1,Diff1)', 2, 90, false, SimValueID=3711, 3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0, 'Diff', false, '1')
 						$begin 'Sweeps'
 							$begin 'Sweep'
 								Variable='Freq'
@@ -2269,12 +2228,12 @@ $begin 'AnsoftProject'
 							$end 'Sweep'
 							$begin 'Sweep'
 								Variable='sub_res'
-								Column='64mil;140.6mil'
+								Column='140.6mil'
 								Units='mil'
 							$end 'Sweep'
 							$begin 'Sweep'
 								Variable='sub_width'
-								Column='192mil;345.2mil'
+								Column='345.2mil'
 								Units='mil'
 							$end 'Sweep'
 						$end 'Sweeps'
@@ -2286,16 +2245,16 @@ $begin 'AnsoftProject'
 				V=2818
 				$begin 'Setup'
 					N='Setup1'
-					V=2818
-					Soln(N='AdaptivePass', V=2819)
-					Soln(N='LastAdaptive', V=2819)
-					Soln(N='Sweep', V=2819)
+					V=3736
+					Soln(N='AdaptivePass', V=3736)
+					Soln(N='LastAdaptive', V=3736)
+					Soln(N='Sweep', V=3736)
 				$end 'Setup'
 				$begin 'Setup'
 					N='Setup_port'
-					V=2820
-					Soln(N='Sweep', V=2820)
-					Soln(N='PortOnly', V=2820)
+					V=3657
+					Soln(N='Sweep', V=3657)
+					Soln(N='PortOnly', V=3657)
 				$end 'Setup'
 			$end 'Version ID Map'
 			$begin 'ID Map'
@@ -2364,7 +2323,7 @@ $begin 'AnsoftProject'
 				DesignInstanceID=1
 				$begin 'WindowPosition'
 					$begin 'EditorWindow'
-						Circuit(Editor3d(View(WindowPos(5, -1, -1, -13, -58, 0, 0, 1735, 755), OrientationMatrix(-0.00195886916480958, -0.00314117828384042, 0.00496663898229599, 0, 0.00587660633027554, -0.00104705954436213, 0.00165554659906775, 0, -2.29935140372284e-10, 0.00523529713973403, 0.00331109296530485, 0, 0.0333008766174316, -0.234541535377502, -6.2709527015686, 1, 0, -1.97500002384186, 1.97500002384186, -1, 1, 0.148017883300781, 11.6290254592896), Drawings[9: 'trace_p_0', 'trace_n_0', 'trace_n_1', 'trace_p_1', 'substrate', 'GND', 'AirBox', 'Port1', 'Port2'], 'View Data'('Render Mode'=1, 'Show Ruler'=1, 'Coordinate Systems View Mode'=0, 'CS Triad View Mode'=0, 'Render Facets'=1, GridVisible=1, GridAutoAdjust=1, GridAutoExtents=1, GridType='Rect', GridStyle='Line', NumPixels=30, dXForGrid=10, dYForGrid=10, dZForGrid=10, dRForGrid=10, dThetaForGrid=10), ClipPlanes(ClipPlaneOptions(DisableWhenDrawingNewPlane=true, ForceOpqaueForUnclipped=false, ShowClipped=false, Transparency=0, HandleColor=16776960)))))
+						Circuit(Editor3d(View(WindowPos(3, -1, -1, -13, -58, 0, 0, 1735, 755), OrientationMatrix(-0.00195886939764023, -0.00314117805100977, 0.00496663898229599, 0, 0.00587660726159811, -0.00104705919511616, 0.00165554648265243, 0, -2.39665898238428e-10, 0.0052352980710566, 0.0033110931981355, 0, 0.0333008766174316, -0.234541147947311, -6.27095317840576, 1, 0, -1.79918456077576, 1.79918456077576, -1, 1, 0.148018360137939, 11.6290264129639), Drawings[9: 'trace_p_0', 'trace_n_0', 'trace_n_1', 'trace_p_1', 'substrate', 'GND', 'AirBox', 'Port1', 'Port2'], 'View Data'('Render Mode'=1, 'Show Ruler'=1, 'Coordinate Systems View Mode'=0, 'CS Triad View Mode'=0, 'Render Facets'=1, GridVisible=1, GridAutoAdjust=1, GridAutoExtents=1, GridType='Rect', GridStyle='Line', NumPixels=30, dXForGrid=10, dYForGrid=10, dZForGrid=10, dRForGrid=10, dThetaForGrid=10), ClipPlanes(ClipPlaneOptions(DisableWhenDrawingNewPlane=true, ForceOpqaueForUnclipped=false, ShowClipped=false, Transparency=0, HandleColor=16776960)))))
 					$end 'EditorWindow'
 				$end 'WindowPosition'
 				$begin 'ReportSetup'
@@ -2386,7 +2345,7 @@ $begin 'AnsoftProject'
 										$end 'DESIGN_SOLUTION_SIM_VALUE_CONTEXT'
 									$end 'DesignSolnDefn'
 									ID=102
-									VersionID=1143
+									VersionID=1151
 									Name='dB(St(trace_p_0_T1,trace_p_0_T1))'
 									TieNameToExpr=true
 									$begin 'Components'
@@ -2488,7 +2447,7 @@ $begin 'AnsoftProject'
 						NextUniqueID=104
 						MoveBackwards=false
 						$begin 'NextVersID'
-							NextUniqueID=1144
+							NextUniqueID=1152
 							MoveBackwards=false
 						$end 'NextVersID'
 					$end 'ReportManager'
@@ -2510,7 +2469,7 @@ $begin 'AnsoftProject'
 									$end 'Graph2D'
 								$end 'Graph2DsV2'
 								$begin 'PlotDisplayDataManager'
-									NextUniqueID=39
+									NextUniqueID=45
 									MoveBackwards=false
 									$begin 'PlotHeaderDataSource'
 										CompanyName=''
@@ -3759,17 +3718,17 @@ $begin 'AnsoftProject'
 									$end 'DocDefaultAttributes'
 									$begin 'PerViewPlotAttributeStoreMap'
 										$begin 'MapItem'
-											ItemID=36
+											ItemID=44
 											$begin 'PlotAttributeStoreMap'
 												$begin 'MainMapItem'
 													$begin 'SubMapItem'
 														DataSourceID=4
 														$begin 'BasicLayoutAttribute'
 															$begin 'LayoutRect'
-																Top=592
-																Left=660
-																Bottom=9794
-																Right=9172
+																Top=731
+																Left=992
+																Bottom=9759
+																Right=8725
 															$end 'LayoutRect'
 														$end 'BasicLayoutAttribute'
 													$end 'SubMapItem'
@@ -3777,10 +3736,10 @@ $begin 'AnsoftProject'
 														DataSourceID=28
 														$begin 'BasicLayoutAttribute'
 															$begin 'LayoutRect'
-																Top=592
-																Left=660
-																Bottom=9794
-																Right=9172
+																Top=731
+																Left=992
+																Bottom=9759
+																Right=8725
 															$end 'LayoutRect'
 														$end 'BasicLayoutAttribute'
 													$end 'SubMapItem'
@@ -3791,7 +3750,7 @@ $begin 'AnsoftProject'
 																Top=75
 																Left=75
 																Bottom=9925
-																Right=503
+																Right=756
 															$end 'LayoutRect'
 														$end 'BasicLayoutAttribute'
 													$end 'SubMapItem'
@@ -3802,15 +3761,15 @@ $begin 'AnsoftProject'
 														$begin 'CartesianAxisLayoutAttribute'
 															$begin 'AxisRect'
 																Top=75
-																Left=9172
+																Left=8725
 																Bottom=9925
 																Right=9925
 															$end 'AxisRect'
 															$begin 'GridRect'
-																Top=592
-																Left=660
-																Bottom=9794
-																Right=9172
+																Top=731
+																Left=992
+																Bottom=9759
+																Right=8725
 															$end 'GridRect'
 															AxisCollapsed=false
 															AxisExpandCollapseByUser=false
@@ -3821,15 +3780,15 @@ $begin 'AnsoftProject'
 														$begin 'CartesianAxisLayoutAttribute'
 															$begin 'AxisRect'
 																Top=75
-																Left=660
-																Bottom=592
-																Right=9172
+																Left=992
+																Bottom=731
+																Right=8725
 															$end 'AxisRect'
 															$begin 'GridRect'
-																Top=592
-																Left=660
-																Bottom=9794
-																Right=9172
+																Top=731
+																Left=992
+																Bottom=9759
+																Right=8725
 															$end 'GridRect'
 															AxisCollapsed=false
 															AxisExpandCollapseByUser=false
@@ -3843,7 +3802,7 @@ $begin 'AnsoftProject'
 															X_spc=10000000000
 															X_fwd=4
 															X_fpr=2
-															Y1_spc=5
+															Y1_spc=10
 															Y1_fwd=4
 															Y1_fpr=2
 														$end 'CartesianCurveGroupLayoutAttribute'
@@ -3859,12 +3818,36 @@ $begin 'AnsoftProject'
 																		Top=7236
 																		Left=5637
 																		Bottom=8983
-																		Right=6819
+																		Right=13137
 																	$end 'BoundingRect'
 																	ModifySize=false
 																	ModifyPosition=true
 																$end 'OverlayLayoutAttribute'
 															$end 'Dock_0'
+															$begin 'Dock_1'
+																$begin 'OverlayLayoutAttribute'
+																	$begin 'BoundingRect'
+																		Top=8253
+																		Left=0
+																		Bottom=10000
+																		Right=10000
+																	$end 'BoundingRect'
+																	ModifySize=false
+																	ModifyPosition=true
+																$end 'OverlayLayoutAttribute'
+															$end 'Dock_1'
+															$begin 'Dock_2'
+																$begin 'OverlayLayoutAttribute'
+																	$begin 'BoundingRect'
+																		Top=0
+																		Left=0
+																		Bottom=1747
+																		Right=10000
+																	$end 'BoundingRect'
+																	ModifySize=false
+																	ModifyPosition=true
+																$end 'OverlayLayoutAttribute'
+															$end 'Dock_2'
 														$end 'DockableOverlayLayoutAttribute'
 													$end 'SubMapItem'
 												$end 'MainMapItem'
@@ -3908,7 +3891,7 @@ $begin 'AnsoftProject'
 								$begin 'Report2D'
 									$begin 'ViewInfo'
 										$begin 'WrapperView'
-											ID(36)
+											ID(44)
 										$end 'WrapperView'
 										$begin 'WrapperDoc'
 											HiddenDrawings()
@@ -3918,13 +3901,13 @@ $begin 'AnsoftProject'
 													$begin 'MedCamera'
 														$begin 'svrc'
 															svid=4
-															view(36, cam(XYCam(false, true, true, true, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1)))
+															view(44, cam(XYCam(false, true, true, true, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1)))
 														$end 'svrc'
 													$end 'MedCamera'
 												$end 'CurveMed'
 											$end 'DispType'
 										$end 'WrapperDoc'
-										WindowPos(WindowPos(3, -1, -1, -13, -58, 49, 49, 1886, 740))
+										WindowPos(WindowPos(5, -1, -1, -13, -58, 196, 196, 2033, 887))
 									$end 'ViewInfo'
 								$end 'Report2D'
 							$end 'WindowInfoList'
@@ -3997,46 +3980,46 @@ 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\
-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\
-een7d1qlQooor0TvCiiigAooooA//9k='
+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'
 	$begin 'DesignInfo'
 		DesignName='2-diff-pairs'
 		Notes=''
@@ -4116,96 +4099,96 @@ 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\
-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\
-UUAFFFFABRRRQAUUUUAFFFFABRRRQB//2Q=='
+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\
+UUAFFFFABRRRQAUUUUAf/9k='
 	$end 'DesignInfo'
 $end 'ProjectPreview'

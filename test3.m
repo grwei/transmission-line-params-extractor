@@ -7,22 +7,17 @@
 
 clc; clear; close all;
 
-%% Import data
-
-% Import simulated data
-lineLength = 0.00508; % Line Length(meters)
-filename_16line = 'data/16line/16lines_HFSS/16lines_HFSS_200mil.s32p';
-SingleEnded32PortData = read(rfdata.data,filename_16line);
-freq = SingleEnded32PortData.Freq;
-freqPts = length(freq);
-z0 = SingleEnded32PortData.Z0; % Reference Impedance
-SingleEnded32PortData.S_Parameters = snp2smp(SingleEnded32PortData.S_Parameters,...
-    z0,1:1:32); % Classic style
-numOfLines = size(SingleEnded32PortData.S_Parameters,1)/2;
-
 %% initialize
 % 此节在每个调试周期只需执行一次
 
+% %%% Import simulated S
+% filename_16line = 'data/16line/16lines_HFSS/16lines_HFSS_200mil.s32p';
+% SingleEnded32PortData = read(rfdata.data,filename_16line);
+% numOfLines = size(SingleEnded32PortData.S_Parameters,1)/2;
+% freq = SingleEnded32PortData.Freq;
+% freqPts = length(freq);
+% lineLength = 0.00508; % Line Length(meters)
+%  
 % %%% Import Cadence-PowerSI-extracted params
 % % Allocate memory
 % rlgc_PowerSI.R = zeros(numOfLines,numOfLines,freqPts);
@@ -84,10 +79,19 @@ numOfLines = size(SingleEnded32PortData.S_Parameters,1)/2;
 % end
 % 
 % %%% Save some data
-% save('test3','rlgc_PowerSI','rlgc_HFSSW');
+% save('test3','SingleEnded32PortData','rlgc_PowerSI','rlgc_HFSSW');
 
-%%
-load('test3','rlgc_PowerSI','rlgc_HFSSW');
+%% process data
+
+load('test3','SingleEnded32PortData','rlgc_PowerSI','rlgc_HFSSW');
+% process simulated data
+lineLength = 0.00508; % Line Length(meters)
+freq = SingleEnded32PortData.Freq;
+freqPts = length(freq);
+z0 = SingleEnded32PortData.Z0; % Reference Impedance
+SingleEnded32PortData.S_Parameters = snp2smp(SingleEnded32PortData.S_Parameters,...
+    z0,1:1:32); % Classic style
+numOfLines = size(SingleEnded32PortData.S_Parameters,1)/2;
 
 %% Extract RLGC params using proposed method
 

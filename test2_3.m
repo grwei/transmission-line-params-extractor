@@ -7,22 +7,17 @@
 
 clc; clear; close all;
 
-%% Import data
-
-% Import simulated data
-lineLength = 0.00508; % Line Length(meters)
-filename_4line = 'data/4line/4lines_ADS/data/4lines_HFSSW_200mil.s8p';
-SingleEnded8PortData = read(rfdata.data,filename_4line);
-freq = SingleEnded8PortData.Freq;
-freqPts = length(freq);
-z0 = SingleEnded8PortData.Z0; % Reference Impedance
-SingleEnded8PortData.S_Parameters = snp2smp(SingleEnded8PortData.S_Parameters,...
-    z0,1:1:8); % Classic style
-numOfLines = size(SingleEnded8PortData.S_Parameters,1)/2;
-
 %% initialize
 % 此节在每个调试周期只需执行一次
 
+% %%% Import simulated data
+% lineLength = 0.00508; % Line Length(meters)
+% filename_4line = 'data/4line/4lines_ADS/data/4lines_HFSSW_200mil.s8p';
+% SingleEnded8PortData = read(rfdata.data,filename_4line);
+% freq = SingleEnded8PortData.Freq;
+% freqPts = length(freq);
+% numOfLines = size(SingleEnded8PortData.S_Parameters,1)/2;
+% 
 % %%% Import Cadence-PowerSI-extracted params
 % % Allocate memory
 % rlgc_PowerSI.R = zeros(numOfLines,numOfLines,freqPts);
@@ -83,14 +78,135 @@ numOfLines = size(SingleEnded8PortData.S_Parameters,1)/2;
 %     end
 % end
 % 
-% save('test2_3','rlgc_PowerSI','rlgc_HFSSW');
+% save('test2_3','SingleEnded8PortData','rlgc_PowerSI','rlgc_HFSSW');
 
-%%
-load('test2_3','rlgc_PowerSI','rlgc_HFSSW');
+%% process data
+
+load('test2_3','SingleEnded8PortData','rlgc_PowerSI','rlgc_HFSSW');
+% process simulated data
+lineLength = 0.00508; % Line Length(meters)
+freq = SingleEnded8PortData.Freq;
+freqPts = length(freq);
+z0 = SingleEnded8PortData.Z0; % Reference Impedance
+SingleEnded8PortData.S_Parameters = snp2smp(SingleEnded8PortData.S_Parameters,...
+    z0,1:1:8); % Classic style
+numOfLines = size(SingleEnded8PortData.S_Parameters,1)/2;
 
 %% Extract RLGC params using proposed method
 
 rlgc_t = s2rlgc_t(SingleEnded8PortData.S_Parameters,lineLength,freq,z0,[],false);
+
+%% Calculate S from HFSS_W-element using proposed method
+% compare with the result using ADS 2020.2.2
+
+[s_HFSSW_prop,~] = rlgc2s_t(rlgc_HFSSW.R,rlgc_HFSSW.L,rlgc_HFSSW.G,rlgc_HFSSW.C,lineLength,freq,z0);
+% external<-external
+figure('Name','Rebuilt s-HFSSW (cmp. with ADS): See') 
+sgtitle({'Cmp. between s-HFSSW using prop. method and ADS: See'})
+num_of_columes = ceil(numOfLines/2);
+for idx = 1:numOfLines
+    subplot(2,num_of_columes,idx)
+    % left axis: dB(S(i,j))
+    yyaxis left
+    plot(freq/1e9,db(squeeze(s_HFSSW_prop(1,idx,:)),'voltage'),'k-')
+    hold on
+    plot(freq/1e9,db(squeeze(SingleEnded8PortData.S_Parameters(1,idx,:)),'voltage'),'g--')
+    grid on
+    xlabel('Freq(GHz)');
+    ylabel(sprintf('dB(S(1,%u))',idx));
+    title(sprintf('S(1,%u)',idx));
+    
+    % right axis: arg(S(i,j))
+    yyaxis right
+    plot(freq/1e9,angle(squeeze(s_HFSSW_prop(1,idx,:))),'m-')
+    hold on
+    plot(freq/1e9,angle(squeeze(SingleEnded8PortData.S_Parameters(1,idx,:))),'c--')
+    hold off
+    ylabel(sprintf('arg(S(1,%u))',idx));
+    legend({'prop.(dB)','ADS(dB)','prop.(arg)','ADS(arg)'},'Location','best','NumColumns',2)
+    legend('boxoff')
+end
+
+% external<-internal
+figure('Name','Rebuilt s-HFSSW (cmp. with ADS): Sei')
+sgtitle({'Cmp. between s-HFSSW using prop. method and ADS: Sei'})
+num_of_columes = ceil(numOfLines/2);
+for idx = 1:numOfLines
+    subplot(2,num_of_columes,idx)
+    % left axis: dB(S(i,j))
+    yyaxis left
+    plot(freq/1e9,db(squeeze(s_HFSSW_prop(1,idx+numOfLines,:)),'voltage'),'k-')
+    hold on
+    plot(freq/1e9,db(squeeze(SingleEnded8PortData.S_Parameters(1,idx+numOfLines,:)), 'voltage'),'g--')
+    grid on
+    xlabel('Freq(GHz)');
+    ylabel(sprintf('dB(S(1,%u))',idx+numOfLines));
+    title(sprintf('S(1,%u)',idx+numOfLines));
+    
+    % right axis: arg(S(i,j))
+    yyaxis right
+    plot(freq/1e9,angle(squeeze(s_HFSSW_prop(1,idx+numOfLines,:))),'m-')
+    hold on
+    plot(freq/1e9,angle(squeeze(SingleEnded8PortData.S_Parameters(1,idx+numOfLines,:))),'c--')
+    hold off
+    ylabel(sprintf('arg(S(1,%u))',idx+numOfLines));
+    legend({'prop.(dB)','ADS(dB)','prop.(arg)','ADS(arg)'},'Location','best','NumColumns',2)
+    legend('boxoff')
+end
+
+% internal<-external
+figure('Name','Rebuilt s-HFSSW (cmp. with ADS): Sie') 
+sgtitle({'Cmp. between s-HFSSW using prop. method and ADS: Sie'})
+num_of_columes = ceil(numOfLines/2);
+for idx = 1:numOfLines
+    subplot(2,num_of_columes,idx)
+    % left axis: dB(S(i,j))
+    yyaxis left
+    plot(freq/1e9,db(squeeze(s_HFSSW_prop(numOfLines+1,idx,:)),'voltage'),'k-')
+    hold on
+    plot(freq/1e9,db(squeeze(SingleEnded8PortData.S_Parameters(numOfLines+1,idx,:)),'voltage'),'g--')
+    grid on
+    xlabel('Freq(GHz)');
+    ylabel(sprintf('dB(S(%u,%u))',numOfLines+1,idx));
+    title(sprintf('S(%u,%u)',numOfLines+1,idx));
+    
+    % right axis: arg(S(i,j))
+    yyaxis right
+    plot(freq/1e9,angle(squeeze(s_HFSSW_prop(numOfLines+1,idx,:))),'m-')
+    hold on
+    plot(freq/1e9,angle(squeeze(SingleEnded8PortData.S_Parameters(numOfLines+1,idx,:))),'c--')
+    hold off
+    ylabel(sprintf('arg(S(%u,%u))',numOfLines+1,idx));
+    legend({'prop.(dB)','ADS(dB)','prop.(arg)','ADS(arg)'},'Location','best','NumColumns',2)
+    legend('boxoff')
+end
+
+% internal<-internal
+figure('Name','Rebuilt s-HFSSW (cmp. with ADS): Sii') 
+sgtitle({'Cmp. between s-HFSSW using prop. method and ADS: Sii'})
+num_of_columes = ceil(numOfLines/2);
+for idx = 1:numOfLines
+    subplot(2,num_of_columes,idx)
+    % left axis: dB(S(i,j))
+    yyaxis left
+    plot(freq/1e9,db(squeeze(s_HFSSW_prop(numOfLines+1,numOfLines+idx,:)),'voltage'),'k-')
+    hold on
+    plot(freq/1e9,db(squeeze(SingleEnded8PortData.S_Parameters(numOfLines+1,numOfLines+idx,:)),'voltage'),'g--')
+    grid on
+    xlabel('Freq(GHz)');
+    ylabel(sprintf('dB(S(%u,%u))',numOfLines+1,numOfLines+idx));
+    title(sprintf('S(%u,%u)',numOfLines+1,numOfLines+idx));
+    
+    % right axis: arg(S(i,j))
+    yyaxis right
+    plot(freq/1e9,angle(squeeze(s_HFSSW_prop(numOfLines+1,numOfLines+idx,:))),'m-')
+    hold on
+    plot(freq/1e9,angle(squeeze(SingleEnded8PortData.S_Parameters(numOfLines+1,numOfLines+idx,:))),'c--')
+    hold off
+    ylabel(sprintf('arg(S(%u,%u))',numOfLines+1,numOfLines+idx));
+    legend({'prop.(dB)','ADS(dB)','prop.(arg)','ADS(arg)'},'Location','best','NumColumns',2)
+    legend('boxoff')
+end
 
 %% Extracted RLGC compared with HFSS
 
