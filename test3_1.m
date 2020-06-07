@@ -171,3 +171,76 @@ for idx = 1:numOfLines
     legend({'Proposed','HFSS'},'Location','best','NumColumns',1)
     legend('boxoff')
 end
+
+
+%% Extracted RLGC compared with HFSS (part)
+
+idx_set = [1:numOfLines/4,1+numOfLines*3/4:numOfLines];
+total = ceil(numOfLines/4);
+% R
+figure('Name','R matrix (compared with HFSS)')
+% sgtitle({'Comparison Between Proposed Algorithm and';' HFSS: R Matrix'})
+for idx = idx_set
+    subplot(2,total,find(idx_set == idx))
+    plot(freq/1e9,squeeze(rlgc_t.R(1,idx,:)),'k-')
+    hold on
+    plot(freq/1e9,squeeze(rlgc_HFSSW.R(1,idx,:)),'g--')
+    hold off
+    grid on
+    xlabel('Freq(GHz)');
+    ylabel(sprintf('R(1,%u) (Ohms/m)',idx));
+    title(sprintf('R(1,%u)',idx));
+    legend({'prop.','HFSS'},'Location','best','NumColumns',1)
+    legend('boxoff')
+end
+
+% L
+figure('Name','L matrix (compared with HFSS)')
+% sgtitle({'Comparison Between Proposed Algorithm and';' HFSS: L Matrix'})
+for idx = idx_set
+    subplot(2,total,find(idx_set == idx))
+    plot(freq/1e9,squeeze(rlgc_t.L(1,idx,:)),'k-')
+    hold on
+    plot(freq/1e9,squeeze(rlgc_HFSSW.L(1,idx,:)),'g--')
+    hold off
+    grid on
+    xlabel('Freq(GHz)');
+    ylabel(sprintf('L(1,%u) (H/m)',idx));
+    title(sprintf('L(1,%u)',idx));
+    legend({'prop.','HFSS'},'Location','best','NumColumns',1)
+    legend('boxoff')
+end
+
+% G
+figure('Name','G matrix (compared with HFSS)')
+% sgtitle({'Comparison Between Proposed Algorithm and';' HFSS: G Matrix'})
+for idx = idx_set
+    subplot(2,total,find(idx_set == idx))
+    plot(freq/1e9,squeeze(rlgc_t.G(1,idx,:)),'k-')
+    hold on
+    plot(freq/1e9,squeeze(rlgc_HFSSW.G(1,idx,:)),'g--')
+    hold off
+    grid on
+    xlabel('Freq(GHz)');
+    ylabel(sprintf('G(1,%u) (S/m)',idx));
+    title(sprintf('G(1,%u)',idx));
+    legend({'prop.','HFSS'},'Location','best','NumColumns',1)
+    legend('boxoff')
+end
+
+% C
+figure('Name','C matrix (compared with HFSS)')
+% sgtitle({'Comparison Between Proposed Algorithm and';' HFSS: C Matrix'})
+for idx = idx_set
+    subplot(2,total,find(idx_set == idx))
+    plot(freq/1e9,squeeze(rlgc_t.C(1,idx,:)),'k-')
+    hold on
+    plot(freq/1e9,squeeze(rlgc_HFSSW.C(1,idx,:)),'g--')
+    hold off
+    grid on
+    xlabel('Freq(GHz)');
+    ylabel(sprintf('C(1,%u) (F/m)',idx));
+    title(sprintf('C(1,%u)',idx));
+    legend({'prop.','HFSS'},'Location','best','NumColumns',1)
+    legend('boxoff')
+end
