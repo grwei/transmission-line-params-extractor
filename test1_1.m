@@ -56,4 +56,4 @@ end
 
 idx_selected = ceil(1:5:freqPts);
 rlgc_t = s2rlgc_t(SingleEnded4PortData.S_Parameters(:,:,idx_selected),lineLength,freq(idx_selected),z0,[],true);
-check_consistence(rlgc_t.R, rlgc_t.L, rlgc_t.G, rlgc_t.C, lineLength, freq(idx_selected), z0);
+% check_consistence(rlgc_t.R, rlgc_t.L, rlgc_t.G, rlgc_t.C, lineLength, freq(idx_selected), z0);
