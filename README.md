@@ -8,6 +8,15 @@ Matlab implementation of patent [Transmission-line simulators and methods](https
 
 - [ ] add content
 
+## In progress
+
+> Need to add:
+>
+> - [ ]  Resonance treatment
+> - [ ]  Low-frequency conversion
+> - [ ]  Passivity check
+> - [ ]  Causality enforcement
+
 ## Functions
 
 - [`s2rlgc_t.m`](s2rlgc_t.m): Extract TL RLGC params from S params
