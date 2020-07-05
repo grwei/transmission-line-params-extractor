@@ -8,7 +8,6 @@ Matlab implementation of patent [Transmission-line simulators and methods](https
 
 - [ ] add content
 
-<<<<<<< HEAD
 ## In progress
 
 > Need to add:
@@ -42,25 +41,6 @@ Matlab implementation of patent [Transmission-line simulators and methods](https
    1. [`test3_1.m`](test3_1.m): HFSS_Welement -> ADS -> S
    2. [`test3_2.mlx`](test3_2.mlx): (bad) Try to clean outliers or smooth of RLGC. (Ansys 2020R1)
 
-## Contact me
-=======
-## Test
-
-1. `test0.m`: Single-line Transmission Line
-1. `test1.m`: Coupled Transmission Line
-1. `test2.m`: Four-line Transmission Line
-1. `test2_1.m`: Four-line TL, removing singular frequencies
-
-## In progress
-
-> Need to add:
-> 
-> * [ ]  Resonance treatment
-> * [ ]  Low-frequency conversion
-> * [ ]  Passivity check
-> * [ ]  Causality enforcement
-
 ## Contact us
->>>>>>> master
 
 E-mail: 313017602@qq.com
