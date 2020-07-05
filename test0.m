@@ -1,6 +1,5 @@
 %% Basic Information
-
-% Overview
+%%% Overview
 % Transmission-line parameters extractor
 % MATLAB implementation of Patent US8892414B1
 % Author Name: Guorui Wei
@@ -10,10 +9,10 @@ clc; clear; close all;
 
 %% Import data
 
-lineLength = 0.0254; % Line Length(meters)
+lineLength = 0.0127; % Line Length(meters)
 
 % Import simulated data
-filename_1line = 'data/MSL_1in_20200319.s2p';
+filename_1line = 'data/1line/1line_Polar_500mil.s2p';
 SingleEnded2PortData = read(rfdata.data,filename_1line);
 freq = SingleEnded2PortData.Freq;
 freqPts = length(freq);
@@ -23,7 +22,7 @@ SingleEnded2PortData.S_Parameters = snp2smp(SingleEnded2PortData.S_Parameters,..
 numOfLines = size(SingleEnded2PortData.S_Parameters,1)/2;
 
 % Import Cadence-PowerSI-extracted params
-filename_PowerSI = 'data/MSL_1in_20200319_PowerSI.csv';
+filename_PowerSI = 'data/1line/Transmission_RLGC_res.csv';
 opts = detectImportOptions(filename_PowerSI);
 rlgc_PowerSI_mat = readtable(filename_PowerSI);
 % Allocate memory
@@ -42,6 +41,7 @@ end
 %% Extract RLGC params using proposed method
 
 rlgc_t = s2rlgc_t(SingleEnded2PortData.S_Parameters,lineLength,freq,z0);
+check_consistence(rlgc_t.R, rlgc_t.L, rlgc_t.G, rlgc_t.C, lineLength, freq, z0);
 
 %% Extracted RLGC compared with Cadence Sigrity PowerSI
 

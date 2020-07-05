@@ -1,0 +1,1138 @@
+From: =?gb2312?B?0tHTySBJbnRlcm5ldCBFeHBsb3JlciAxMSCxo7Tm?=
+Subject: S-parameter Checking Report
+Date: Sun, 7 Jun 2020 16:48:50 +0800
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----=_NextPart_000_0025_01D63CEB.8550E260"
+X-MimeOLE: Produced By Microsoft MimeOLE
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0025_01D63CEB.8550E260
+Content-Type: text/html;
+	charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: file://C:\Users\31301\AppData\Local\Temp\silib_hvex_8.htm
+
+=EF=BB=BF<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML xmlns=3D"http://www.w3.org/1999/xhtml"><HEAD><META =
+content=3D"IE=3D5.0000"=20
+http-equiv=3D"X-UA-Compatible">
+<TITLE>S-parameter Checking Report</TITLE>
+<META content=3D"text/html; charset=3Dutf-8" http-equiv=3DContent-Type>
+<META name=3DGENERATOR content=3D"MSHTML 11.00.10570.1001"></HEAD>
+<BODY>
+<SCRIPT id=3DJSInclude type=3Dtext/javascript src=3D""></SCRIPT>
+
+<SCRIPT id=3DJSIncludeBasic type=3Dtext/javascript src=3D""></SCRIPT>
+
+<STYLE type=3Dtext/css>UL {
+	FONT-SIZE: 12pt; FONT-FAMILY: "Calibri"; FONT-WEIGHT: normal
+}
+LI {
+	FONT-SIZE: 12pt; FONT-FAMILY: "Calibri"; FONT-WEIGHT: normal
+}
+P {
+	FONT-SIZE: 12pt; FONT-FAMILY: "Calibri"; FONT-WEIGHT: normal
+}
+P.text {
+	FONT-SIZE: 12pt; FONT-FAMILY: "Calibri"; FONT-WEIGHT: normal
+}
+H1 {
+	FONT-FAMILY: "Calibri"
+}
+H2 {
+	FONT-FAMILY: "Calibri"
+}
+H3 {
+	FONT-FAMILY: "Calibri"
+}
+H3.text {
+	FONT-FAMILY: "Calibri"
+}
+LI.intable {
+	FONT-SIZE: 9pt; FONT-FAMILY: "Times New Roman"
+}
+P.pass {
+	COLOR: green
+}
+P.fail {
+	COLOR: red
+}
+TABLE {
+	BORDER-TOP: black 1px outset; BORDER-RIGHT: black 1px outset; =
+BORDER-COLLAPSE: collapse; BORDER-BOTTOM: black 1px outset; BORDER-LEFT: =
+black 1px outset
+}
+TABLE.noborder {
+	BORDER-TOP: black 0px outset; BORDER-RIGHT: black 0px outset; =
+BORDER-COLLAPSE: collapse; BORDER-BOTTOM: black 0px outset; BORDER-LEFT: =
+black 0px outset; bordercolor: #000000
+}
+TD.thicktopborder {
+	BORDER-TOP-WIDTH: 3px
+}
+TD.thickbottomborder {
+	BORDER-BOTTOM-WIDTH: 3px
+}
+TD.thicktopbottomborder {
+	BORDER-BOTTOM-WIDTH: 3px; BORDER-TOP-WIDTH: 3px
+}
+TD {
+	FONT-SIZE: 9pt; BORDER-TOP: black 1px inset; FONT-FAMILY: "Times New =
+Roman"; BORDER-RIGHT: black 1px inset; BORDER-BOTTOM: black 1px inset; =
+PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; BORDER-LEFT: =
+black 1px inset; PADDING-RIGHT: 5px
+}
+.titlecolumn {
+	WHITE-SPACE: normal; TEXT-ALIGN: left
+}
+.datacolumn {
+	WHITE-SPACE: normal; TEXT-ALIGN: center
+}
+.titlerow {
+	BORDER-BOTTOM-WIDTH: 3px; COLOR: #243f60
+}
+.noborder {
+	BORDER-TOP: 0px; BORDER-RIGHT: 0px; BORDER-BOTTOM: 0px; BORDER-LEFT: =
+0px
+}
+TD.dataleftborder2 {
+	BORDER-LEFT: #d0d0d0 1px solid
+}
+TD.dataleftborder3 {
+	FONT-SIZE: 11pt; FONT-WEIGHT: bold; BORDER-LEFT: #d0d0d0 1px solid
+}
+TD.colorMaxMin {
+	FONT-SIZE: 11pt; FONT-WEIGHT: bold
+}
+TD.colorMaxMin1 {
+	FONT-SIZE: 12pt; FONT-WEIGHT: bold; COLOR: #243f60
+}
+TD.Marginleft {
+	margin-padding: 100pt
+}
+P.image {
+	WIDTH: 700px; PADDING-BOTTOM: 0px; PADDING-TOP: 25px; PADDING-LEFT: =
+0px; PADDING-RIGHT: 0px
+}
+P.curve {
+	WIDTH: 700px; PADDING-BOTTOM: 0px; PADDING-TOP: 25px; PADDING-LEFT: =
+0px; PADDING-RIGHT: 0px
+}
+#color1 {
+	BACKGROUND-COLOR: #cae5e8
+}
+#color2 {
+=09
+}
+TD.noborder2 {
+	FONT-SIZE: 9pt; BORDER-TOP: 0px; FONT-FAMILY: "Times New Roman"; =
+BORDER-RIGHT: 0px; BORDER-BOTTOM: 0px; FONT-WEIGHT: normal; =
+PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; BORDER-LEFT: =
+0px; PADDING-RIGHT: 0px
+}
+TD.noborderleft {
+	FONT-SIZE: 9pt; BORDER-TOP: 0px; FONT-FAMILY: "Times New Roman"; =
+FONT-WEIGHT: normal; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; =
+PADDING-LEFT: 5px; BORDER-LEFT: 0px; PADDING-RIGHT: 5px
+}
+TD.noborderright {
+	FONT-SIZE: 9pt; BORDER-TOP: 0px; FONT-FAMILY: "Times New Roman"; =
+BORDER-RIGHT: 0px; FONT-WEIGHT: normal; PADDING-BOTTOM: 0px; =
+PADDING-TOP: 0px; PADDING-LEFT: 5px; PADDING-RIGHT: 5px
+}
+TD.nobordertop {
+	FONT-SIZE: 9pt; BORDER-TOP: 0px; FONT-FAMILY: "Times New Roman"; =
+FONT-WEIGHT: normal; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; =
+PADDING-LEFT: 5px; PADDING-RIGHT: 5px
+}
+TD.noborder3 {
+	FONT-SIZE: 9pt; BORDER-TOP: 0px; FONT-FAMILY: "Times New Roman"; =
+BORDER-RIGHT: 0px; BORDER-BOTTOM: 0px; FONT-WEIGHT: normal; =
+PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 5px; BORDER-LEFT: =
+0px; PADDING-RIGHT: 5px
+}
+TABLE.noborder2 {
+	BORDER-TOP: 0px; BORDER-RIGHT: 0px; BORDER-COLLAPSE: collapse; =
+BORDER-BOTTOM: 0px; MARGIN-LEFT: 0px; BORDER-LEFT: 0px
+}
+</STYLE>
+
+<SCRIPT type=3Dtext/javascript>=0A=
+function doWheel(ob)=0A=
+{=0A=
+	if(event.altKey)=0A=
+	{=0A=
+		ob.style.zoom*=3Devent.wheelDelta>0?1.25:0.8;=0A=
+		return false;=0A=
+	}=0A=
+	return true;=0A=
+}=0A=
+function doJump(tagID)=0A=
+{=0A=
+	if(tagID !=3D '')=0A=
+	{=0A=
+		document.getElementById(tagID).scrollIntoView();=0A=
+	}=0A=
+}=0A=
+function doShow(tagID, objthis)=0A=
+{=0A=
+	if(tagID !=3D '')=0A=
+	{=0A=
+		//alert(objthis.innerTEXT);=0A=
+		var notes =3D document.getElementById(tagID);	=0A=
+		if(notes.style.display =3D=3D "")=0A=
+		{=0A=
+			//objthis.innerText =3D "Display More...";=0A=
+			notes.style.display =3D "none";=0A=
+		}=0A=
+		else=0A=
+		{=0A=
+			//objthis.innerText =3D "Hide";=0A=
+			notes.style.display =3D "";=0A=
+		}=0A=
+		//alert(notes);=0A=
+		=0A=
+	}=0A=
+}=0A=
+=0A=
+function doShowclass(tagID, objthis)=0A=
+{=0A=
+	if(tagID !=3D '')=0A=
+	{=0A=
+		=0A=
+		//alert(objthis.innerTEXT);=0A=
+		var notes =3D document.getElementsByTagName("tr");	=0A=
+		for(var jtr in notes)=0A=
+		{=0A=
+			//alert(notes[jtr].classname);=0A=
+			if(notes[jtr].name =3D=3D tagID)=0A=
+			{=0A=
+				if(notes[jtr].style.display =3D=3D "")=0A=
+				{=0A=
+					//objthis.innerText =3D "Display More...";=0A=
+					notes[jtr].style.display =3D "none";=0A=
+				}=0A=
+				else=0A=
+				{=0A=
+					//objthis.innerText =3D "Hide";=0A=
+					notes[jtr].style.display =3D "";=0A=
+				}=0A=
+			}=0A=
+		}=0A=
+		=0A=
+		notes =3D document.getElementsByTagName("li");	=0A=
+		for(var jtr in notes)=0A=
+		{=0A=
+			//alert(notes[jtr].classname);=0A=
+			if(notes[jtr].name =3D=3D tagID)=0A=
+			{=0A=
+				if(notes[jtr].style.display =3D=3D "")=0A=
+				{=0A=
+					//objthis.innerText =3D "Display More...";=0A=
+					notes[jtr].style.display =3D "none";=0A=
+				}=0A=
+				else=0A=
+				{=0A=
+					//objthis.innerText =3D "Hide";=0A=
+					notes[jtr].style.display =3D "";=0A=
+				}=0A=
+			}=0A=
+		}		=0A=
+	}=0A=
+}=0A=
+=0A=
+function showNote()=0A=
+{=0A=
+	//alert("aa");=0A=
+	//var notes =3D document.getElementsByClassName("NoteforUser");=0A=
+	//alert(notes.length);=0A=
+	//for(var i in notes)=0A=
+	////{=0A=
+		//notes[i].style =3D "display:none;";=0A=
+	//}=0A=
+	for(i =3D 0; i < 5; ++i)=0A=
+	{=0A=
+	var notes =3D document.getElementById(("NoteforUser" + i));=0A=
+	//alert(notes);=0A=
+	notes.style.display =3D "none";=0A=
+	}=0A=
+=0A=
+	=0A=
+	return true;=0A=
+}=0A=
+</SCRIPT>
+
+<DIV class=3DSection1>
+<P><IMG=20
+src=3D"file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/Bro=
+adbandSPICE/logo.PNG"=20
+width=3D"100%"></IMG></P>
+<H1 align=3Dcenter>Broadband SPICE<SUP style=3D"FONT-SIZE: =
+15pt"><I>TM</I></SUP>=20
+S-parameter Checking Report</H1><!--<span id=3D"Note">user defined note =
+here</span>-->
+<P><B>Date:</B><SPAN id=3DDate>&nbsp;16:48&nbsp;June 7, =
+2020</SPAN></P><SPAN=20
+id=3DNote><BR></SPAN>
+<H1>1 General information</H1>
+<P><B><SPAN>Broadband SPICE version:&nbsp;</SPAN></B><SPAN=20
+id=3DVersion>&nbsp;19.0.0.10161.185488 000</SPAN></P>
+<P><B><SPAN>File names and locations:</SPAN></B></P>
+<UL id=3DFilenameLocation>
+  <LI>File name:&nbsp;4lines_HFSS_200mil.s8p=20
+  <LI>File=20
+  =
+location:&nbsp;D:\SJTU\Bachelor\thesis\Multi-line\transmission-line-param=
+s-extractor\data\4line\4lines_HFSS\BBSResult_4lines_HFSS_200mil</LI></UL>=
+
+<H1>2 Critical Characteristics</H1><SPAN id=3DCriticalCharacteristics>
+<TABLE cellSpacing=3D0 cellPadding=3D0 border=3D1>
+  <TBODY>
+  <TR class=3Dtitlerow>
+    <TD class=3Dthickbottomborder align=3Dcenter></TD>
+    <TD class=3Dthickbottomborder align=3Dcenter>Parameters</TD>
+    <TD class=3Dthickbottomborder align=3Dcenter>Results</TD>
+    <TD class=3Dthickbottomborder align=3Dcenter>Comments</TD></TR>
+  <TR>
+    <TD>&nbsp;&nbsp;1&nbsp;&nbsp;</TD>
+    <TD>&nbsp;&nbsp;Matrix dimension&nbsp;&nbsp;</TD>
+    <TD>&nbsp;&nbsp;8 x 8&nbsp;&nbsp;</TD>
+    <TD>&nbsp;&nbsp;=20
+      <HR width=3D10 height=3D"1px">
+      &nbsp;&nbsp;</TD></TR>
+  <TR>
+    <TD>&nbsp;&nbsp;2&nbsp;&nbsp;</TD>
+    <TD>&nbsp;&nbsp;Passivity&nbsp;&nbsp;</TD>
+    <TD>&nbsp;&nbsp;No non-passive points&nbsp;&nbsp;</TD>
+    <TD>&nbsp;&nbsp;<A href=3D'javascript:doJump("Item2")'>No=20
+      violation</A>&nbsp;&nbsp;</TD></TR>
+  <TR>
+    <TD>&nbsp;&nbsp;3&nbsp;&nbsp;</TD>
+    <TD>&nbsp;&nbsp;Causality&nbsp;&nbsp;</TD>
+    <TD>&nbsp;&nbsp;No non-causal points&nbsp;&nbsp;</TD>
+    <TD>&nbsp;&nbsp;<A href=3D'javascript:doJump("Item3")'>No=20
+      violation</A>&nbsp;&nbsp;</TD></TR>
+  <TR>
+    <TD>&nbsp;&nbsp;4&nbsp;&nbsp;</TD>
+    <TD>&nbsp;&nbsp;Reciprocity&nbsp;&nbsp;</TD>
+    <TD>&nbsp;&nbsp;No non-reciprocal points&nbsp;&nbsp;</TD>
+    <TD>&nbsp;&nbsp;<A href=3D'javascript:doJump("Item4")'>No=20
+      violation</A>&nbsp;&nbsp;</TD></TR>
+  <TR>
+    <TD>&nbsp;&nbsp;5&nbsp;&nbsp;</TD>
+    <TD>&nbsp;&nbsp;Lowest frequency&nbsp;&nbsp;</TD>
+    <TD>&nbsp;&nbsp;100.000MHz&nbsp;&nbsp;</TD>
+    <TD style=3D"BACKGROUND-COLOR: #fcdad5">&nbsp;&nbsp;<A=20
+      href=3D'javascript:doJump("Item5")'>Too =
+high</A>&nbsp;&nbsp;</TD></TR>
+  <TR>
+    <TD>&nbsp;&nbsp;6&nbsp;&nbsp;</TD>
+    <TD>&nbsp;&nbsp;Maximum <SUB><IMG=20
+      =
+src=3D"file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/Bro=
+adbandSPICE/Images/image008.gif"></SUB>=20
+      between adjacent sampling points&nbsp;&nbsp;</TD>
+    <TD>&nbsp;&nbsp;0.00646&nbsp;&nbsp;</TD>
+    <TD>&nbsp;&nbsp;<A href=3D'javascript:doJump("Item6")'>Small=20
+    jump</A>&nbsp;&nbsp;</TD></TR>
+  <TR>
+    <TD>&nbsp;&nbsp;7&nbsp;&nbsp;</TD>
+    <TD>&nbsp;&nbsp;Maximum <SUB><IMG=20
+      =
+src=3D"file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/Bro=
+adbandSPICE/Images/image012.gif"></SUB>=20
+      between adjacent sampling points&nbsp;&nbsp;</TD>
+    <TD>&nbsp;&nbsp;118.493=C2=B0&nbsp;&nbsp;</TD>
+    <TD>&nbsp;&nbsp;<A href=3D'javascript:doJump("Item7")'>Medium=20
+    jump</A>&nbsp;&nbsp;</TD></TR>
+  <TR>
+    <TD>&nbsp;&nbsp;8&nbsp;&nbsp;</TD>
+    <TD>&nbsp;&nbsp;Maximum range of phase&nbsp;&nbsp;</TD>
+    <TD>&nbsp;&nbsp;-1591.460=C2=B0 from S(4,1)&nbsp;&nbsp;</TD>
+    <TD>&nbsp;&nbsp;<A href=3D'javascript:doJump("Item8")'>Medium=20
+      range</A>&nbsp;&nbsp;</TD></TR>
+  <TR>
+    <TD>&nbsp;&nbsp;9&nbsp;&nbsp;</TD>
+    <TD>&nbsp;&nbsp;Average number of amplitude extrema per 360=C2=B0 =
+phase=20
+      change&nbsp;&nbsp;</TD>
+    <TD>&nbsp;&nbsp;3&nbsp;&nbsp;</TD>
+    <TD>&nbsp;&nbsp;<A=20
+    href=3D'javascript:doJump("Item9")'>Good</A>&nbsp;&nbsp;</TD></TR>
+  <TR>
+    <TD>&nbsp;&nbsp;10&nbsp;&nbsp;</TD>
+    <TD>&nbsp;&nbsp;Overall evaluation&nbsp;&nbsp;</TD>
+    <TD>&nbsp;&nbsp;Poor&nbsp;&nbsp;</TD>
+    <TD style=3D"BACKGROUND-COLOR: #fcdad5">&nbsp;&nbsp;<A=20
+      =
+href=3D'javascript:doJump("Item10")'>Poor</A>&nbsp;&nbsp;</TD></TR></TBOD=
+Y></TABLE></SPAN><SPAN=20
+id=3DResultDefault><SPAN id=3DNoteforUser0>
+<P>Note:</P>
+<UL>
+  <LI>Passivity violation is based on <SUB><IMG=20
+  =
+src=3D"file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/Bro=
+adbandSPICE/Images/image0101.gif"></SUB>,=20
+  which is the maximum singular value of S parameter matrix at specific=20
+  frequency. Apply singular value decomposition (SVD) , <SUB><IMG=20
+  =
+src=3D"file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/Bro=
+adbandSPICE/Images/image0051.gif"></SUB>&nbsp;,<BR>in=20
+  which <SUB><IMG=20
+  =
+src=3D"file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/Bro=
+adbandSPICE/Images/image0061.gif"></SUB>.=20
+  If all the singular value <SUB><IMG=20
+  =
+src=3D"file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/Bro=
+adbandSPICE/Images/image0071.gif"></SUB>,the=20
+  s-parameter at this sampling frequency is passive.=20
+  <LI>Causality violation <SUB><IMG=20
+  =
+src=3D"file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/Bro=
+adbandSPICE/Images/image0081.gif"></SUB>&nbsp;is=20
+  the difference between an s-parameter element and its Hilbert =
+transform and=20
+  error bar <SUB><IMG=20
+  =
+src=3D"file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/Bro=
+adbandSPICE/Images/imageerrorbar.gif"></SUB>&nbsp;is=20
+  the maximum tolerance of <SUB><IMG=20
+  =
+src=3D"file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/Bro=
+adbandSPICE/Images/image0081.gif"></SUB>,=20
+  which is calculated internally. If <SUB><IMG=20
+  =
+src=3D"file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/Bro=
+adbandSPICE/Images/image0091.gif"></SUB>=20
+  is smaller than <SUB><IMG=20
+  =
+src=3D"file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/Bro=
+adbandSPICE/Images/imageerrorbar.gif"></SUB>,=20
+  the s-parameter at this sampling frequency is considered to be causal. =
+
+  <LI>Reciprocity violation <SUB><IMG=20
+  =
+src=3D"file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/Bro=
+adbandSPICE/Images/Deltaimage009.gif"></SUB>&nbsp;is=20
+  the difference between s-parameter at upper triangular matrix and it's =
+
+  counterpart at lower triangular matrix. If <SUB><IMG=20
+  =
+src=3D"file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/Bro=
+adbandSPICE/Images/Deltaimage010.gif"></SUB>,=20
+  the s-parameter at this sampling frequency is considered to be =
+reciprocal. <!--=0A=
+<li>=0A=
+Causality violation <sub><img src=3D"Images/image0081.gif"></sub>&nbspis =
+the difference between an s-parameter entry and its Hilbert transform. =0A=
+If <sub><img src=3D"Images/image0091.gif"></sub>&lt0.01, the s-parameter =
+at this sampling frequency is considered to be causal.=0A=
+</li>-->
+  <LI>Comment description:=20
+  <UL>
+    <LI id=3DItem2>Item 2 - Passivity:=20
+    <TABLE class=3Dnoborder>
+      <TBODY>
+      <TR>
+        <TD class=3Dnoborder width=3D200>a) No violation:</TD>
+        <TD class=3Dnoborder width=3D400>No non-passive points</TD></TR>
+      <TR>
+        <TD class=3Dnoborder>b) Small passivity violation:</TD>
+        <TD class=3Dnoborder>Number of non-passive points &lt;=3D1% and =
+<SUB><IMG=20
+          =
+src=3D"file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/Bro=
+adbandSPICE/Images/image0101.gif"></SUB>&lt;=3D1.00001</TD></TR>
+      <TR>
+        <TD class=3Dnoborder>c) Medium passivity violation:</TD>
+        <TD class=3Dnoborder>Number of non-passive points &gt;1% and =
+<SUB><IMG=20
+          =
+src=3D"file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/Bro=
+adbandSPICE/Images/image0101.gif"></SUB>&lt;=3D1.00001,or=20
+          1.00001 &lt; <SUB><IMG=20
+          =
+src=3D"file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/Bro=
+adbandSPICE/Images/image0101.gif"></SUB>&lt;=3D1.001</TD></TR>
+      <TR>
+        <TD class=3Dnoborder>d) Large passivity violation:</TD>
+        <TD class=3Dnoborder><SUB><IMG=20
+          =
+src=3D"file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/Bro=
+adbandSPICE/Images/image0101.gif"></SUB>&gt;1.001</TD></TR></TBODY></TABL=
+E>
+    <LI id=3DItem3>Item 3 - Number of non-causal points and maximum =
+causality=20
+    violation:=20
+    <TABLE class=3Dnoborder>
+      <TBODY>
+      <TR>
+        <TD class=3Dnoborder width=3D200>a) No violation: </TD>
+        <TD class=3Dnoborder width=3D400>No non-causal =
+points</TD></TR><!--=0A=
+<tr><td class=3Dnoborder>b) Small causality violation:</td><td =
+class=3Dnoborder>Number of non-causal points <=3D1% and <sub><img =
+src=3D"Images/image0081.gif"></sub><=3D0.02</td></tr>=0A=
+<tr><td class=3Dnoborder>c) Medium causality violation:</td><td =
+class=3Dnoborder>Number of non-causal points > 1% and <sub><img =
+src=3D"Images/image0081.gif"></sub><=3D 0.02, or 0.02 < <sub><img =
+src=3D"Images/image0081.gif"></sub> <0.05</td></tr>=0A=
+<tr><td class=3Dnoborder>d) Large causality violation:</td><td =
+class=3Dnoborder><sub><img src=3D"Images/image0081.gif"></sub> &gt 0.05 =
+</td></tr>        =0A=
+--><!--Maximum causality violation-->
+      <TR>
+        <TD class=3Dnoborder>b) Small causality violation:</TD>
+        <TD class=3Dnoborder>Number of non-causal points &lt;=3D1% and =
+<SUB><IMG=20
+          =
+src=3D"file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/Bro=
+adbandSPICE/Images/imageerrorbar.gif"></SUB>=20
+          &lt; <SUB><IMG=20
+          =
+src=3D"file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/Bro=
+adbandSPICE/Images/image0091.gif"></SUB>&lt;=3D=20
+          1.2<SUB><IMG=20
+          =
+src=3D"file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/Bro=
+adbandSPICE/Images/imageerrorbar.gif"></SUB></TD></TR>
+      <TR>
+        <TD class=3Dnoborder>c) Medium causality violation:</TD>
+        <TD class=3Dnoborder>Number of non-causal points &gt; 1% and =
+<SUB><IMG=20
+          =
+src=3D"file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/Bro=
+adbandSPICE/Images/imageerrorbar.gif"></SUB>=20
+          &lt; <SUB><IMG=20
+          =
+src=3D"file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/Bro=
+adbandSPICE/Images/image0091.gif"></SUB>&lt;=3D=20
+          1.2<SUB><IMG=20
+          =
+src=3D"file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/Bro=
+adbandSPICE/Images/imageerrorbar.gif"></SUB>,=20
+          or 1.2<SUB><IMG=20
+          =
+src=3D"file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/Bro=
+adbandSPICE/Images/imageerrorbar.gif"></SUB>=20
+          &lt; <SUB><IMG=20
+          =
+src=3D"file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/Bro=
+adbandSPICE/Images/image0091.gif"></SUB>&lt;=3D=20
+          2<SUB><IMG=20
+          =
+src=3D"file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/Bro=
+adbandSPICE/Images/imageerrorbar.gif"></SUB></TD></TR>
+      <TR>
+        <TD class=3Dnoborder>d) Large causality violation:</TD>
+        <TD class=3Dnoborder><SUB><IMG=20
+          =
+src=3D"file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/Bro=
+adbandSPICE/Images/image0091.gif"></SUB>=20
+          &gt; 2<SUB><IMG=20
+          =
+src=3D"file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/Bro=
+adbandSPICE/Images/imageerrorbar.gif"></SUB>=20
+        </TD></TR></TBODY></TABLE>
+    <LI id=3DItem4>Item 4 - Reciprocity:=20
+    <TABLE class=3Dnoborder>
+      <TBODY>
+      <TR>
+        <TD class=3Dnoborder width=3D200>a) No violation: </TD>
+        <TD class=3Dnoborder width=3D400>No non-reciprocal =
+points</TD></TR>
+      <TR>
+        <TD class=3Dnoborder>b) Small reciprocity violation:</TD>
+        <TD class=3Dnoborder><SUB><IMG=20
+          =
+src=3D"file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/Bro=
+adbandSPICE/Images/Deltaimage011.gif"></SUB></TD></TR>
+      <TR>
+        <TD class=3Dnoborder>c) Medium reciprocity violation:</TD>
+        <TD class=3Dnoborder><SUB><IMG=20
+          =
+src=3D"file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/Bro=
+adbandSPICE/Images/Deltaimage012.gif"></SUB></TD></TR>
+      <TR>
+        <TD class=3Dnoborder>d) Large reciprocity violation:</TD>
+        <TD class=3Dnoborder><SUB><IMG=20
+          =
+src=3D"file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/Bro=
+adbandSPICE/Images/Deltaimage013.gif"></SUB></TD></TR></TBODY></TABLE>
+    <LI id=3DItem5>Item 5 - Lowest frequency:=20
+    <TABLE class=3Dnoborder>
+      <TBODY>
+      <TR>
+        <TD class=3Dnoborder width=3D200>a) Low enough:</TD>
+        <TD class=3Dnoborder width=3D400>&lt;=3D1MHz</TD></TR>
+      <TR>
+        <TD class=3Dnoborder>b) High:</TD>
+        <TD class=3Dnoborder>1MHz ~ 20MHz</TD></TR>
+      <TR>
+        <TD class=3Dnoborder>c) Too high:</TD>
+        <TD class=3Dnoborder>&gt;20MHz</TD></TR></TBODY></TABLE>
+    <LI id=3DItem6>Item 6 - Maximum <SUB><IMG=20
+    =
+src=3D"file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/Bro=
+adbandSPICE/Images/image008.gif"></SUB>=20
+    between adjacent sampling points:=20
+    <TABLE class=3Dnoborder>
+      <TBODY>
+      <TR>
+        <TD class=3Dnoborder width=3D200>a) Small jump:</TD>
+        <TD class=3Dnoborder width=3D400>&lt;=3D0.1</TD></TR>
+      <TR>
+        <TD class=3Dnoborder>b) Medium jump:</TD>
+        <TD class=3Dnoborder>0.1 ~ 0.3</TD></TR>
+      <TR>
+        <TD class=3Dnoborder>c) Large jump:</TD>
+        <TD class=3Dnoborder>&gt;0.3</TD></TR></TBODY></TABLE>
+    <LI id=3DItem7>Item 7 - Maximum <SUB><IMG=20
+    =
+src=3D"file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/Bro=
+adbandSPICE/Images/image012.gif"></SUB>=20
+    between adjacent sampling points:=20
+    <TABLE class=3Dnoborder>
+      <TBODY>
+      <TR>
+        <TD class=3Dnoborder width=3D200>a) Small jump:</TD>
+        <TD class=3Dnoborder width=3D400>&lt;=3D45=C2=B0</TD></TR>
+      <TR>
+        <TD class=3Dnoborder>b) Medium jump:</TD>
+        <TD class=3Dnoborder>45=C2=B0 ~ 135=C2=B0</TD></TR>
+      <TR>
+        <TD class=3Dnoborder>c) Large jump:</TD>
+        <TD class=3Dnoborder>&gt;135=C2=B0</TD></TR></TBODY></TABLE>
+    <LI id=3DItem8>Item 8 - Maximum range of phase:=20
+    <TABLE class=3Dnoborder>
+      <TBODY>
+      <TR>
+        <TD class=3Dnoborder width=3D200>a) Small range: </TD>
+        <TD class=3Dnoborder width=3D400>&lt;=3D2x360=C2=B0</TD></TR>
+      <TR>
+        <TD class=3Dnoborder>b) Medium range:</TD>
+        <TD class=3Dnoborder>2x360=C2=B0 ~ 10x360=C2=B0</TD></TR>
+      <TR>
+        <TD class=3Dnoborder>c) Large range:</TD>
+        <TD class=3Dnoborder>&gt;10x360=C2=B0</TD></TR></TBODY></TABLE>
+    <LI id=3DItem9>Item 9 - Average number of amplitude extremums per =
+360=C2=B0 phase=20
+    change:=20
+    <TABLE class=3Dnoborder>
+      <TBODY>
+      <TR>
+        <TD class=3Dnoborder width=3D200>a) Good:</TD>
+        <TD class=3Dnoborder width=3D400>&lt;=3D5</TD></TR>
+      <TR>
+        <TD class=3Dnoborder>b) Acceptable:</TD>
+        <TD class=3Dnoborder>5 ~ 10</TD></TR>
+      <TR>
+        <TD class=3Dnoborder>c) Too many:</TD>
+        <TD class=3Dnoborder>&gt;10</TD></TR></TBODY></TABLE>
+    <LI id=3DItem10>Item 10 - Overall evaluation:=20
+    <TABLE class=3Dnoborder>
+      <TBODY>
+      <TR>
+        <TD class=3Dnoborder width=3D200>a) Good: </TD>
+        <TD class=3Dnoborder width=3D400>Items 2~9 all meet condition =
+(a)</TD></TR>
+      <TR>
+        <TD class=3Dnoborder>b) Acceptable:</TD>
+        <TD class=3Dnoborder>Neither "Good" nor "Poor"</TD></TR>
+      <TR>
+        <TD class=3Dnoborder>c) Poor: </TD>
+        <TD class=3Dnoborder>Any of items 2~9 has the worst=20
+      condition.</TD></TR></TBODY></TABLE></LI></UL></LI></UL></SPAN>
+<H1>3 Detailed Results</H1>
+<H2>3.1 Passivity</H2><SPAN id=3DPassivityDetails>
+<TABLE cellSpacing=3D0 cellPadding=3D0 border=3D1>
+  <TBODY>
+  <TR class=3Dtitlerow>
+    <TD class=3Dthickbottomborder align=3Dcenter>Parameters</TD>
+    <TD class=3Dthickbottomborder align=3Dcenter>Results</TD>
+    <TD class=3Dthickbottomborder align=3Dcenter>Comments</TD></TR>
+  <TR>
+    <TD>&nbsp;&nbsp;Number of non-passive sampling =
+points&nbsp;&nbsp;</TD>
+    <TD>No non-passive points=20
+    <TD>&nbsp;&nbsp;No=20
+violation&nbsp;&nbsp;</TD></TD></TR></TBODY></TABLE></SPAN><SPAN=20
+id=3DNoteforUser1><!--=0A=
+<p>Note:</p>=0A=
+<ul>=0A=
+<li>=0A=
+Passivity is one of the indications of s-parameter matrix condition.=0A=
+</li>=0A=
+<li>=0A=
+One example of passivity violation is when an s-parameter element =
+amplitude is larger than 1 at a frequency sampling point.=0A=
+</li>=0A=
+<li>=0A=
+Overall passivity level depends on number of frequency sampling points =
+with passivity violations, as well as the corresponding level of =
+passivity violations at those frequency points.=0A=
+</li>=0A=
+</ul>=0A=
+--></SPAN>
+<H2>3.2 Causality</H2><SPAN id=3DCausalityDetails>
+<TABLE cellSpacing=3D0 cellPadding=3D0 border=3D1>
+  <TBODY>
+  <TR class=3Dtitlerow>
+    <TD class=3Dthickbottomborder align=3Dcenter>Parameters</TD>
+    <TD class=3Dthickbottomborder align=3Dcenter>Results</TD>
+    <TD class=3Dthickbottomborder align=3Dcenter>Comments</TD></TR>
+  <TR>
+    <TD>&nbsp;&nbsp;Number of non-causal sampling =
+points&nbsp;&nbsp;</TD>
+    <TD>&nbsp;&nbsp;No non-causal points&nbsp;&nbsp;</TD>
+    <TD>&nbsp;&nbsp;No =
+violation&nbsp;&nbsp;</TD></TR></TBODY></TABLE></SPAN><SPAN=20
+id=3DNoteforUser2><!--=0A=
+<p>Note:</p>=0A=
+<ul>=0A=
+<li>Causality is one of indications of s-parameter matrix condition.</li>=0A=
+<li>Causality factor is defined as<sub><img =
+src=3D"Images/image0151.gif"></sub> , where td=3D10ps by default, and =
+h(t) is the inverse Fourier transform of an s-parameter element. =
+Ideally, CF equals to 1 when an s-parameter element is causal over an =
+infinite frequency bandwidth.</li>=0A=
+<li>Causality level:=0A=
+<table class=3D"noborder">=0A=
+<tr><td class=3Dnoborder width=3D"200">a) High causality level:</td><td =
+class=3Dnoborder width=3D"400">CF>=3D0.9</td></tr>=0A=
+<tr><td class=3Dnoborder>b) Medium causality level:</td><td =
+class=3Dnoborder>0.6 ~ 0.9</td></tr>=0A=
+<tr><td class=3Dnoborder>c) Low causality level:	</td><td =
+class=3Dnoborder>CF<0.6</td></tr>=0A=
+</table>			=0A=
+</li>=0A=
+</ul>=0A=
+--></SPAN>
+<H2>3.3 Reciprocity</H2><SPAN id=3DReciprocityDetails>
+<TABLE cellSpacing=3D0 cellPadding=3D0 border=3D1>
+  <TBODY>
+  <TR class=3Dtitlerow>
+    <TD class=3Dthickbottomborder align=3Dcenter>Parameters</TD>
+    <TD class=3Dthickbottomborder align=3Dcenter>Results</TD>
+    <TD class=3Dthickbottomborder align=3Dcenter>Comments</TD></TR>
+  <TR>
+    <TD>&nbsp;&nbsp;Number of non-reciprocal sampling =
+points&nbsp;&nbsp;</TD>
+    <TD>&nbsp;&nbsp;No non-reciprocal points&nbsp;&nbsp;</TD>
+    <TD>&nbsp;&nbsp;No =
+violation&nbsp;&nbsp;</TD></TR></TBODY></TABLE></SPAN>
+<H2>3.4 Frequency Sampling </H2><SPAN id=3DFrequencySetting>
+<TABLE cellSpacing=3D0 cellPadding=3D0 border=3D1>
+  <TBODY>
+  <TR class=3Dtitlerow>
+    <TD class=3Dthickbottomborder align=3Dcenter>Parameters</TD>
+    <TD class=3Dthickbottomborder align=3Dcenter>Results</TD>
+    <TD class=3Dthickbottomborder align=3Dcenter>Comments</TD></TR>
+  <TR>
+    <TD>&nbsp;&nbsp;Number of frequency sampling points&nbsp;&nbsp;</TD>
+    <TD>&nbsp;&nbsp;700&nbsp;&nbsp;</TD>
+    <TD>
+      <HR width=3D10 height=3D"1px">
+    </TD></TR>
+  <TR>
+    <TD>&nbsp;&nbsp;Highest frequency&nbsp;&nbsp;</TD>
+    <TD>&nbsp;&nbsp;70.000GHz&nbsp;&nbsp;</TD>
+    <TD>
+      <HR width=3D10 height=3D"1px">
+    </TD></TR>
+  <TR>
+    <TD>&nbsp;&nbsp;Lowest frequency&nbsp;&nbsp;</TD>
+    <TD>&nbsp;&nbsp;100.000MHz&nbsp;&nbsp;</TD>
+    <TD>&nbsp;&nbsp;Too high&nbsp;&nbsp;</TD></TR>
+  <TR>
+    <TD>&nbsp;&nbsp;Maximum&nbsp;<SUB><IMG=20
+      =
+src=3D"file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/Bro=
+adbandSPICE/Images/image004.gif"></SUB>&nbsp;between=20
+      adjacent sampling points&nbsp;&nbsp;</TD>
+    <TD>&nbsp;&nbsp;100.000MHz @ 64.100GHz&nbsp;&nbsp;</TD>
+    <TD>
+      <HR width=3D10 height=3D"1px">
+    </TD></TR>
+  <TR>
+    <TD>&nbsp;&nbsp;Average&nbsp;<SUB><IMG=20
+      =
+src=3D"file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/Bro=
+adbandSPICE/Images/image004.gif"></SUB>&nbsp;between=20
+      adjacent sampling points&nbsp;&nbsp;</TD>
+    <TD>&nbsp;&nbsp;100.000MHz&nbsp;&nbsp;</TD>
+    <TD>
+      <HR width=3D10 height=3D"1px">
+    </TD></TR>
+  <TR>
+    <TD>&nbsp;&nbsp;Maximum&nbsp;<SUB><IMG=20
+      =
+src=3D"file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/Bro=
+adbandSPICE/Images/image008.gif"></SUB>&nbsp;between=20
+      adjacent sampling points&nbsp;&nbsp;</TD>
+    <TD>&nbsp;&nbsp;0.00646 @ 100.000MHz from S(4,3)&nbsp;&nbsp;</TD>
+    <TD>&nbsp;&nbsp;Small jump&nbsp;&nbsp;</TD></TR>
+  <TR>
+    <TD>&nbsp;&nbsp;Average&nbsp;<SUB><IMG=20
+      =
+src=3D"file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/Bro=
+adbandSPICE/Images/image008.gif"></SUB>&nbsp;between=20
+      adjacent sampling points&nbsp;&nbsp;</TD>
+    <TD>&nbsp;&nbsp;0.00129&nbsp;&nbsp;</TD>
+    <TD>
+      <HR width=3D10 height=3D"1px">
+    </TD></TR>
+  <TR>
+    <TD>&nbsp;&nbsp;Maximum relative&nbsp;<SUB><IMG=20
+      =
+src=3D"file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/Bro=
+adbandSPICE/Images/image008.gif"></SUB>&nbsp;between=20
+      adjacent sampling points&nbsp;&nbsp;</TD>
+    <TD>&nbsp;&nbsp;0.933 @ 30.700GHz from S(7,6)&nbsp;&nbsp;</TD>
+    <TD>
+      <HR width=3D10 height=3D"1px">
+    </TD></TR>
+  <TR>
+    <TD>&nbsp;&nbsp;Average relative&nbsp;<SUB><IMG=20
+      =
+src=3D"file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/Bro=
+adbandSPICE/Images/image008.gif"></SUB>&nbsp;between=20
+      adjacent sampling points&nbsp;&nbsp;</TD>
+    <TD>&nbsp;&nbsp;0.0220&nbsp;&nbsp;</TD>
+    <TD>
+      <HR width=3D10 height=3D"1px">
+    </TD></TR>
+  <TR>
+    <TD>&nbsp;&nbsp;Maximum&nbsp;<SUB><IMG=20
+      =
+src=3D"file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/Bro=
+adbandSPICE/Images/image012.gif"></SUB>&nbsp;between=20
+      adjacent sampling points&nbsp;&nbsp;</TD>
+    <TD>&nbsp;&nbsp;118.493=C2=B0 @ 30.600GHz from =
+S(3,2)&nbsp;&nbsp;</TD>
+    <TD>&nbsp;&nbsp;Medium jump&nbsp;&nbsp;</TD></TR>
+  <TR>
+    <TD>&nbsp;&nbsp;Average&nbsp;<SUB><IMG=20
+      =
+src=3D"file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/Bro=
+adbandSPICE/Images/image012.gif"></SUB>&nbsp;between=20
+      adjacent sampling points&nbsp;&nbsp;</TD>
+    <TD>&nbsp;&nbsp;1.347=C2=B0&nbsp;&nbsp;</TD>
+    <TD>
+      <HR width=3D10 height=3D"1px">
+    </TD></TR></TBODY></TABLE></SPAN><SPAN id=3DNoteforUser3>
+<P>Note:</P>
+<UL>
+  <LI><SUB><IMG=20
+  =
+src=3D"file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/Bro=
+adbandSPICE/Images/image004.gif"></SUB>,=20
+  <SUB><IMG=20
+  =
+src=3D"file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/Bro=
+adbandSPICE/Images/image008.gif"></SUB>=20
+  and <SUB><IMG=20
+  =
+src=3D"file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/Bro=
+adbandSPICE/Images/image012.gif"></SUB>&nbsp;=20
+  between adjacent sampling points are indications of smoothness of the=20
+  s-parameter sampling data.=20
+  <LI>Relative <SUB><IMG=20
+  =
+src=3D"file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/Bro=
+adbandSPICE/Images/image008.gif"></SUB>=20
+  between adjacent sampling points is defined as <SUB><IMG=20
+  =
+src=3D"file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/Bro=
+adbandSPICE/Images/image018.gif"></SUB>.=20
+  </LI></UL></SPAN>
+<H2>3.5 Phase and Amplitude </H2><SPAN id=3DPhaseAndAmplitudeDetails>
+<TABLE cellSpacing=3D0 cellPadding=3D0 border=3D1>
+  <TBODY>
+  <TR class=3Dtitlerow>
+    <TD class=3Dthickbottomborder align=3Dcenter>Parameters</TD>
+    <TD class=3Dthickbottomborder align=3Dcenter>Results</TD>
+    <TD class=3Dthickbottomborder align=3Dcenter>Comments</TD></TR>
+  <TR>
+    <TD>&nbsp;&nbsp;Maximum range of phase&nbsp;&nbsp;</TD>
+    <TD>&nbsp;&nbsp;-1591.460=C2=B0 from S(4,1)</TD>
+    <TD>&nbsp;&nbsp;Medium range&nbsp;&nbsp;</TD></TR>
+  <TR>
+    <TD>&nbsp;&nbsp;Maximum range of amplitude&nbsp;&nbsp;</TD>
+    <TD>
+      <LI class=3Dintable>Diagonal terms:&nbsp;&nbsp;0.271 from S(8,8)=20
+      <LI class=3Dintable>Non-diagonal terms:&nbsp;&nbsp;0.626 from =
+S(6,1)</LI></TD>
+    <TD rowSpan=3D4>
+      <HR width=3D10 height=3D"1px">
+    </TD></TR>
+  <TR>
+    <TD>&nbsp;&nbsp;Average range of amplitude&nbsp;&nbsp;</TD>
+    <TD>
+      <LI class=3Dintable>Diagonal terms:&nbsp;&nbsp;0.258=20
+      <LI class=3Dintable>Non-diagonal =
+terms:&nbsp;&nbsp;0.336</LI></TD></TR>
+  <TR>
+    <TD>&nbsp;&nbsp;Maximum number of amplitude extrema&nbsp;&nbsp;</TD>
+    <TD>
+      <LI class=3Dintable>Diagonal terms:&nbsp;&nbsp;8 from S(1,1)=20
+      <LI class=3Dintable>Non-diagonal terms:&nbsp;&nbsp;8 from =
+S(1,1)</LI></TD></TR>
+  <TR>
+    <TD>&nbsp;&nbsp;Average number of amplitude extrema&nbsp;&nbsp;</TD>
+    <TD>
+      <LI class=3Dintable>Diagonal terms:&nbsp;&nbsp;8=20
+      <LI class=3Dintable>Non-diagonal =
+terms:&nbsp;&nbsp;8</LI></TD></TR>
+  <TR>
+    <TD>&nbsp;&nbsp;Average number of amplitude extrema per 360=C2=B0 =
+phase=20
+      change&nbsp;&nbsp;</TD>
+    <TD>&nbsp;&nbsp;3</TD>
+    <TD>&nbsp;&nbsp;Good</TD></TR></TBODY></TABLE></SPAN><SPAN =
+id=3DNoteforUser4>
+<P>Note:</P>
+<UL>
+  <LI>The above phase and amplitude parameters are defined over the =
+entire=20
+  frequency range. They are indications of smoothness of s-parameter =
+element=20
+  curves over the entire frequency range.=20
+  <LI>An amplitude extremum is a local amplitude maximum or a local =
+amplitude=20
+  minimum. <!--<li>The above phase parameters are defined over the =
+entire frequency =
+range.</li>--></LI></UL></SPAN></SPAN><!--id=3D'ResultDefault'--></DIV></=
+BODY></HTML>
+
+------=_NextPart_000_0025_01D63CEB.8550E260
+Content-Type: image/png
+Content-Transfer-Encoding: base64
+Content-Location: file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/BroadbandSPICE/logo.PNG
+
+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
+z+Pv7x2iwe9+2e779+//oYk6Zd/4PT8rx1rrGyNn35hHzD3+f22VU/w95xu1836ufV5OvLRJk/x3
+abyyfZpGvZxny5VYx9fp+gwvoHsgQIAAAQIECBAgQIAAAQIECNQKxCqjpZVGcebVPHiJlVCP08+1
+K8+sWvr7/FD4eZu9fW/1i28HzJCsvJ9rn8/ntMUm+pZ157WWPGuf0byd7YR75fQjQIAAAQIECBAg
+QIAAAQIE7lZgy6Hjp/P5EO33rCrKsKl137314oGt9V2yuXUeWARVSwfd51lerV4SK7FaSapDgAAB
+AgQIECBAgAABAgQIECDQTcBKrG60ChMgQIAAAQIECBAgQIAAAQIECLQSEGK1klSHAAECBAgQIECA
+AAECBAgQIECgm4AQqxutwgQIECBAgAABAgQIECBAgAABAq0EhFitJNUhQIAAAQIECBAgQIAAAQIE
+CBDoJiDE6karMAECBAgQIECAAAECBAgQIECAQCsBIVYrSXUIECBAgAABAgQIECBAgAABAgS6CQix
+utEqTIAAAQIECBAgQIAAAQIECBAg0EpAiNVKUh0CBAgQIECAAAECBAgQIECAAIFuAkKsbrQKEyBA
+gAABAgQIECBAgAABAgQItBIQYrWSVIcAAQIECBAgQIAAAQIECBAgQKCbgBCrG63CBAgQIECAAAEC
+BAgQIECAAAECrQSEWK0k1SFAgAABAgQIECBAgAABAgQIEOgmIMTqRqswAQIECBAgQIAAAQIECBAg
+QIBAKwEhVitJdQgQIECAAAECBAgQIECAAAECBLoJHJ8v59du1RUmQIAAAQIECBAgQIAAAQIECBAg
+8EGB0/lyOF5OJyHWByF1J0CAAAECBAgQIECAAAECBAgQ6Cdwfn4+2E7Yz1dlAgQIECBAgAABAgQI
+ECBAgACBRgJCrEaQyhAgQIAAAQIECBAgQIAAAQIECPQTOF7OthP241WZAAECBAgQIECAAAECBAgQ
+IEDgowLny/Ph+DpdHy2kPwECBAgQIECAAAECBAgQIECAAIGeArYT9tRVmwABAgQIECBAgAABAgQI
+ECBAoImAEKsJoyIECBAgQIAAAQIECBAgQIAAAQI9BYRYPXXVJkCAAAECBAgQIECAAAECBAgQaCIg
+xGrCqAgBAgQIECBAgAABAgQIECBAgEBPgV8gY2z2mHPO0AAAAABJRU5ErkJggg==
+
+------=_NextPart_000_0025_01D63CEB.8550E260
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/BroadbandSPICE/Images/image008.gif
+
+R0lGODlhHQAbAHcAMSH+GlNvZnR3YXJlOiBNaWNyb3NvZnQgT2ZmaWNlACH5BAEAAAAALAMABAAW
+ABMAgAAAAAAAAAI8DI6pGra/GpxIJsessTVWyQEbcx3hWHYiJrZkprrpF7Pxar4spulzX2rwaMKi
+0HSyUWBLSKh5UUJxU0YBADs=
+
+------=_NextPart_000_0025_01D63CEB.8550E260
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/BroadbandSPICE/Images/image012.gif
+
+R0lGODlhGgAVAPcAAAAAAIAAAACAAICAAAAAgIAAgACAgICAgMDAwP8AAAD/AP//AAAA//8A/wD/
+/////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMwAAZgAAmQAAzAAA/wAzAAAzMwAzZgAzmQAzzAAz/wBm
+AABmMwBmZgBmmQBmzABm/wCZAACZMwCZZgCZmQCZzACZ/wDMAADMMwDMZgDMmQDMzADM/wD/AAD/
+MwD/ZgD/mQD/zAD//zMAADMAMzMAZjMAmTMAzDMA/zMzADMzMzMzZjMzmTMzzDMz/zNmADNmMzNm
+ZjNmmTNmzDNm/zOZADOZMzOZZjOZmTOZzDOZ/zPMADPMMzPMZjPMmTPMzDPM/zP/ADP/MzP/ZjP/
+mTP/zDP//2YAAGYAM2YAZmYAmWYAzGYA/2YzAGYzM2YzZmYzmWYzzGYz/2ZmAGZmM2ZmZmZmmWZm
+zGZm/2aZAGaZM2aZZmaZmWaZzGaZ/2bMAGbMM2bMZmbMmWbMzGbM/2b/AGb/M2b/Zmb/mWb/zGb/
+/5kAAJkAM5kAZpkAmZkAzJkA/5kzAJkzM5kzZpkzmZkzzJkz/5lmAJlmM5lmZplmmZlmzJlm/5mZ
+AJmZM5mZZpmZmZmZzJmZ/5nMAJnMM5nMZpnMmZnMzJnM/5n/AJn/M5n/Zpn/mZn/zJn//8wAAMwA
+M8wAZswAmcwAzMwA/8wzAMwzM8wzZswzmcwzzMwz/8xmAMxmM8xmZsxmmcxmzMxm/8yZAMyZM8yZ
+ZsyZmcyZzMyZ/8zMAMzMM8zMZszMmczMzMzM/8z/AMz/M8z/Zsz/mcz/zMz///8AAP8AM/8AZv8A
+mf8AzP8A//8zAP8zM/8zZv8zmf8zzP8z//9mAP9mM/9mZv9mmf9mzP9m//+ZAP+ZM/+ZZv+Zmf+Z
+zP+Z///MAP/MM//MZv/Mmf/MzP/M////AP//M///Zv//mf//zP///yH5BAEAABAALAAAAAAaABUA
+AAhsAP8JHEiwoEGDKA4qPJjwX8OFEB0KfBhRYUOKEisOvFgQY0SOGzNqBDlRJMKEKFKSlOixpEOU
+JB96lBlSJM2ONTOuNHnzpUuMFG+q/IlzI8eUOl+qXEpwqVCNOYlCnelyJMKqUIu2zLo1K8GAADs=
+
+------=_NextPart_000_0025_01D63CEB.8550E260
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/BroadbandSPICE/Images/image0101.gif
+
+R0lGODlhEAAPAHcAMSH+GlNvZnR3YXJlOiBNaWNyb3NvZnQgT2ZmaWNlACH5BAEAAAAALAMAAwAL
+AAgAgAAAAAAAAAIShIOJFwbtYHSP1mOvnixKtlgFADs=
+
+------=_NextPart_000_0025_01D63CEB.8550E260
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/BroadbandSPICE/Images/image0051.gif
+
+R0lGODlhawAbAHcAMSH+GlNvZnR3YXJlOiBNaWNyb3NvZnQgT2ZmaWNlACH5BAEAAAAALAIAAwBm
+ABUAgAAAAAAAAALChI+py+0PowqUyouzzgH0voXieIHkiabeUSXt6pjT51pcZb4ezoO4kZuwbAyZ
+C2aEaZIyI23IQjClsSr1uhRGqc1h8LgtNqZYDLkMDC+SSuuMqGZDzuq0Xbyeu8vOHv1e9zU2uAem
+BSjxh+ijx1eIFpdlWLciN9kmyIh32LbTc9nZVRnRRGTZSRnJMQlnA7fnY/ohCrq4wSPll7r5oIn4
+a6uicnrlZCenKCyig8c2i1xDrKxsIT19nfKEvY39yv39UAAAOw==
+
+------=_NextPart_000_0025_01D63CEB.8550E260
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/BroadbandSPICE/Images/image0061.gif
+
+R0lGODlhmABjAHcAMSH+GlNvZnR3YXJlOiBNaWNyb3NvZnQgT2ZmaWNlACH5BAEAAAAALAMABACS
+AFsAgAAAAAAAAAL/hI+pG90Lo5y02gudwzTwD4ai6I1JaabqiqGqy3ZwnD7TPOK0Uuo717vFfD+A
+i1gUHohIYESjqSGaycxUQr3obEbWsQr6PoeMk/cKdi6xZJ55JQ6juFy1gdlG66XrEH2e5dZndfaG
+Vhe2l1YRV1Y4BaiY2LWohhTIyLBhmINZudTkqaT1WToJZ2eq2pFnIbq6+DqmhQhrO/hyq2siS7j7
+m8oHPJz5SHzsm4u8LIjK/HzXCo3c6zi9XN18fZzNmdG9Dcpq7Ai+HcRGzmkO3agtbE1JAlWr6+7N
+mx49j0t8L5lDn7wPMNjR+Ncv36x9pxjyuxOpIR51e2TN6PZHnESB//C0WWxWDxZChx0F9cq4z6DC
+S9I08dr0zl6olqtUxoJEr8Uumzf7eeKpE2gVdz9vRQnnMyBSf/h0Lh1W8Am9qE+BUfVT1SpAp1nt
+4bo4tWlXUx7qhBw1VuTUj2ltGRTadpwzLHCpzaR4KK4rkjGVJqv7a+TAkhX1op04Nx7gnVv5+lVs
+WCBiZX8fGokIBPPZwxwVVvaj+RXKy1gTNm7oMfLCwWJLz1oc2PFpgjJU10ZL2HaRt7or8e6d5jfw
+oTSHF3dt/Ifw5DuWMz+O+nni3NIfU6+O/Dp22ni3R7fucgjsJM5NFhqvHLpgUqbDlS8MDz2jsPGu
+r9/bXm1+2dnXUU1m7VZr/H331X8nhcbdfgCSIJmBlo2G32zvFRifVgIu2N8b7KATmGbJaEeaeNzA
+dBkOE3q32mzBoIibgiuy+KGKXMFIV4ydkEijVBoUAAA7
+
+------=_NextPart_000_0025_01D63CEB.8550E260
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/BroadbandSPICE/Images/image0071.gif
+
+R0lGODlhLQAbAHcAMSH+GlNvZnR3YXJlOiBNaWNyb3NvZnQgT2ZmaWNlACH5BAEAAAAALAMABAAn
+ABMAgAAAAAAAAAJWDI6pYOve3opS0nouVrr2bXyPiFDByWwJiU5pecZtBs1uNHeXPb47xCHRGj/X
+hJXS6Cy84WsFxCiTOFNJdcvEgsSVTMYVPsUW0BVrLJ/RUA+OzWGTHwUAOw==
+
+------=_NextPart_000_0025_01D63CEB.8550E260
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/BroadbandSPICE/Images/image0081.gif
+
+R0lGODlhDQARAHcAMSH+GlNvZnR3YXJlOiBNaWNyb3NvZnQgT2ZmaWNlACH5BAEAAAAALAQAAgAH
+AAsAgAAAAAAAAAIPRAJ5luyonIJtNRkv3rwAADs=
+
+------=_NextPart_000_0025_01D63CEB.8550E260
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/BroadbandSPICE/Images/imageerrorbar.gif
+
+R0lGODlhHQAbAHcAMSH+GlNvZnR3YXJlOiBNaWNyb3NvZnQgT2ZmaWNlACH5BAEAAAAALAMABAAY
+ABMAgAAAAAAAAAJBDI6pC2EMl4sUTevyaxqr3STbc1nieZDg+KFlmLZxunZidpuzvpcs2vvxVh7Y
+EMjhaC5LULJCeUElzmnOypBiUwUAOw==
+
+------=_NextPart_000_0025_01D63CEB.8550E260
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/BroadbandSPICE/Images/image0091.gif
+
+R0lGODlhEwAbAHcAMSH+GlNvZnR3YXJlOiBNaWNyb3NvZnQgT2ZmaWNlACH5BAEAAAAALAMABAAN
+ABMAgAAAAAAAAAInDI4JYarsXosH0jqpXbNZ02GJh2zLWWYmN2Zs6WyuWEWfRtqzdFUFADs=
+
+------=_NextPart_000_0025_01D63CEB.8550E260
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/BroadbandSPICE/Images/Deltaimage009.gif
+
+R0lGODlhDwARAHcAMSH+GlNvZnR3YXJlOiBNaWNyb3NvZnQgT2ZmaWNlACH5BAEAAAAALAMAAwAJ
+AAsAgAAAAAAAAAIUhBGnuJa5XpMKsmNzdPtiFIRiWAAAOw==
+
+------=_NextPart_000_0025_01D63CEB.8550E260
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/BroadbandSPICE/Images/Deltaimage010.gif
+
+R0lGODlhPQAbAHcAMSH+GlNvZnR3YXJlOiBNaWNyb3NvZnQgT2ZmaWNlACH5BAEAAAAALAMABAA3
+ABMAgAAAAAAAAAJzDI55pu0PFYsz2itvxZzm3y1bEoyAsY0m2TCmS5Ynm0IyOLNIXaG4uOrheLTh
+aqdDKpGTZvJ0XDxz0mKVihXZpkJr7Sq5Pb/gGSwZzXaX6hw57Th/VOaS3X696+POWAtvAReCASc4
+GKhxqDgVt+hY6LhYAAA7
+
+------=_NextPart_000_0025_01D63CEB.8550E260
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/BroadbandSPICE/Images/Deltaimage011.gif
+
+R0lGODlhRQAbAHcAMSH+GlNvZnR3YXJlOiBNaWNyb3NvZnQgT2ZmaWNlACH5BAEAAAAALAMABAA/
+ABMAgAAAAAAAAAKFDI55pu0PI2KRyovrtbl7zgEhFoxLWDoG2JhTu6jxKyblatf5kyoWS/v5dDGg
+rQejKXXCnNAocs2mVEbzRcnuTpJr9etUerm8LXiMI05NtyRVbTXX4lupGj4MytNGu+w+04Qyd1NI
+F2WIdGSmSHbU+OchmeHnN3lZeamp0bXp6QZh+YlRAAA7
+
+------=_NextPart_000_0025_01D63CEB.8550E260
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/BroadbandSPICE/Images/Deltaimage012.gif
+
+R0lGODlhcAAbAHcAMSH+GlNvZnR3YXJlOiBNaWNyb3NvZnQgT2ZmaWNlACH5BAEAAAAALAMABABq
+ABMAgAAAAAAAAAK9hI+py53hDIy02ovd1Ln7322NCHoB+aDnglKkarbHqkw2c88ScsocX3M9diyi
+ZCWC6QDJYab50kSXQOqu6SRiraPqNcujgZXGL5dZ3ZZZUzNXXDyr0XP0cu6DUzd4n339F0jnZZWz
+1qLnxUc4I1OHF0hmB1mTd3jW2CYYOfSYxpiHeAkYVFg6auiEJcmmmuWHQzp5CveicgvL2bNLk8Tb
+UwmKW0IMFluMnIyRm6vsjMz8LD0ty0h9XRKNvVAAADs=
+
+------=_NextPart_000_0025_01D63CEB.8550E260
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/BroadbandSPICE/Images/Deltaimage013.gif
+
+R0lGODlhPwAbAHcAMSH+GlNvZnR3YXJlOiBNaWNyb3NvZnQgT2ZmaWNlACH5BAEAAAAALAMABAA4
+ABMAgAAAAAAAAAJyDI55pu0PG4sz2itvxdzuDYBYICKkY3xZt7Sou5xVqpTQvMItria2DsL5QsOe
+zyYcmmpEWLImegKZk6rycbo2tSqG8ZddirlU3bYUJjPHO7MVSjGLg0SS/e4eSdMx/osFiKURSLgW
+V4j4I4fYobjFCFgAADs=
+
+------=_NextPart_000_0025_01D63CEB.8550E260
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/BroadbandSPICE/Images/image004.gif
+
+R0lGODlhFwAVAHcAMSH+GlNvZnR3YXJlOiBNaWNyb3NvZnQgT2ZmaWNlACH5BAEAAAAALAIAAwAR
+AA4AgAAAAAAAAAIlhBGnF8mrkkMU1jcjlKs1bWRh94DleY1myk6iB3+stdKOaMtLAQA7
+
+------=_NextPart_000_0025_01D63CEB.8550E260
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: file:///D:/Cadence/Cadence_Sigrity_2019/share/library/template/BroadbandSPICE/Images/image018.gif
+
+R0lGODlhVQAgAHcAMSH+GlNvZnR3YXJlOiBNaWNyb3NvZnQgT2ZmaWNlACH5BAEAAAAALAIAAgBS
+ABwAggAAAAAAAAsJCgoICQkHCAkICAwKCwsKCgPtCLrcDmHFR6u9beI7td5Q9W0eKCrf6EXpyayh
+9JpPN9+h6spozPe0jA+IKjmMPwgSRwzacCwmUddrCaWmJ0/bzAW+Ru5wPMp2o0DxMrc9Z8o16Bv8
+9SoEg+mcbgcMCGdwR3JYD3ldhYaBV3VoeokNBUlXFwKTdTdoS1QWBpKIk4YEB4sSXJuUIIJjGCol
+SKhBsrNFaZlupnS6u7y9vrxvPpq2kLTGNb1KbcXHzbWtuM5Fq07UMmXWNGLGmBys2bLgJNqD0qHc
+ZuXm4qrpqc2Ozuxw7Bxg5qwUq/X40O36/fDNs8AvYJx/BA2iU5AAADs=
+
+------=_NextPart_000_0025_01D63CEB.8550E260--
