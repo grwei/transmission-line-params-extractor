@@ -2,8 +2,6 @@
 
 Matlab implementation of patent [Transmission-line simulators and methods](https://patents.google.com/patent/US8892414B1/en).
 
-![CI](https://github.com/grwei/transmission-line-params-extractor/workflows/CI/badge.svg?branch=matlab)
-
 ## Overview
 
 - [Bachelor Thesis (PDF)](doc/final/论文最终稿.pdf)
