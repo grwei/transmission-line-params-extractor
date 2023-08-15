@@ -6,7 +6,8 @@ Matlab implementation of patent [Transmission-line simulators and methods](https
 
 ## Overview
 
-- [ ] add content
+- [Bachelor Thesis (PDF)](doc/final/论文最终稿.pdf)
+   - [Summary (PDF)](doc/final/0619答辩PPT.pdf)
 
 ## In progress
 
@@ -41,10 +42,12 @@ Matlab implementation of patent [Transmission-line simulators and methods](https
    1. [`test3_1.m`](test3_1.m): HFSS_Welement -> ADS -> S
    2. [`test3_2.mlx`](test3_2.mlx): (bad) Try to clean outliers or smooth of RLGC. (Ansys 2020R1)
 
-## Contact us
+## Contact me
 
-E-mail: 313017602@qq.com
+Author: Guorui Wei (危国锐)
+E-mail: [313017602@qq.com](mailto:313017602@qq.com)
+Website: [grwei.github.io](https://grwei.github.io/)
 
-## Reference
+## References
 
 - using [Semantic Versioning](https://semver.org/)
