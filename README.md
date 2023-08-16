@@ -44,9 +44,9 @@ Matlab implementation of patent [Transmission-line simulators and methods](https
 
 ## Contact me
 
-Author: Guorui Wei (危国锐)
-E-mail: [313017602@qq.com](mailto:313017602@qq.com)
-Website: [grwei.github.io](https://grwei.github.io/)
+- Author: Guorui Wei (危国锐)
+- E-mail: [313017602@qq.com](mailto:313017602@qq.com)
+- Website: [grwei.github.io](https://grwei.github.io/)
 
 ## References
 
