@@ -8,6 +8,7 @@
 
 - [Bachelor Thesis (PDF)](doc/final/论文最终稿.pdf)
    - [Summary (PDF)](doc/final/0619答辩PPT.pdf)
+   - [Summary (PPT)](doc/final/0619答辩PPT.pptx)
 
 ## In progress
 
