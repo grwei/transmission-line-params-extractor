@@ -1,6 +1,6 @@
 # Transmission Line Parameters Extractor
 
-Matlab implementation of patent [Transmission-line simulators and methods](https://patentcenter.uspto.gov/applications/12713941) (Patent# 8892414, Application #12/713941).
+Matlab implementation of patent [Transmission-line simulators and methods](https://patentcenter.uspto.gov/applications/12713941) (Patent# 8892414, Application# 12/713941).
 
 ![CI](https://github.com/grwei/transmission-line-params-extractor/workflows/CI/badge.svg?branch=matlab)
 
